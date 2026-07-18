@@ -2,6 +2,7 @@
 
 A responsive, fast, and backend-less Progressive Web App (PWA) designed for pizza enthusiasts and pizzaiolos to calculate exact ingredient weights based on **Baker's Percentages** and a **Mixed Fermentation Kinetic Model** (Room Temperature + Fridge Time).
 
+![CI Pipeline](https://github.com/Diviei/pizza-calculator/actions/workflows/ci.yml/badge.svg)
 ![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)
 ![PWA Ready](https://img.shields.io/badge/PWA-Offline--First-orange?style=for-the-badge&logo=pwa)
 ![Build Tool](https://img.shields.io/badge/Vite-8.1-646CFF?style=for-the-badge&logo=vite)

@@ -1,47 +1,12 @@
 /**
- * Pizza Dough Calculator - Client-side Engine (TypeScript)
- * Algorithm: Baker's Percentages + Accumulated Kinetic Fermentation Model
+ * Pizza Dough Calculator - Client-side UI & Binding Engine (TypeScript)
  * Internationalization: Scalable N-language support with custom floating popover UI
  */
 
 import { translations, getInitialLanguage, setSavedLanguage, LanguageCode } from './i18n.ts';
+import { calculateDough, DoughInputs, CalculationResults, YeastType, DEFAULTS } from './calculator.ts';
 
-export type YeastType = 'Fresh' | 'Instant Dry';
 export type ThemeMode = 'dark' | 'light';
-
-export interface DoughInputs {
-  numberOfBalls: number;
-  ballWeight: number;
-  hydrationPercentage: number;
-  saltPercentage: number;
-  yeastType: YeastType;
-  hoursRt: number;
-  tempRt: number;
-  hoursFridge: number;
-  tempFridge: number;
-}
-
-export interface CalculationResults {
-  totalDoughWeight: number;
-  flourGrams: number;
-  waterGrams: number;
-  saltGrams: number;
-  yeastGrams: number;
-  yeastPercentage: number;
-}
-
-// Default Configuration Constants
-const DEFAULTS: DoughInputs = {
-  numberOfBalls: 1,
-  ballWeight: 280,
-  hydrationPercentage: 65,
-  saltPercentage: 2.5,
-  yeastType: 'Fresh',
-  hoursRt: 4,
-  tempRt: 22,
-  hoursFridge: 0,
-  tempFridge: 4
-};
 
 const DEFAULT_THEME: ThemeMode = 'dark';
 const STORAGE_KEY = 'pizza_calculator_settings_v1';
@@ -143,7 +108,7 @@ function applyLanguage(lang: LanguageCode): void {
 }
 
 /**
- * Perform all calculation steps and update DOM outputs in real-time
+ * Perform calculation and update DOM elements
  */
 function calculate(): CalculationResults {
   const t = translations[currentLang] || translations.en || translations.es;
@@ -154,9 +119,9 @@ function calculate(): CalculationResults {
   const hydrationPercentage = parseFloat(elements.hydrationSlider.value) || 65;
   const saltPercentage = parseFloat(elements.saltSlider.value) || 2.5;
   
-  let yeastType: 'Fresh' | 'Instant Dry' = 'Fresh';
+  let yeastType: YeastType = 'Fresh';
   elements.yeastInputs.forEach(input => {
-    if (input.checked) yeastType = input.value as 'Fresh' | 'Instant Dry';
+    if (input.checked) yeastType = input.value as YeastType;
   });
 
   const hoursRt = Math.max(0, parseFloat(elements.hoursRt.value) || 0);
@@ -164,48 +129,31 @@ function calculate(): CalculationResults {
   const hoursFridge = Math.max(0, parseFloat(elements.hoursFridge.value) || 0);
   const tempFridge = parseFloat(elements.tempFridgeSlider.value) || 4;
 
-  // Step 1: Base Flour Calculation (Baker's Percentage)
-  const totalDoughWeight = numberOfBalls * ballWeight;
-  const flourGrams = totalDoughWeight / (1 + (hydrationPercentage / 100) + (saltPercentage / 100));
+  const inputs: DoughInputs = {
+    numberOfBalls,
+    ballWeight,
+    hydrationPercentage,
+    saltPercentage,
+    yeastType,
+    hoursRt,
+    tempRt,
+    hoursFridge,
+    tempFridge
+  };
 
-  // Step 2: Water & Salt Calculation
-  const waterGrams = flourGrams * (hydrationPercentage / 100);
-  const saltGrams = flourGrams * (saltPercentage / 100);
-
-  // Step 3: Mixed Yeast Algorithm (Accumulated Kinetic Model)
-  const afRt = Math.max(0, tempRt - 3.5);
-  const afFridge = Math.max(0, tempFridge - 3.5);
-
-  const contributionRt = hoursRt * Math.pow(afRt, 2);
-  const contributionFridge = hoursFridge * Math.pow(afFridge, 2);
-  const totalFermentationCapacity = contributionRt + contributionFridge;
-
-  let yeastGrams = 0;
-  let yeastPercentage = 0;
-
-  if (totalFermentationCapacity > 0) {
-    const freshYeastPercentage = 850 / totalFermentationCapacity;
-
-    if ((yeastType as string) === 'Instant Dry') {
-      yeastPercentage = freshYeastPercentage / 3;
-    } else {
-      yeastPercentage = freshYeastPercentage;
-    }
-
-    yeastGrams = flourGrams * (yeastPercentage / 100);
-  }
+  const results = calculateDough(inputs);
 
   // Update Displays
-  elements.totalDoughWeightDisplay.textContent = `${totalDoughWeight.toFixed(1)} g`;
-  elements.flourRes.textContent = flourGrams.toFixed(1);
-  elements.waterRes.textContent = waterGrams.toFixed(1);
-  elements.saltRes.textContent = saltGrams.toFixed(1);
-  elements.yeastRes.textContent = yeastGrams.toFixed(2);
+  elements.totalDoughWeightDisplay.textContent = `${results.totalDoughWeight.toFixed(1)} g`;
+  elements.flourRes.textContent = results.flourGrams.toFixed(1);
+  elements.waterRes.textContent = results.waterGrams.toFixed(1);
+  elements.saltRes.textContent = results.saltGrams.toFixed(1);
+  elements.yeastRes.textContent = results.yeastGrams.toFixed(2);
 
   // Percentage Badges
   elements.waterPctDisplay.textContent = `${hydrationPercentage}%`;
   elements.saltPctDisplay.textContent = `${saltPercentage}%`;
-  elements.yeastPctDisplay.textContent = `${yeastPercentage.toFixed(3)}%`;
+  elements.yeastPctDisplay.textContent = `${results.yeastPercentage.toFixed(3)}%`;
 
   // Dynamic Yeast Label
   elements.yeastLabel.textContent = (yeastType as string) === 'Instant Dry' 
@@ -219,28 +167,7 @@ function calculate(): CalculationResults {
     elements.warningNotice.classList.add('hidden');
   }
 
-  const results: CalculationResults = {
-    totalDoughWeight,
-    flourGrams,
-    waterGrams,
-    saltGrams,
-    yeastGrams,
-    yeastPercentage
-  };
-
-  // Save parameters to localStorage
-  saveState({
-    numberOfBalls,
-    ballWeight,
-    hydrationPercentage,
-    saltPercentage,
-    yeastType,
-    hoursRt,
-    tempRt,
-    hoursFridge,
-    tempFridge
-  });
-
+  saveState(inputs);
   return results;
 }
 
