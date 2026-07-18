@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title data-i18n="metaTitle">Calculadora de Masa de Pizza | Fermentación Mixta</title>
+  <meta name="description" content="Calcula los ingredientes exactos para tu masa de pizza napolitana o casera según tiempo a temperatura ambiente y nevera.">
+  <meta name="theme-color" content="#d97706">
+  
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <link rel="manifest" href="./manifest.json">
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="dark-theme">
+  <div id="app" class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 512 512" class="pizza-icon">
+            <path d="M 128,140 C 200,90 312,90 384,140 L 370,165 C 300,120 212,120 142,165 Z" fill="currentColor" opacity="0.9"/>
+            <path d="M 142,165 C 212,120 300,120 370,165 L 256,420 Z" fill="var(--color-primary)"/>
+            <path d="M 155,185 C 215,145 297,145 357,185 L 256,390 Z" fill="var(--color-accent)"/>
+            <circle cx="230" cy="220" r="14" fill="var(--color-danger)"/>
+            <circle cx="282" cy="245" r="12" fill="var(--color-danger)"/>
+            <circle cx="245" cy="300" r="11" fill="var(--color-danger)"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="app-title" data-i18n="appTitle">Pizza Calculator</h1>
+          <span class="app-badge" data-i18n="appBadge">Fermentación Mixta</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <!-- Language Switcher Custom Popover -->
+        <div class="lang-dropdown-container">
+          <button id="langMenuBtn" class="lang-menu-btn" title="Seleccionar idioma" data-i18n-title="langSelectTitle" aria-expanded="false" aria-haspopup="true">
+            <span class="lang-globe-icon">🌐</span>
+            <span id="currentLangBadge" class="current-lang-badge">ES</span>
+          </button>
+          
+          <div id="langPopover" class="lang-popover hidden" role="menu">
+            <div class="lang-popover-header" data-i18n="langSelectTitle">Seleccionar idioma</div>
+            <div class="lang-options-list" role="none">
+              <button type="button" class="lang-option-item" data-lang="es" role="menuitem">
+                <span class="lang-flag">🇪🇸</span>
+                <span class="lang-name">Español</span>
+                <span class="lang-check">✓</span>
+              </button>
+              <button type="button" class="lang-option-item" data-lang="en" role="menuitem">
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">English</span>
+                <span class="lang-check"></span>
+              </button>
+              <button type="button" class="lang-option-item" data-lang="it" role="menuitem">
+                <span class="lang-flag">🇮🇹</span>
+                <span class="lang-name">Italiano</span>
+                <span class="lang-check"></span>
+              </button>
+              <button type="button" class="lang-option-item" data-lang="fr" role="menuitem">
+                <span class="lang-flag">🇫🇷</span>
+                <span class="lang-name">Français</span>
+                <span class="lang-check"></span>
+              </button>
+              <button type="button" class="lang-option-item" data-lang="de" role="menuitem">
+                <span class="lang-flag">🇩🇪</span>
+                <span class="lang-name">Deutsch</span>
+                <span class="lang-check"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button id="resetBtn" class="icon-button" title="Restablecer valores por defecto" aria-label="Restablecer valores" data-i18n-title="resetTitle">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+        </button>
+        
+        <button id="themeToggleBtn" class="icon-button" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema" data-i18n-title="themeTitle">
+          <svg id="sunIcon" class="theme-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg id="moonIcon" class="theme-icon hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-card">
+      <!-- Section 1: Dough Dimensions -->
+      <section class="form-block">
+        <div class="block-header">
+          <span class="block-number">1</span>
+          <h2 data-i18n="block1Title">Dimensiones de la Masa</h2>
+        </div>
+
+        <div class="grid-2cols">
+          <div class="input-group">
+            <label for="numberOfBalls" data-i18n="numberOfBalls">Número de bolas</label>
+            <div class="number-control">
+              <button type="button" class="btn-step" data-target="numberOfBalls" data-action="-1">-</button>
+              <input type="number" id="numberOfBalls" min="1" max="100" value="1" step="1" required>
+              <button type="button" class="btn-step" data-target="numberOfBalls" data-action="1">+</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="ballWeight" data-i18n="ballWeight">Peso por bola (g)</label>
+            <div class="number-control">
+              <button type="button" class="btn-step" data-target="ballWeight" data-action="-10">-</button>
+              <input type="number" id="ballWeight" min="50" max="1000" value="280" step="5" required>
+              <button type="button" class="btn-step" data-target="ballWeight" data-action="10">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-badge">
+          <span data-i18n="totalDoughWeightLabel">Peso total de masa:</span>
+          <strong id="totalDoughWeightDisplay">280.0 g</strong>
+        </div>
+      </section>
+
+      <!-- Section 2: Core Parameters -->
+      <section class="form-block">
+        <div class="block-header">
+          <span class="block-number">2</span>
+          <h2 data-i18n="block2Title">Parámetros Clave</h2>
+        </div>
+
+        <!-- Hydration -->
+        <div class="input-group">
+          <div class="label-row">
+            <label for="hydrationSlider" data-i18n="hydration">Hidratación</label>
+            <span class="value-display"><strong id="hydrationVal">65</strong>%</span>
+          </div>
+          <div class="range-wrapper">
+            <input type="range" id="hydrationSlider" min="50" max="80" value="65" step="1">
+          </div>
+        </div>
+
+        <!-- Salt -->
+        <div class="input-group">
+          <div class="label-row">
+            <label for="saltSlider" data-i18n="salt">Sal</label>
+            <span class="value-display"><strong id="saltVal">2.5</strong>%</span>
+          </div>
+          <div class="range-wrapper">
+            <input type="range" id="saltSlider" min="1.0" max="4.0" value="2.5" step="0.1">
+          </div>
+        </div>
+
+        <!-- Yeast Type Selector -->
+        <div class="input-group">
+          <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
+          <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
+            <input type="radio" id="yeastFresh" name="yeastType" value="Fresh" checked>
+            <label for="yeastFresh" class="segment-label">
+              <span data-i18n="yeastFresh">🌾 Fresca</span>
+            </label>
+
+            <input type="radio" id="yeastDry" name="yeastType" value="Instant Dry">
+            <label for="yeastDry" class="segment-label">
+              <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Fermentation Times & Temps -->
+      <section class="form-block">
+        <div class="block-header">
+          <span class="block-number">3</span>
+          <h2 data-i18n="block3Title">Tiempos y Temperaturas</h2>
+        </div>
+
+        <!-- Room Temperature Phase -->
+        <div class="phase-card">
+          <div class="phase-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <span data-i18n="phaseRt">Fase Temperatura Ambiente (TA)</span>
+          </div>
+          
+          <div class="grid-2cols">
+            <div class="input-group">
+              <label for="hoursRt" data-i18n="hoursRt">Tiempo TA (horas)</label>
+              <input type="number" id="hoursRt" min="0" max="72" value="4" step="0.5">
+            </div>
+
+            <div class="input-group">
+              <div class="label-row">
+                <label for="tempRtSlider" data-i18n="tempRt">Temperatura TA</label>
+                <span class="value-display"><strong id="tempRtVal">22</strong>°C</span>
+              </div>
+              <input type="range" id="tempRtSlider" min="10" max="35" value="22" step="1">
+            </div>
+          </div>
+        </div>
+
+        <!-- Fridge Phase -->
+        <div class="phase-card">
+          <div class="phase-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+              <line x1="4" y1="10" x2="20" y2="10"></line>
+              <line x1="9" y1="6" x2="9" y2="6.01"></line>
+              <line x1="9" y1="15" x2="9" y2="15.01"></line>
+            </svg>
+            <span data-i18n="phaseFridge">Fase Nevera / Frío (TC)</span>
+          </div>
+
+          <div class="grid-2cols">
+            <div class="input-group">
+              <label for="hoursFridge" data-i18n="hoursFridge">Tiempo Nevera (horas)</label>
+              <input type="number" id="hoursFridge" min="0" max="120" value="0" step="1">
+            </div>
+
+            <div class="input-group">
+              <div class="label-row">
+                <label for="tempFridgeSlider" data-i18n="tempFridge">Temp. Nevera</label>
+                <span class="value-display"><strong id="tempFridgeVal">4</strong>°C</span>
+              </div>
+              <input type="range" id="tempFridgeSlider" min="2" max="10" value="4" step="1">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Results Display -->
+      <section class="results-section" aria-live="polite">
+        <div class="results-header">
+          <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
+          <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
+        </div>
+
+        <div id="warningNotice" class="warning-notice hidden">
+          <span data-i18n="warningNotice">⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card primary">
+            <span class="ingredient-name" data-i18n="flour">🌾 Harina</span>
+            <div class="ingredient-value"><span id="flourRes">0.0</span> <small>g</small></div>
+            <span class="baker-pct">100%</span>
+          </div>
+
+          <div class="result-card">
+            <span class="ingredient-name" data-i18n="water">💧 Agua</span>
+            <div class="ingredient-value"><span id="waterRes">0.0</span> <small>g</small></div>
+            <span class="baker-pct" id="waterPctDisplay">65%</span>
+          </div>
+
+          <div class="result-card">
+            <span class="ingredient-name" data-i18n="saltIngredient">🧂 Sal</span>
+            <div class="ingredient-value"><span id="saltRes">0.0</span> <small>g</small></div>
+            <span class="baker-pct" id="saltPctDisplay">2.5%</span>
+          </div>
+
+          <div class="result-card highlight">
+            <span class="ingredient-name" id="yeastLabel">🧫 Levadura Fresca</span>
+            <div class="ingredient-value"><span id="yeastRes">0.00</span> <small>g</small></div>
+            <span class="baker-pct" id="yeastPctDisplay">0.00%</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p data-i18n="footerText">Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta</p>
+    </footer>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
