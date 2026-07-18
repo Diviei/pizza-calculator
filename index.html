@@ -371,6 +371,33 @@
     </footer>
   </div>
 
+  <!-- PWA Toasts & Banner Notifications -->
+  <div id="pwaToastContainer" class="pwa-toast-container">
+    <!-- PWA Update Available Toast -->
+    <div id="pwaUpdateToast" class="pwa-toast hidden" role="alert">
+      <div class="toast-content">
+        <span class="toast-icon">✨</span>
+        <span data-i18n="pwaUpdateNotice">Nueva versión disponible con mejoras</span>
+      </div>
+      <div class="toast-actions">
+        <button id="pwaUpdateBtn" class="btn-toast-action" data-i18n="pwaUpdateBtn">Actualizar</button>
+        <button id="pwaUpdateCloseBtn" class="btn-toast-dismiss" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+
+    <!-- PWA Install Banner Toast -->
+    <div id="pwaInstallToast" class="pwa-toast hidden" role="alert">
+      <div class="toast-content">
+        <span class="toast-icon">📱</span>
+        <span data-i18n="pwaInstallNotice">Instala la app para usarla 100% offline</span>
+      </div>
+      <div class="toast-actions">
+        <button id="pwaInstallBtn" class="btn-toast-action" data-i18n="pwaInstallBtn">Instalar</button>
+        <button id="pwaInstallCloseBtn" class="btn-toast-dismiss" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/app.ts"></script>
 </body>
 </html>

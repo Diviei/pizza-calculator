@@ -63,6 +63,13 @@ export interface TranslationDictionary {
   faqQ4: string;
   faqA4: string;
 
+  // PWA & Update Alerts
+  pwaUpdateNotice: string;
+  pwaUpdateBtn: string;
+  pwaInstallNotice: string;
+  pwaInstallBtn: string;
+  dismiss: string;
+
   footerText: string;
 }
 
@@ -123,6 +130,12 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqQ4: '¿Puedo usar esta calculadora sin conexión a internet?',
     faqA4: '¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.',
 
+    pwaUpdateNotice: '✨ Nueva versión disponible con mejoras',
+    pwaUpdateBtn: 'Actualizar',
+    pwaInstallNotice: '📱 Instala la app para usarla 100% offline',
+    pwaInstallBtn: 'Instalar',
+    dismiss: 'Cerrar',
+
     footerText: 'Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta'
   },
 
@@ -173,7 +186,13 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA3: 'The standard conversion ratio is 3:1. 3 grams of fresh cake yeast equals 1 gram of active/instant dry yeast powder.',
     faqQ4: 'Can I use this calculator offline?',
     faqA4: 'Yes! It is a 100% offline Progressive Web App (PWA). Once opened in your browser or installed on your mobile home screen, it works completely offline without network coverage.',
-    
+
+    pwaUpdateNotice: '✨ New version available with updates',
+    pwaUpdateBtn: 'Update',
+    pwaInstallNotice: '📱 Install app for 100% offline use',
+    pwaInstallBtn: 'Install',
+    dismiss: 'Dismiss',
+
     footerText: 'PWA Pizza Dough Calculator • Kinetic Fermentation Model'
   },
 
@@ -224,7 +243,13 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA3: 'Il rapporto standard è 3 a 1. 3 grammi di lievito fresco di birra equivalgono a 1 grammo di lievito secco istantaneo.',
     faqQ4: 'Posso usare questo calcolatore offline?',
     faqA4: 'Sì! È una PWA (Progressive Web App) 100% offline. Una volta caricata o aggiunta alla schermata home del telefono, funziona senza connessione internet.',
-    
+
+    pwaUpdateNotice: '✨ Nuova versione disponibile',
+    pwaUpdateBtn: 'Aggiorna',
+    pwaInstallNotice: '📱 Installa l\'app per usarla offline',
+    pwaInstallBtn: 'Installa',
+    dismiss: 'Chiudi',
+
     footerText: 'Calcolatore Impasto Pizza PWA • Modello Cinetico di Lievitazione'
   },
 
@@ -275,7 +300,13 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA3: 'Le ratio standard est de 3 pour 1. 3g de levure fraîche de boulanger équivalent à 1g de levure sèche instantanée.',
     faqQ4: 'Puis-je utiliser cette application hors ligne?',
     faqA4: 'Oui! C\'est une PWA 100% hors ligne. Une fois ouverte ou ajoutée à l\'écran d\'accueil de votre smartphone, elle fonctionne sans connexion internet.',
-    
+
+    pwaUpdateNotice: '✨ Nouvelle version disponible',
+    pwaUpdateBtn: 'Mettre à jour',
+    pwaInstallNotice: '📱 Installez l\'appli pour l\'utiliser hors ligne',
+    pwaInstallBtn: 'Installer',
+    dismiss: 'Fermer',
+
     footerText: 'Calculateur de Pâte à Pizza PWA • Modèle Cinétique de Fermentation'
   },
 
@@ -326,7 +357,13 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA3: 'Das Standardverhältnis ist 3 zu 1. 3 Gramm frische Hefe entsprechen 1 Gramm Trockenhefe.',
     faqQ4: 'Kann ich den Rechner offline nutzen?',
     faqA4: 'Ja! Es ist eine 100% offlinefähige Progressive Web App (PWA). Einmal geladen oder auf dem Smartphone installiert, funktioniert sie ohne Internet.',
-    
+
+    pwaUpdateNotice: '✨ Neue Version verfügbar',
+    pwaUpdateBtn: 'Aktualisieren',
+    pwaInstallNotice: '📱 App für 100% Offline-Nutzung installieren',
+    pwaInstallBtn: 'Installieren',
+    dismiss: 'Schließen',
+
     footerText: 'Pizzateig Rechner PWA • Kinetisches Gärmodell'
   }
 };

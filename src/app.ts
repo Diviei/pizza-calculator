@@ -256,6 +256,78 @@ function setTheme(theme: ThemeMode): void {
 }
 
 /**
+ * PWA Install & Update Toast Handlers
+ */
+let deferredInstallPrompt: any = null;
+
+function initPwaToasts(): void {
+  const pwaUpdateToast = document.getElementById('pwaUpdateToast');
+  const pwaUpdateBtn = document.getElementById('pwaUpdateBtn');
+  const pwaUpdateCloseBtn = document.getElementById('pwaUpdateCloseBtn');
+
+  const pwaInstallToast = document.getElementById('pwaInstallToast');
+  const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+  const pwaInstallCloseBtn = document.getElementById('pwaInstallCloseBtn');
+
+  // Handle Before Install Prompt Event for PWA Installation
+  window.addEventListener('beforeinstallprompt', (e: Event) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    if (pwaInstallToast) {
+      pwaInstallToast.classList.remove('hidden');
+    }
+  });
+
+  if (pwaInstallBtn) {
+    pwaInstallBtn.addEventListener('click', async () => {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          console.log('[PWA] User accepted install prompt');
+        }
+        deferredInstallPrompt = null;
+      }
+      if (pwaInstallToast) pwaInstallToast.classList.add('hidden');
+    });
+  }
+
+  if (pwaInstallCloseBtn && pwaInstallToast) {
+    pwaInstallCloseBtn.addEventListener('click', () => {
+      pwaInstallToast.classList.add('hidden');
+    });
+  }
+
+  if (pwaUpdateCloseBtn && pwaUpdateToast) {
+    pwaUpdateCloseBtn.addEventListener('click', () => {
+      pwaUpdateToast.classList.add('hidden');
+    });
+  }
+
+  if (pwaUpdateBtn) {
+    pwaUpdateBtn.addEventListener('click', () => {
+      window.location.reload();
+    });
+  }
+
+  // Handle Service Worker update availability
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (pwaUpdateToast) {
+        pwaUpdateToast.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Debug/Demo Helper: Allow manual testing via query param ?previewPwa=1
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('previewPwa')) {
+    if (pwaUpdateToast) pwaUpdateToast.classList.remove('hidden');
+    if (pwaInstallToast) pwaInstallToast.classList.remove('hidden');
+  }
+}
+
+/**
  * Attach Event Listeners
  */
 function initEventListeners(): void {
@@ -395,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadState();
   applyLanguage(currentLang);
   initEventListeners();
+  initPwaToasts();
 });
 
 // Register Service Worker for PWA Offline Capabilities & Cache Versioning
