@@ -4,7 +4,7 @@ A responsive, fast, and backend-less Progressive Web App (PWA) designed for pizz
 
 ![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)
 ![PWA Ready](https://img.shields.io/badge/PWA-Offline--First-orange?style=for-the-badge&logo=pwa)
-![Build Tool](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite)
+![Build Tool](https://img.shields.io/badge/Vite-8.1-646CFF?style=for-the-badge&logo=vite)
 ![Languages](https://img.shields.io/badge/i18n-ES%20%7C%20EN%20%7C%20IT%20%7C%20FR%20%7C%20DE-blue?style=for-the-badge)
 
 ---
@@ -52,7 +52,7 @@ $$\text{Fresh Yeast \%} = \frac{850}{\text{Capacity}}$$
 ## 🛠️ Tech Stack
 
 - **Frontend:** HTML5, Vanilla CSS3 (CSS Variables, Responsive Single-Card Layout), Vanilla JavaScript (ES6+ Modules).
-- **Build Tooling:** [Vite](https://vitejs.dev/) with `vite-plugin-pwa`.
+- **Build Tooling:** [Vite 8](https://vitejs.dev/) with `vite-plugin-pwa 1.3`.
 - **PWA & Offline:** Service Worker pre-caching with Workbox static asset versioning.
 - **CI/CD:** Automated GitHub Actions workflow deploying to GitHub Pages.
 
