@@ -1,9 +1,61 @@
 /**
- * Scalable Internationalization (i18n) Module
+ * Scalable Internationalization (i18n) TypeScript Module
  * Supports N languages with automatic browser language matching & fallback to 'en'.
  */
 
-export const SUPPORTED_LANGUAGES = {
+export type LanguageCode = 'es' | 'en' | 'it' | 'fr' | 'de';
+
+export interface LanguageInfo {
+  name: string;
+  flag: string;
+}
+
+export interface TranslationDictionary {
+  metaTitle: string;
+  metaDesc: string;
+  appTitle: string;
+  appBadge: string;
+  resetTitle: string;
+  themeTitle: string;
+  langSelectTitle: string;
+  
+  // Block 1: Dimensions
+  block1Title: string;
+  numberOfBalls: string;
+  ballWeight: string;
+  totalDoughWeightLabel: string;
+  
+  // Block 2: Core Parameters
+  block2Title: string;
+  hydration: string;
+  salt: string;
+  yeastTypeLabel: string;
+  yeastFresh: string;
+  yeastDry: string;
+  
+  // Block 3: Times & Temps
+  block3Title: string;
+  phaseRt: string;
+  hoursRt: string;
+  tempRt: string;
+  phaseFridge: string;
+  hoursFridge: string;
+  tempFridge: string;
+  
+  // Block 4: Results
+  resultsTitle: string;
+  resultsSubtitle: string;
+  warningNotice: string;
+  flour: string;
+  water: string;
+  saltIngredient: string;
+  yeastFreshLabel: string;
+  yeastDryLabel: string;
+  
+  footerText: string;
+}
+
+export const SUPPORTED_LANGUAGES: Record<LanguageCode, LanguageInfo> = {
   es: { name: 'Español', flag: '🇪🇸' },
   en: { name: 'English', flag: '🇬🇧' },
   it: { name: 'Italiano', flag: '🇮🇹' },
@@ -11,7 +63,7 @@ export const SUPPORTED_LANGUAGES = {
   de: { name: 'Deutsch', flag: '🇩🇪' }
 };
 
-export const translations = {
+export const translations: Record<LanguageCode, TranslationDictionary> = {
   es: {
     metaTitle: 'Calculadora de Masa de Pizza | Fermentación Mixta',
     metaDesc: 'Calcula los ingredientes exactos para tu masa de pizza napolitana o casera según tiempo a temperatura ambiente y nevera.',
@@ -21,13 +73,11 @@ export const translations = {
     themeTitle: 'Cambiar tema claro/oscuro',
     langSelectTitle: 'Seleccionar idioma',
     
-    // Block 1: Dimensions
     block1Title: 'Dimensiones de la Masa',
     numberOfBalls: 'Número de bolas',
     ballWeight: 'Peso por bola (g)',
     totalDoughWeightLabel: 'Peso total de masa:',
     
-    // Block 2: Core Parameters
     block2Title: 'Parámetros Clave',
     hydration: 'Hidratación',
     salt: 'Sal',
@@ -35,7 +85,6 @@ export const translations = {
     yeastFresh: '🌾 Fresca',
     yeastDry: '🌱 Seca Instantánea',
     
-    // Block 3: Times & Temps
     block3Title: 'Tiempos y Temperaturas',
     phaseRt: 'Fase Temperatura Ambiente (TA)',
     hoursRt: 'Tiempo TA (horas)',
@@ -44,7 +93,6 @@ export const translations = {
     hoursFridge: 'Tiempo Nevera (horas)',
     tempFridge: 'Temp. Nevera',
     
-    // Block 4: Results
     resultsTitle: 'Ingredientes Necesarios',
     resultsSubtitle: 'Cálculo exacto para tus dosis de masa',
     warningNotice: '⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.',
@@ -66,13 +114,11 @@ export const translations = {
     themeTitle: 'Toggle light/dark theme',
     langSelectTitle: 'Select language',
     
-    // Block 1: Dimensions
     block1Title: 'Dough Dimensions',
     numberOfBalls: 'Number of dough balls',
     ballWeight: 'Weight per ball (g)',
     totalDoughWeightLabel: 'Total dough weight:',
     
-    // Block 2: Core Parameters
     block2Title: 'Core Parameters',
     hydration: 'Hydration',
     salt: 'Salt',
@@ -80,7 +126,6 @@ export const translations = {
     yeastFresh: '🌾 Fresh',
     yeastDry: '🌱 Instant Dry',
     
-    // Block 3: Times & Temps
     block3Title: 'Times & Temperatures',
     phaseRt: 'Room Temperature Phase (RT)',
     hoursRt: 'RT Time (hours)',
@@ -89,7 +134,6 @@ export const translations = {
     hoursFridge: 'Fridge Time (hours)',
     tempFridge: 'Fridge Temp',
     
-    // Block 4: Results
     resultsTitle: 'Required Ingredients',
     resultsSubtitle: 'Exact formula breakdown for your dough balls',
     warningNotice: '⚠️ Total fermentation time is 0h. Add room temperature or fridge hours to calculate yeast.',
@@ -111,13 +155,11 @@ export const translations = {
     themeTitle: 'Cambia tema chiaro/scuro',
     langSelectTitle: 'Seleziona lingua',
     
-    // Block 1: Dimensions
     block1Title: 'Dimensioni dell\'Impasto',
     numberOfBalls: 'Numero di panetti',
     ballWeight: 'Peso per panetto (g)',
     totalDoughWeightLabel: 'Peso totale impasto:',
     
-    // Block 2: Core Parameters
     block2Title: 'Parametri Principali',
     hydration: 'Idratazione',
     salt: 'Sale',
@@ -125,7 +167,6 @@ export const translations = {
     yeastFresh: '🌾 Fresco di Birra',
     yeastDry: '🌱 Secco Istantaneo',
     
-    // Block 3: Times & Temps
     block3Title: 'Tempi e Temperature',
     phaseRt: 'Fase Temperatura Ambiente (TA)',
     hoursRt: 'Tempo TA (ore)',
@@ -134,7 +175,6 @@ export const translations = {
     hoursFridge: 'Tempo Frigo (ore)',
     tempFridge: 'Temp. Frigo',
     
-    // Block 4: Results
     resultsTitle: 'Ingredienti Necessari',
     resultsSubtitle: 'Calcolo esatto delle dosi per i tuoi panetti',
     warningNotice: '⚠️ I tempi totali di lievitazione sono 0h. Aggiungi ore a TA o frigo per calcolare il lievito.',
@@ -235,20 +275,20 @@ const LANG_STORAGE_KEY = 'pizza_calculator_language';
 /**
  * Determine initial language from localStorage or navigator
  */
-export function getInitialLanguage() {
-  const saved = localStorage.getItem(LANG_STORAGE_KEY);
+export function getInitialLanguage(): LanguageCode {
+  const saved = localStorage.getItem(LANG_STORAGE_KEY) as LanguageCode | null;
   if (saved && translations[saved]) {
     return saved;
   }
   
-  const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase().slice(0, 2);
+  const browserLang = (navigator.language || (navigator as { userLanguage?: string }).userLanguage || '').toLowerCase().slice(0, 2) as LanguageCode;
   return translations[browserLang] ? browserLang : 'en';
 }
 
 /**
  * Save language preference
  */
-export function setSavedLanguage(lang) {
+export function setSavedLanguage(lang: LanguageCode): void {
   if (translations[lang]) {
     localStorage.setItem(LANG_STORAGE_KEY, lang);
   }

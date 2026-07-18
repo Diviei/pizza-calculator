@@ -51,7 +51,7 @@ $$\text{Fresh Yeast \%} = \frac{850}{\text{Capacity}}$$
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, Vanilla CSS3 (CSS Variables, Responsive Single-Card Layout), Vanilla JavaScript (ES6+ Modules).
+- **Frontend:** HTML5, Vanilla CSS3 (CSS Variables, Responsive Single-Card Layout), TypeScript (Strict Type Safety, ES6+ Modules).
 - **Build Tooling:** [Vite 8](https://vitejs.dev/) with `vite-plugin-pwa 1.3`.
 - **PWA & Offline:** Service Worker pre-caching with Workbox static asset versioning.
 - **CI/CD:** Automated GitHub Actions workflow deploying to GitHub Pages.
