@@ -339,6 +339,15 @@ body {
   gap: 24px;
 }
 
+@media (max-width: 600px) {
+  .main-card {
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
 .form-block {
   display: flex;
   flex-direction: column;
