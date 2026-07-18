@@ -20,6 +20,58 @@
   </noscript>
   
   <link rel="stylesheet" href="/src/styles.css">
+  
+  <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets & Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Pizza Dough Calculator",
+        "url": "https://diviei.github.io/pizza-calculator/",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript & HTML5 support",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Calculadora de ingredientes para masa de pizza basada en Porcentajes de Panadero y Modelo Cinético de Fermentación Mixta."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué es el porcentaje de panadero (Baker's Percentage)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La proporción estándar es 3 a 1. 3 gramos de levadura fresca equivalen a 1 gramo de levadura seca."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="dark-theme">
   <div id="app" class="app-container">
@@ -283,6 +335,33 @@
             <div class="ingredient-value"><span id="yeastRes">0.00</span> <small>g</small></div>
             <span class="baker-pct" id="yeastPctDisplay">0.00%</span>
           </div>
+        </div>
+      </section>
+
+      <!-- FAQ & Fermentation Guide Section for Search & Rich Snippets -->
+      <section class="faq-card" aria-labelledby="faqHeader">
+        <h2 id="faqHeader" class="faq-title" data-i18n="faqSectionTitle">Preguntas Frecuentes y Guía de Fermentación</h2>
+        
+        <div class="faq-accordion">
+          <details class="faq-item" open>
+            <summary class="faq-question"><span data-i18n="faqQ1">¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?</span></summary>
+            <p class="faq-answer" data-i18n="faqA1">Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question"><span data-i18n="faqQ2">¿Qué es el porcentaje de panadero (Baker's Percentage)?</span></summary>
+            <p class="faq-answer" data-i18n="faqA2">Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question"><span data-i18n="faqQ3">¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?</span></summary>
+            <p class="faq-answer" data-i18n="faqA3">La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question"><span data-i18n="faqQ4">¿Puedo usar esta calculadora sin conexión a internet?</span></summary>
+            <p class="faq-answer" data-i18n="faqA4">¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.</p>
+          </details>
         </div>
       </section>
     </main>

@@ -52,6 +52,17 @@ export interface TranslationDictionary {
   yeastFreshLabel: string;
   yeastDryLabel: string;
   
+  // FAQ Section
+  faqSectionTitle: string;
+  faqQ1: string;
+  faqA1: string;
+  faqQ2: string;
+  faqA2: string;
+  faqQ3: string;
+  faqA3: string;
+  faqQ4: string;
+  faqA4: string;
+
   footerText: string;
 }
 
@@ -102,6 +113,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     yeastFreshLabel: '🧫 Levadura Fresca',
     yeastDryLabel: '🌱 Levadura Seca',
     
+    faqSectionTitle: 'Preguntas Frecuentes y Guía de Fermentación',
+    faqQ1: '¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?',
+    faqA1: 'Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.',
+    faqQ2: '¿Qué es el porcentaje de panadero (Baker\'s Percentage)?',
+    faqA2: 'Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.',
+    faqQ3: '¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?',
+    faqA3: 'La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.',
+    faqQ4: '¿Puedo usar esta calculadora sin conexión a internet?',
+    faqA4: '¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.',
+
     footerText: 'Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta'
   },
 
@@ -142,6 +163,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     saltIngredient: '🧂 Salt',
     yeastFreshLabel: '🧫 Fresh Yeast',
     yeastDryLabel: '🌱 Instant Dry Yeast',
+
+    faqSectionTitle: 'Frequently Asked Questions & Fermentation Guide',
+    faqQ1: 'How does mixed fermentation (Fridge + Room Temp) calculation work?',
+    faqA1: 'Our calculator uses an exponential kinetic algorithm that models yeast metabolic activity across temperatures. Yeast activity drops near zero at 3.5°C (fridge) and increases exponentially at room temperature to reach target maturation.',
+    faqQ2: 'What is Baker\'s Percentage?',
+    faqA2: 'Baker\'s percentage is the professional baking standard where total flour weight equals 100%. All other ingredients (water, salt, yeast) are calculated as a percentage relative to flour mass.',
+    faqQ3: 'What is the ratio between fresh yeast and instant dry yeast?',
+    faqA3: 'The standard conversion ratio is 3:1. 3 grams of fresh cake yeast equals 1 gram of active/instant dry yeast powder.',
+    faqQ4: 'Can I use this calculator offline?',
+    faqA4: 'Yes! It is a 100% offline Progressive Web App (PWA). Once opened in your browser or installed on your mobile home screen, it works completely offline without network coverage.',
     
     footerText: 'PWA Pizza Dough Calculator • Kinetic Fermentation Model'
   },
@@ -183,6 +214,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     saltIngredient: '🧂 Sale',
     yeastFreshLabel: '🧫 Lievito Fresco',
     yeastDryLabel: '🌱 Lievito Secco',
+
+    faqSectionTitle: 'Domande Frequenti e Guida alla Lievitazione',
+    faqQ1: 'Come funziona il calcolo della lievitazione mista (Frigo + Ambiente)?',
+    faqA1: 'Il calcolatore utilizza un algoritmo cinetico esponenziale che modella l\'attività del lievito alle diverse temperature. L\'attività è vicina allo zero a 3.5°C (frigo) e cresce esponenzialmente a temperatura ambiente.',
+    faqQ2: 'Cos\'è la percentuale del pizzaiolo / panificatore?',
+    faqA2: 'È la formula professionale in cui il peso della farina rappresenta il 100%. Tutti gli altri ingredienti (acqua, sale, lievito) sono calcolati in percentuale rispetto alla farina.',
+    faqQ3: 'Qual è il rapporto tra lievito fresco e lievito secco istantaneo?',
+    faqA3: 'Il rapporto standard è 3 a 1. 3 grammi di lievito fresco di birra equivalgono a 1 grammo di lievito secco istantaneo.',
+    faqQ4: 'Posso usare questo calcolatore offline?',
+    faqA4: 'Sì! È una PWA (Progressive Web App) 100% offline. Una volta caricata o aggiunta alla schermata home del telefono, funziona senza connessione internet.',
     
     footerText: 'Calcolatore Impasto Pizza PWA • Modello Cinetico di Lievitazione'
   },
@@ -224,6 +265,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     saltIngredient: '🧂 Sel',
     yeastFreshLabel: '🧫 Levure Fraîche',
     yeastDryLabel: '🌱 Levure Sèche',
+
+    faqSectionTitle: 'Foire Aux Questions & Guide de Fermentation',
+    faqQ1: 'Comment fonctionne la fermentation mixte (Frigo + Température Ambiante)?',
+    faqA1: 'Notre calculateur utilise un algorithme cinétique modélisant l\'activité de la levure selon la température. L\'activité est quasi nulle à 3.5°C (frigo) et augmente exponentiellement à température ambiante.',
+    faqQ2: 'Qu\'est-ce que le pourcentage du boulanger?',
+    faqA2: 'C\'est la formule standard où le poids de la farine représente 100%. Tous les autres ingrédients (eau, sel, levure) sont exprimés en pourcentage par rapport à la farine.',
+    faqQ3: 'Quel est le ratio entre levure fraîche et levure sèche instantanée?',
+    faqA3: 'Le ratio standard est de 3 pour 1. 3g de levure fraîche de boulanger équivalent à 1g de levure sèche instantanée.',
+    faqQ4: 'Puis-je utiliser cette application hors ligne?',
+    faqA4: 'Oui! C\'est une PWA 100% hors ligne. Une fois ouverte ou ajoutée à l\'écran d\'accueil de votre smartphone, elle fonctionne sans connexion internet.',
     
     footerText: 'Calculateur de Pâte à Pizza PWA • Modèle Cinétique de Fermentation'
   },
@@ -265,6 +316,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     saltIngredient: '🧂 Salz',
     yeastFreshLabel: '🧫 Frische Hefe',
     yeastDryLabel: '🌱 Trockenhefe',
+
+    faqSectionTitle: 'Häufig gestellte Fragen & Gärungs-Ratgeber',
+    faqQ1: 'Wie funktioniert die Berechnung für gemischte Gärung (Kühlschrank + Raumtemperatur)?',
+    faqA1: 'Der Rechner nutzt ein kinetisches Modell für die Hefeaktivität. Bei 3,5°C im Kühlschrank ruht die Hefe nahezu und entfaltet bei Raumtemperatur exponentiell ihre Gärkraft.',
+    faqQ2: 'Was ist die Bäckerprozent-Formel?',
+    faqA2: 'Die Bäckerprozent-Formel ist der Profi-Standard: Das Mehlgewicht entspricht immer 100%. Wasser, Salz und Hefe werden prozentual zum Mehl angegeben.',
+    faqQ3: 'Wie rechnet man Frische Hefe in Trockenhefe um?',
+    faqA3: 'Das Standardverhältnis ist 3 zu 1. 3 Gramm frische Hefe entsprechen 1 Gramm Trockenhefe.',
+    faqQ4: 'Kann ich den Rechner offline nutzen?',
+    faqA4: 'Ja! Es ist eine 100% offlinefähige Progressive Web App (PWA). Einmal geladen oder auf dem Smartphone installiert, funktioniert sie ohne Internet.',
     
     footerText: 'Pizzateig Rechner PWA • Kinetisches Gärmodell'
   }
