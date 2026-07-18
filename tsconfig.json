@@ -19,5 +19,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["i18n.ts", "calculator.ts", "app.ts", "*.test.ts"]
+  "include": ["src/**/*"]
 }
