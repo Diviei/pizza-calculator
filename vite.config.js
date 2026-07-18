@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: false,
       includeAssets: ['icon.svg', 'favicon.ico'],
       manifest: {
         name: 'Calculadora de Masa de Pizza',
