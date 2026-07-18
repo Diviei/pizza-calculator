@@ -67,7 +67,7 @@ $$\text{Fresh Yeast \%} = \frac{850}{\text{Capacity}}$$
 ### Installation & Run
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/pizza-calculator.git
+git clone https://github.com/Diviei/pizza-calculator.git
 cd pizza-calculator
 
 # Install dependencies
