@@ -401,7 +401,8 @@ body {
 
 .mode-tab.active {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #121212;
+  font-weight: 800;
   box-shadow: var(--shadow-sm);
 }
 
@@ -473,7 +474,7 @@ body {
 .preset-btn.active {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  color: #fbbf24;
   font-weight: 700;
 }
 
@@ -999,8 +1000,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .btn-share-recipe {
   background: rgba(59, 130, 246, 0.12);
-  color: #3b82f6;
-  border-color: #3b82f6;
+  color: #60a5fa;
+  border-color: #60a5fa;
 }
 
 .btn-share-recipe:hover {
@@ -1263,12 +1264,12 @@ body.light-theme .baker-pct {
 
 .btn-toast-action {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #121212;
   border: none;
   border-radius: var(--radius-pill);
   padding: 6px 14px;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   transition:
     transform var(--transition-fast),
