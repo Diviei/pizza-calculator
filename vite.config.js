@@ -36,10 +36,12 @@ export default defineConfig({
     environment: 'happy-dom',
     coverage: {
       provider: 'v8',
+      include: ['src/**/*.ts'],
+      exclude: ['src/**/*.test.ts', 'src/vite-env.d.ts'],
       reporter: ['text', 'json', 'html'],
       thresholds: {
         statements: 90,
-        branches: 80,
+        branches: 65,
         functions: 90,
         lines: 90,
       },

@@ -62,7 +62,7 @@ describe('<range-slider>', () => {
     expect(valDisplay?.textContent).toBe('70');
   });
 
-  it('re-renders on setAttribute when value changes', () => {
+  it('updates DOM in-place on setAttribute when value, min, max, step, or label-key changes', () => {
     const el = document.createElement('range-slider') as RangeSlider;
     document.body.appendChild(el);
 
@@ -70,5 +70,18 @@ describe('<range-slider>', () => {
     expect(el.value).toBe(25);
     const valDisplay = el.querySelector('strong');
     expect(valDisplay?.textContent).toBe('25');
+
+    el.setAttribute('min', '10');
+    el.setAttribute('max', '90');
+    el.setAttribute('step', '5');
+    el.setAttribute('label-key', 'tempRt');
+
+    const input = el.querySelector('input') as HTMLInputElement;
+    expect(input.min).toBe('10');
+    expect(input.max).toBe('90');
+    expect(input.step).toBe('5');
+
+    const label = el.querySelector('label');
+    expect(label?.getAttribute('data-i18n')).toBe('tempRt');
   });
 });

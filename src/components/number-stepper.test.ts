@@ -99,7 +99,7 @@ describe('<number-stepper>', () => {
     expect(el.value).toBe(1);
   });
 
-  it('re-renders on setAttribute when value changes', () => {
+  it('updates DOM in-place on setAttribute when value, min, max, step changes', () => {
     const el = document.createElement('number-stepper') as NumberStepper;
     document.body.appendChild(el);
 
@@ -107,5 +107,12 @@ describe('<number-stepper>', () => {
     expect(el.value).toBe(10);
     const input = el.querySelector('input') as HTMLInputElement;
     expect(input.value).toBe('10');
+
+    el.setAttribute('min', '5');
+    el.setAttribute('max', '50');
+    el.setAttribute('step', '2');
+    expect(input.min).toBe('5');
+    expect(input.max).toBe('50');
+    expect(input.step).toBe('2');
   });
 });

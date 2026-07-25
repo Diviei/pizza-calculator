@@ -8,13 +8,23 @@ export class PresetButtons extends HTMLElement {
     return ['value'];
   }
 
+  private isRendered = false;
+
   connectedCallback() {
-    this.render();
+    if (!this.isRendered) {
+      this.render();
+      this.isRendered = true;
+    }
   }
 
-  attributeChangedCallback(_name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue !== newValue && this.isConnected) {
-      this.render();
+      if (!this.isRendered) {
+        this.render();
+        this.isRendered = true;
+      } else {
+        this.updateDOM(name, newValue);
+      }
     }
   }
 
@@ -24,6 +34,18 @@ export class PresetButtons extends HTMLElement {
 
   set value(val: number) {
     this.setAttribute('value', val.toString());
+  }
+
+  private updateDOM(_name: string, newValue: string) {
+    const activeHours = parseFloat(newValue);
+    this.querySelectorAll('.preset-btn').forEach((btn) => {
+      const btnHours = parseFloat(btn.getAttribute('data-hours') || '8');
+      if (btnHours === activeHours) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
   private render() {

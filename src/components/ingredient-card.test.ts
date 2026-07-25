@@ -70,16 +70,27 @@ describe('<ingredient-card>', () => {
     expect(pct).toBeNull();
   });
 
-  it('re-renders on attributeChangedCallback when value changes', () => {
+  it('updates DOM in-place on setAttribute when value, baker-pct, or icon changes', () => {
     const el = document.createElement('ingredient-card') as IngredientCard;
+    el.setAttribute('simple', '');
+    el.setAttribute('icon', '🌾');
+    el.setAttribute('value', '10.0');
     document.body.appendChild(el);
 
-    el.attributeChangedCallback('value', '0.0', '0.0');
-    expect(el.getAttribute('value')).toBeNull();
-
     el.setAttribute('value', '50.0');
-    el.attributeChangedCallback('value', '0.0', '50.0');
-    const val = el.querySelector('.ingredient-value span');
+    const val = el.querySelector('.simple-card-value span');
     expect(val?.textContent).toBe('50.0');
+
+    el.setAttribute('icon', '💧');
+    const icon = el.querySelector('.simple-card-icon');
+    expect(icon?.textContent).toBe('💧');
+
+    const advEl = document.createElement('ingredient-card') as IngredientCard;
+    advEl.setAttribute('baker-pct', '65%');
+    document.body.appendChild(advEl);
+
+    advEl.setAttribute('baker-pct', '70%');
+    const pct = advEl.querySelector('.baker-pct');
+    expect(pct?.textContent).toBe('70%');
   });
 });

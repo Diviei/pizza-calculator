@@ -30,68 +30,166 @@ const MODE_KEY = 'pizza_calculator_mode';
 let currentLang: LanguageCode = getInitialLanguage();
 let currentMode: AppMode = 'simple';
 
-// DOM Element Registry
+// DOM Element Registry (Dynamic Getters for Live References)
 const elements = {
   // Mode Tabs & Containers
-  tabSimple: document.getElementById('tabSimple') as HTMLButtonElement,
-  tabAdvanced: document.getElementById('tabAdvanced') as HTMLButtonElement,
-  simpleModeContainer: document.getElementById('simpleModeContainer') as HTMLElement,
-  advancedModeContainer: document.getElementById('advancedModeContainer') as HTMLElement,
+  get tabSimple() {
+    return document.getElementById('tabSimple') as HTMLButtonElement;
+  },
+  get tabAdvanced() {
+    return document.getElementById('tabAdvanced') as HTMLButtonElement;
+  },
+  get simpleModeContainer() {
+    return document.getElementById('simpleModeContainer') as HTMLElement;
+  },
+  get advancedModeContainer() {
+    return document.getElementById('advancedModeContainer') as HTMLElement;
+  },
 
   // Simple Mode Controls & Displays
-  simpleBalls: document.getElementById('simpleBalls') as HTMLInputElement,
-  simpleHours: document.getElementById('simpleHours') as HTMLInputElement,
-  simpleHoursVal: document.getElementById('simpleHoursVal') as HTMLElement,
-  simpleYeastInputs: document.getElementsByName('simpleYeastType') as NodeListOf<HTMLInputElement>,
-  simpleTempRtSlider: document.getElementById('simpleTempRtSlider') as HTMLInputElement,
-  simpleTempRtVal: document.getElementById('simpleTempRtVal') as HTMLElement,
-  simpleTempFridgeSlider: document.getElementById('simpleTempFridgeSlider') as HTMLInputElement,
-  simpleTempFridgeVal: document.getElementById('simpleTempFridgeVal') as HTMLElement,
-  simpleTimeSplitDisplay: document.getElementById('simpleTimeSplitDisplay') as HTMLElement,
-  simpleDoughSummaryDisplay: document.getElementById('simpleDoughSummaryDisplay') as HTMLElement,
-  simpleFlourRes: document.getElementById('simpleFlourRes') as HTMLElement,
-  simpleWaterRes: document.getElementById('simpleWaterRes') as HTMLElement,
-  simpleSaltRes: document.getElementById('simpleSaltRes') as HTMLElement,
-  simpleYeastRes: document.getElementById('simpleYeastRes') as HTMLElement,
-  simpleYeastTitle: document.getElementById('simpleYeastTitle') as HTMLElement,
+  get simpleBalls() {
+    return document.getElementById('simpleBalls') as HTMLInputElement;
+  },
+  get simpleHours() {
+    return document.getElementById('simpleHours') as HTMLInputElement;
+  },
+  get simpleHoursVal() {
+    return document.getElementById('simpleHoursVal') as HTMLElement;
+  },
+  get simpleYeastInputs() {
+    return document.getElementsByName('simpleYeastType') as NodeListOf<HTMLInputElement>;
+  },
+  get simpleTempRtSlider() {
+    return document.getElementById('simpleTempRtSlider') as HTMLInputElement;
+  },
+  get simpleTempRtVal() {
+    return document.getElementById('simpleTempRtVal') as HTMLElement;
+  },
+  get simpleTempFridgeSlider() {
+    return document.getElementById('simpleTempFridgeSlider') as HTMLInputElement;
+  },
+  get simpleTempFridgeVal() {
+    return document.getElementById('simpleTempFridgeVal') as HTMLElement;
+  },
+  get simpleTimeSplitDisplay() {
+    return document.getElementById('simpleTimeSplitDisplay') as HTMLElement;
+  },
+  get simpleDoughSummaryDisplay() {
+    return document.getElementById('simpleDoughSummaryDisplay') as HTMLElement;
+  },
+  get simpleFlourRes() {
+    return document.getElementById('simpleFlourRes') as HTMLElement;
+  },
+  get simpleWaterRes() {
+    return document.getElementById('simpleWaterRes') as HTMLElement;
+  },
+  get simpleSaltRes() {
+    return document.getElementById('simpleSaltRes') as HTMLElement;
+  },
+  get simpleYeastRes() {
+    return document.getElementById('simpleYeastRes') as HTMLElement;
+  },
+  get simpleYeastTitle() {
+    return document.getElementById('simpleYeastTitle') as HTMLElement;
+  },
 
   // Advanced Mode Inputs
-  numberOfBalls: document.getElementById('numberOfBalls') as HTMLInputElement,
-  ballWeight: document.getElementById('ballWeight') as HTMLInputElement,
-  hydrationSlider: document.getElementById('hydrationSlider') as HTMLInputElement,
-  hydrationVal: document.getElementById('hydrationVal') as HTMLElement,
-  saltSlider: document.getElementById('saltSlider') as HTMLInputElement,
-  saltVal: document.getElementById('saltVal') as HTMLElement,
-  yeastInputs: document.getElementsByName('yeastType') as NodeListOf<HTMLInputElement>,
-  hoursRt: document.getElementById('hoursRt') as HTMLInputElement,
-  tempRtSlider: document.getElementById('tempRtSlider') as HTMLInputElement,
-  tempRtVal: document.getElementById('tempRtVal') as HTMLElement,
-  hoursFridge: document.getElementById('hoursFridge') as HTMLInputElement,
-  tempFridgeSlider: document.getElementById('tempFridgeSlider') as HTMLInputElement,
-  tempFridgeVal: document.getElementById('tempFridgeVal') as HTMLElement,
+  get numberOfBalls() {
+    return document.getElementById('numberOfBalls') as HTMLInputElement;
+  },
+  get ballWeight() {
+    return document.getElementById('ballWeight') as HTMLInputElement;
+  },
+  get hydrationSlider() {
+    return document.getElementById('hydrationSlider') as HTMLInputElement;
+  },
+  get hydrationVal() {
+    return document.getElementById('hydrationVal') as HTMLElement;
+  },
+  get saltSlider() {
+    return document.getElementById('saltSlider') as HTMLInputElement;
+  },
+  get saltVal() {
+    return document.getElementById('saltVal') as HTMLElement;
+  },
+  get yeastInputs() {
+    return document.getElementsByName('yeastType') as NodeListOf<HTMLInputElement>;
+  },
+  get hoursRt() {
+    return document.getElementById('hoursRt') as HTMLInputElement;
+  },
+  get tempRtSlider() {
+    return document.getElementById('tempRtSlider') as HTMLInputElement;
+  },
+  get tempRtVal() {
+    return document.getElementById('tempRtVal') as HTMLElement;
+  },
+  get hoursFridge() {
+    return document.getElementById('hoursFridge') as HTMLInputElement;
+  },
+  get tempFridgeSlider() {
+    return document.getElementById('tempFridgeSlider') as HTMLInputElement;
+  },
+  get tempFridgeVal() {
+    return document.getElementById('tempFridgeVal') as HTMLElement;
+  },
 
   // Advanced Output Displays
-  totalDoughWeightDisplay: document.getElementById('totalDoughWeightDisplay') as HTMLElement,
-  flourRes: document.getElementById('flourRes') as HTMLElement,
-  waterRes: document.getElementById('waterRes') as HTMLElement,
-  saltRes: document.getElementById('saltRes') as HTMLElement,
-  yeastRes: document.getElementById('yeastRes') as HTMLElement,
-  waterPctDisplay: document.getElementById('waterPctDisplay') as HTMLElement,
-  saltPctDisplay: document.getElementById('saltPctDisplay') as HTMLElement,
-  yeastPctDisplay: document.getElementById('yeastPctDisplay') as HTMLElement,
-  yeastLabel: document.getElementById('yeastLabel') as HTMLElement,
-  warningNotice: document.getElementById('warningNotice') as HTMLElement,
+  get totalDoughWeightDisplay() {
+    return document.getElementById('totalDoughWeightDisplay') as HTMLElement;
+  },
+  get flourRes() {
+    return document.getElementById('flourRes') as HTMLElement;
+  },
+  get waterRes() {
+    return document.getElementById('waterRes') as HTMLElement;
+  },
+  get saltRes() {
+    return document.getElementById('saltRes') as HTMLElement;
+  },
+  get yeastRes() {
+    return document.getElementById('yeastRes') as HTMLElement;
+  },
+  get waterPctDisplay() {
+    return document.getElementById('waterPctDisplay') as HTMLElement;
+  },
+  get saltPctDisplay() {
+    return document.getElementById('saltPctDisplay') as HTMLElement;
+  },
+  get yeastPctDisplay() {
+    return document.getElementById('yeastPctDisplay') as HTMLElement;
+  },
+  get yeastLabel() {
+    return document.getElementById('yeastLabel') as HTMLElement;
+  },
+  get warningNotice() {
+    return document.getElementById('warningNotice') as HTMLElement;
+  },
 
   // Buttons & Controls
-  resetBtn: document.getElementById('resetBtn') as HTMLButtonElement,
-  themeToggleBtn: document.getElementById('themeToggleBtn') as HTMLButtonElement,
-  sunIcon: document.getElementById('sunIcon') as HTMLElement,
-  moonIcon: document.getElementById('moonIcon') as HTMLElement,
+  get resetBtn() {
+    return document.getElementById('resetBtn') as HTMLButtonElement;
+  },
+  get themeToggleBtn() {
+    return document.getElementById('themeToggleBtn') as HTMLButtonElement;
+  },
+  get sunIcon() {
+    return document.getElementById('sunIcon') as HTMLElement;
+  },
+  get moonIcon() {
+    return document.getElementById('moonIcon') as HTMLElement;
+  },
 
   // Language Popover UI
-  langMenuBtn: document.getElementById('langMenuBtn') as HTMLButtonElement | null,
-  currentLangBadge: document.getElementById('currentLangBadge') as HTMLElement | null,
-  langPopover: document.getElementById('langPopover') as HTMLElement | null,
+  get langMenuBtn() {
+    return document.getElementById('langMenuBtn') as HTMLButtonElement | null;
+  },
+  get currentLangBadge() {
+    return document.getElementById('currentLangBadge') as HTMLElement | null;
+  },
+  get langPopover() {
+    return document.getElementById('langPopover') as HTMLElement | null;
+  },
 };
 
 /**
@@ -433,24 +531,26 @@ function initTheme(): void {
   const savedTheme = (localStorage.getItem(THEME_KEY) as ThemeMode) || DEFAULT_THEME;
   setTheme(savedTheme);
 
-  elements.themeToggleBtn.addEventListener('click', () => {
-    const currentTheme: ThemeMode = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
-    const nextTheme: ThemeMode = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-  });
+  if (elements.themeToggleBtn) {
+    elements.themeToggleBtn.addEventListener('click', () => {
+      const currentTheme: ThemeMode = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+      const nextTheme: ThemeMode = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    });
+  }
 }
 
 function setTheme(theme: ThemeMode): void {
   if (theme === 'dark') {
     document.body.classList.remove('light-theme');
     document.body.classList.add('dark-theme');
-    elements.sunIcon.classList.remove('hidden');
-    elements.moonIcon.classList.add('hidden');
+    if (elements.sunIcon) elements.sunIcon.classList.remove('hidden');
+    if (elements.moonIcon) elements.moonIcon.classList.add('hidden');
   } else {
     document.body.classList.remove('dark-theme');
     document.body.classList.add('light-theme');
-    elements.sunIcon.classList.add('hidden');
-    elements.moonIcon.classList.remove('hidden');
+    if (elements.sunIcon) elements.sunIcon.classList.add('hidden');
+    if (elements.moonIcon) elements.moonIcon.classList.remove('hidden');
   }
   localStorage.setItem(THEME_KEY, theme);
 }
@@ -527,6 +627,16 @@ function initPwaToasts(): void {
 /**
  * Attach Event Listeners
  */
+
+export function initApp(): void {
+  initTheme();
+  loadState();
+  setMode(currentMode);
+  applyLanguage(currentLang);
+  initEventListeners();
+  initPwaToasts();
+}
+
 function initEventListeners(): void {
   // Mode Switcher Tabs
   if (elements.tabSimple && elements.tabAdvanced) {
@@ -558,10 +668,20 @@ function initEventListeners(): void {
       if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = target.value;
       calculateSimple();
     });
+    elements.simpleTempRtSlider.addEventListener('change', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = target.value;
+      calculateSimple();
+    });
   }
 
   if (elements.simpleTempFridgeSlider) {
     elements.simpleTempFridgeSlider.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = target.value;
+      calculateSimple();
+    });
+    elements.simpleTempFridgeSlider.addEventListener('change', (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = target.value;
       calculateSimple();
@@ -601,13 +721,13 @@ function initEventListeners(): void {
   if (elements.langMenuBtn && elements.langPopover) {
     elements.langMenuBtn.addEventListener('click', (e: MouseEvent) => {
       e.stopPropagation();
-      const isHidden = elements.langPopover!.classList.contains('hidden');
+      const isHidden = elements.langPopover?.classList.contains('hidden');
       if (isHidden) {
-        elements.langPopover!.classList.remove('hidden');
-        elements.langMenuBtn!.setAttribute('aria-expanded', 'true');
+        elements.langPopover?.classList.remove('hidden');
+        elements.langMenuBtn?.setAttribute('aria-expanded', 'true');
       } else {
-        elements.langPopover!.classList.add('hidden');
-        elements.langMenuBtn!.setAttribute('aria-expanded', 'false');
+        elements.langPopover?.classList.add('hidden');
+        elements.langMenuBtn?.setAttribute('aria-expanded', 'false');
       }
     });
 
@@ -616,8 +736,8 @@ function initEventListeners(): void {
         const lang = btn.getAttribute('data-lang') as LanguageCode;
         if (lang) {
           applyLanguage(lang);
-          elements.langPopover!.classList.add('hidden');
-          elements.langMenuBtn!.setAttribute('aria-expanded', 'false');
+          elements.langPopover?.classList.add('hidden');
+          elements.langMenuBtn?.setAttribute('aria-expanded', 'false');
         }
       });
     });
@@ -644,29 +764,47 @@ function initEventListeners(): void {
   }
 
   // Sync slider label values and trigger calculate for Advanced mode
-  elements.hydrationSlider.addEventListener('input', (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    elements.hydrationVal.textContent = target.value;
-    calculate();
-  });
+  if (elements.hydrationSlider) {
+    elements.hydrationSlider.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.hydrationVal) elements.hydrationVal.textContent = target.value;
+      calculate();
+    });
+  }
 
-  elements.saltSlider.addEventListener('input', (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    elements.saltVal.textContent = target.value;
-    calculate();
-  });
+  if (elements.saltSlider) {
+    elements.saltSlider.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.saltVal) elements.saltVal.textContent = target.value;
+      calculate();
+    });
+  }
 
-  elements.tempRtSlider.addEventListener('input', (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    elements.tempRtVal.textContent = target.value;
-    calculate();
-  });
+  if (elements.tempRtSlider) {
+    elements.tempRtSlider.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.tempRtVal) elements.tempRtVal.textContent = target.value;
+      calculate();
+    });
+    elements.tempRtSlider.addEventListener('change', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.tempRtVal) elements.tempRtVal.textContent = target.value;
+      calculate();
+    });
+  }
 
-  elements.tempFridgeSlider.addEventListener('input', (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    elements.tempFridgeVal.textContent = target.value;
-    calculate();
-  });
+  if (elements.tempFridgeSlider) {
+    elements.tempFridgeSlider.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = target.value;
+      calculate();
+    });
+    elements.tempFridgeSlider.addEventListener('change', (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = target.value;
+      calculate();
+    });
+  }
 
   // Numeric Inputs for Advanced mode
   [elements.numberOfBalls, elements.ballWeight, elements.hoursRt, elements.hoursFridge].forEach((input) => {
@@ -677,9 +815,11 @@ function initEventListeners(): void {
   });
 
   // Yeast Type Radio buttons
-  elements.yeastInputs.forEach((input) => {
-    input.addEventListener('change', calculate);
-  });
+  if (elements.yeastInputs) {
+    elements.yeastInputs.forEach((input) => {
+      input.addEventListener('change', calculate);
+    });
+  }
 
   // Stepper Buttons (+ / -) for Advanced mode
   document.querySelectorAll<HTMLButtonElement>('.btn-step').forEach((btn) => {
@@ -700,57 +840,64 @@ function initEventListeners(): void {
   });
 
   // Reset Button
-  elements.resetBtn.addEventListener('click', () => {
-    if (elements.simpleBalls) elements.simpleBalls.value = '4';
-    if (elements.simpleHours) elements.simpleHours.value = '8';
-    if (elements.simpleYeastInputs) {
-      elements.simpleYeastInputs.forEach((input) => {
-        input.checked = input.value === 'Fresh';
-      });
-    }
-    if (elements.simpleTempRtSlider) {
-      elements.simpleTempRtSlider.value = '22';
-      if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = '22';
-    }
-    if (elements.simpleTempFridgeSlider) {
-      elements.simpleTempFridgeSlider.value = '4';
-      if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = '4';
-    }
+  if (elements.resetBtn) {
+    elements.resetBtn.addEventListener('click', () => {
+      if (elements.simpleBalls) elements.simpleBalls.value = '4';
+      if (elements.simpleHours) elements.simpleHours.value = '8';
+      if (elements.simpleYeastInputs) {
+        elements.simpleYeastInputs.forEach((input) => {
+          input.checked = input.value === 'Fresh';
+        });
+      }
+      if (elements.simpleTempRtSlider) {
+        elements.simpleTempRtSlider.value = '22';
+        if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = '22';
+      }
+      if (elements.simpleTempFridgeSlider) {
+        elements.simpleTempFridgeSlider.value = '4';
+        if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = '4';
+      }
 
-    elements.numberOfBalls.value = DEFAULTS.numberOfBalls.toString();
-    elements.ballWeight.value = DEFAULTS.ballWeight.toString();
+      if (elements.numberOfBalls) elements.numberOfBalls.value = DEFAULTS.numberOfBalls.toString();
+      if (elements.ballWeight) elements.ballWeight.value = DEFAULTS.ballWeight.toString();
 
-    elements.hydrationSlider.value = DEFAULTS.hydrationPercentage.toString();
-    elements.hydrationVal.textContent = DEFAULTS.hydrationPercentage.toString();
+      if (elements.hydrationSlider) {
+        elements.hydrationSlider.value = DEFAULTS.hydrationPercentage.toString();
+        if (elements.hydrationVal) elements.hydrationVal.textContent = DEFAULTS.hydrationPercentage.toString();
+      }
 
-    elements.saltSlider.value = DEFAULTS.saltPercentage.toString();
-    elements.saltVal.textContent = DEFAULTS.saltPercentage.toString();
+      if (elements.saltSlider) {
+        elements.saltSlider.value = DEFAULTS.saltPercentage.toString();
+        if (elements.saltVal) elements.saltVal.textContent = DEFAULTS.saltPercentage.toString();
+      }
 
-    elements.yeastInputs.forEach((input) => {
-      input.checked = String(input.value) === String(DEFAULTS.yeastType);
+      if (elements.yeastInputs) {
+        elements.yeastInputs.forEach((input) => {
+          input.checked = String(input.value) === String(DEFAULTS.yeastType);
+        });
+      }
+
+      if (elements.hoursRt) elements.hoursRt.value = DEFAULTS.hoursRt.toString();
+      if (elements.tempRtSlider) {
+        elements.tempRtSlider.value = DEFAULTS.tempRt.toString();
+        if (elements.tempRtVal) elements.tempRtVal.textContent = DEFAULTS.tempRt.toString();
+      }
+
+      if (elements.hoursFridge) elements.hoursFridge.value = DEFAULTS.hoursFridge.toString();
+      if (elements.tempFridgeSlider) {
+        elements.tempFridgeSlider.value = DEFAULTS.tempFridge.toString();
+        if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = DEFAULTS.tempFridge.toString();
+      }
+
+      calculateSimple();
+      calculate();
     });
-
-    elements.hoursRt.value = DEFAULTS.hoursRt.toString();
-    elements.tempRtSlider.value = DEFAULTS.tempRt.toString();
-    elements.tempRtVal.textContent = DEFAULTS.tempRt.toString();
-
-    elements.hoursFridge.value = DEFAULTS.hoursFridge.toString();
-    elements.tempFridgeSlider.value = DEFAULTS.tempFridge.toString();
-    elements.tempFridgeVal.textContent = DEFAULTS.tempFridge.toString();
-
-    calculateSimple();
-    calculate();
-  });
+  }
 }
 
 // Initial Bootstrapping
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
-  loadState();
-  setMode(currentMode);
-  applyLanguage(currentLang);
-  initEventListeners();
-  initPwaToasts();
+  initApp();
 });
 
 // Register Service Worker for PWA Offline Capabilities & Cache Versioning
