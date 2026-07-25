@@ -87,6 +87,14 @@ export interface TranslationDictionary {
   simpleTipBody: string;
   simpleDoughSummary: string;
   simpleDefaultsInfo: string;
+  simpleDefaultsInfoNeapolitan: string;
+  simpleDefaultsInfoTondaRomana: string;
+
+  pizzaStyleLabel: string;
+  styleNeapolitan: string;
+  styleNeapolitanDesc: string;
+  styleTondaRomana: string;
+  styleTondaRomanaDesc: string;
 
   copyRecipeBtn: string;
   recipeCopiedToast: string;
@@ -167,9 +175,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       '¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.',
 
-    pwaUpdateNotice: '✨ Nueva versión disponible con mejoras',
+    pwaUpdateNotice: 'Nueva versión disponible con mejoras',
     pwaUpdateBtn: 'Actualizar',
-    pwaInstallNotice: '📱 Instala la app para usarla 100% offline',
+    pwaInstallNotice: 'Instala la app para usarla 100% offline',
     pwaInstallBtn: 'Instalar',
     dismiss: 'Cerrar',
 
@@ -188,8 +196,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTipTitle: '💡 Guía Rápida de Preparación',
     simpleTipBody:
       'Disuelve la levadura fresca en el agua. Agrega la harina, amasa 5 min, añade la sal y amasa hasta obtener una masa lisa. Deja reposar cubierta.',
-    simpleDoughSummary: 'Masa total: {total}g ({balls} bolas de 280g)',
+    simpleDoughSummary: 'Masa total: {total}g ({balls} bolas de {weight}g)',
     simpleDefaultsInfo: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal • Levadura fresca',
+    simpleDefaultsInfoNeapolitan: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal',
+    simpleDefaultsInfoTondaRomana: 'Fórmula Tonda Romana: Bola 180g • 57% Hidratación • 2.5% Sal',
+
+    pizzaStyleLabel: 'Estilo de Pizza',
+    styleNeapolitan: 'Napolitana',
+    styleNeapolitanDesc: 'Masa esponjosa (Bola 280g • 65% Hidr.)',
+    styleTondaRomana: 'Tonda Romana',
+    styleTondaRomanaDesc: 'Fina y crujiente (Bola 180g • 57% Hidr.)',
 
     copyRecipeBtn: '📋 Copiar Receta',
     recipeCopiedToast: '✅ ¡Receta copiada al portapapeles!',
@@ -264,9 +280,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       'Yes! It is a 100% offline Progressive Web App (PWA). Once opened in your browser or installed on your mobile home screen, it works completely offline without network coverage.',
 
-    pwaUpdateNotice: '✨ New version available with updates',
+    pwaUpdateNotice: 'New version available with updates',
     pwaUpdateBtn: 'Update',
-    pwaInstallNotice: '📱 Install app for 100% offline use',
+    pwaInstallNotice: 'Install app for 100% offline use',
     pwaInstallBtn: 'Install',
     dismiss: 'Dismiss',
 
@@ -285,8 +301,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTipTitle: '💡 Quick Preparation Guide',
     simpleTipBody:
       'Dissolve fresh yeast in water. Add flour, knead 5 min, add salt and knead until smooth. Let rest covered.',
-    simpleDoughSummary: 'Total dough: {total}g ({balls} balls of 280g)',
+    simpleDoughSummary: 'Total dough: {total}g ({balls} balls of {weight}g)',
     simpleDefaultsInfo: 'Neapolitan Standard: 280g ball • 65% Hydration • 2.5% Salt • Fresh yeast',
+    simpleDefaultsInfoNeapolitan: 'Neapolitan Formula: 280g ball • 65% Hydration • 2.5% Salt',
+    simpleDefaultsInfoTondaRomana: 'Tonda Romana Formula: 180g ball • 57% Hydration • 2.5% Salt',
+
+    pizzaStyleLabel: 'Pizza Style',
+    styleNeapolitan: 'Neapolitan',
+    styleNeapolitanDesc: 'Airy crust (280g ball • 65% Hydr.)',
+    styleTondaRomana: 'Tonda Romana',
+    styleTondaRomanaDesc: 'Thin & crispy (180g ball • 57% Hydr.)',
 
     copyRecipeBtn: '📋 Copy Recipe',
     recipeCopiedToast: '✅ Recipe copied to clipboard!',
@@ -362,9 +386,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       'Sì! È una PWA (Progressive Web App) 100% offline. Una volta caricata o aggiunta alla schermata home del telefono, funziona senza connessione internet.',
 
-    pwaUpdateNotice: '✨ Nuova versione disponibile',
+    pwaUpdateNotice: 'Nuova versione disponibile',
     pwaUpdateBtn: 'Aggiorna',
-    pwaInstallNotice: "📱 Installa l'app per usarla offline",
+    pwaInstallNotice: "Installa l'app per usarla offline",
     pwaInstallBtn: 'Installa',
     dismiss: 'Chiudi',
 
@@ -383,8 +407,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTipTitle: '💡 Guida Rapida di Preparazione',
     simpleTipBody:
       "Sciogli il lievito fresco nell'acqua. Aggiungi la farina, impasta 5 min, unisci il sale e impasta fino a ottenere un panetto liscio.",
-    simpleDoughSummary: 'Impasto totale: {total}g ({balls} panetti da 280g)',
+    simpleDoughSummary: 'Impasto totale: {total}g ({balls} panetti da {weight}g)',
     simpleDefaultsInfo: 'Standard Napoletano: Panetto 280g • 65% Idratazione • 2.5% Sale • Lievito fresco',
+    simpleDefaultsInfoNeapolitan: 'Formula Napoletana: Panetto 280g • 65% Idratazione • 2.5% Sale',
+    simpleDefaultsInfoTondaRomana: 'Formula Tonda Romana: Panetto 180g • 57% Idratazione • 2.5% Sale',
+
+    pizzaStyleLabel: 'Stile di Pizza',
+    styleNeapolitan: 'Napoletana',
+    styleNeapolitanDesc: 'Cornicione alto (Panetto 280g • 65% Idr.)',
+    styleTondaRomana: 'Tonda Romana',
+    styleTondaRomanaDesc: 'Fina e scrocchiarella (Panetto 180g • 57% Idr.)',
 
     copyRecipeBtn: '📋 Copia Ricetta',
     recipeCopiedToast: '✅ Ricetta copiata negli appunti!',
@@ -460,9 +492,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       "Oui! C'est une PWA 100% hors ligne. Une fois ouverte ou ajoutée à l'écran d'accueil de votre smartphone, elle fonctionne sans connexion internet.",
 
-    pwaUpdateNotice: '✨ Nouvelle version disponible',
+    pwaUpdateNotice: 'Nouvelle version disponible',
     pwaUpdateBtn: 'Mettre à jour',
-    pwaInstallNotice: "📱 Installez l'appli pour l'utiliser hors ligne",
+    pwaInstallNotice: "Installez l'appli pour l'utiliser hors ligne",
     pwaInstallBtn: 'Installer',
     dismiss: 'Fermer',
 
@@ -481,8 +513,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTipTitle: '💡 Guide de Préparation Rapide',
     simpleTipBody:
       "Dissolvez la levure fraîche dans l'eau. Ajoutez la farine, pétrissez 5 min, ajoutez le sel et pétrissez jusqu'à obtenir une pâte lisse.",
-    simpleDoughSummary: 'Pâte totale : {total}g ({balls} pâtons de 280g)',
+    simpleDoughSummary: 'Pâte totale : {total}g ({balls} pâtons de {weight}g)',
     simpleDefaultsInfo: 'Standard Napolitain : Pâton de 280g • 65% Hydratation • 2.5% Sel • Levure fraîche',
+    simpleDefaultsInfoNeapolitan: 'Formule Napolitaine : Pâton de 280g • 65% Hydratation • 2.5% Sel',
+    simpleDefaultsInfoTondaRomana: 'Formule Tonda Romana : Pâton de 180g • 57% Hydratation • 2.5% Sel',
+
+    pizzaStyleLabel: 'Style de Pizza',
+    styleNeapolitan: 'Napolitaine',
+    styleNeapolitanDesc: 'Bords alvéolés (Pâton 280g • 65% Hydr.)',
+    styleTondaRomana: 'Tonda Romana',
+    styleTondaRomanaDesc: 'Fine et croustillante (Pâton 180g • 57% Hydr.)',
 
     copyRecipeBtn: '📋 Copier la Recette',
     recipeCopiedToast: '✅ Recette copiée dans le presse-papier !',
@@ -556,9 +596,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       'Ja! Es ist eine 100% offlinefähige Progressive Web App (PWA). Einmal geladen oder auf dem Smartphone installiert, funktioniert sie ohne Internet.',
 
-    pwaUpdateNotice: '✨ Neue Version verfügbar',
+    pwaUpdateNotice: 'Neue Version verfügbar',
     pwaUpdateBtn: 'Aktualisieren',
-    pwaInstallNotice: '📱 App für 100% Offline-Nutzung installieren',
+    pwaInstallNotice: 'App für 100% Offline-Nutzung installieren',
     pwaInstallBtn: 'Installieren',
     dismiss: 'Schließen',
 
@@ -577,8 +617,16 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTipTitle: '💡 Kurzanleitung zur Zubereitung',
     simpleTipBody:
       'Frische Hefe im Wasser auflösen. Mehl hinzufügen, 5 Min. kneten, Salz zugeben und zu einem glatten Teig kneten.',
-    simpleDoughSummary: 'Gesamte Teigmenge: {total}g ({balls} Teigkugeln à 280g)',
+    simpleDoughSummary: 'Gesamte Teigmenge: {total}g ({balls} Teigkugeln à {weight}g)',
     simpleDefaultsInfo: 'Neapolitanischer Standard: 280g Teigkugel • 65% Hydratation • 2.5% Salz • Frische Hefe',
+    simpleDefaultsInfoNeapolitan: 'Neapolitanische Formel: 280g Teigkugel • 65% Hydratation • 2.5% Salz',
+    simpleDefaultsInfoTondaRomana: 'Tonda Romana Formel: 180g Teigkugel • 57% Hydratation • 2.5% Salz',
+
+    pizzaStyleLabel: 'Pizzastil',
+    styleNeapolitan: 'Neapolitanisch',
+    styleNeapolitanDesc: 'Luftiger Rand (280g Kugel • 65% Hydr.)',
+    styleTondaRomana: 'Tonda Romana',
+    styleTondaRomanaDesc: 'Dünn & knusprig (180g Kugel • 57% Hydr.)',
 
     copyRecipeBtn: '📋 Rezept kopieren',
     recipeCopiedToast: '✅ Rezept in die Zwischenablage kopiert!',
