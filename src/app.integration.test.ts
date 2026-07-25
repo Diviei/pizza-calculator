@@ -449,6 +449,11 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     const flourRes = document.getElementById('simpleFlourRes');
     expect(flourRes?.textContent).toBe('451.4');
 
+    // Prep guide should mention Tonda Romana stretching (rodillo/fina/mattarello/sottile) and 2-3h rest
+    const simplePrepSteps = document.getElementById('simplePrepSteps');
+    expect(simplePrepSteps?.textContent).toMatch(/rodillo|fina|mattarello|sottile/i);
+    expect(simplePrepSteps?.textContent).toMatch(/2 a 3|2-3/i);
+
     // 2. Switch to Advanced mode
     const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
     tabAdvanced.click();
