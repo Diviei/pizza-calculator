@@ -2,21 +2,21 @@
   <title>Pizza Calculator Icon</title>
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e1b18"/>
-      <stop offset="100%" stop-color="#0f0e0c"/>
+      <stop offset="0%" stop-color="#2d1d27"/>
+      <stop offset="100%" stop-color="#120b10"/>
     </linearGradient>
     <linearGradient id="crustGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f59e0b"/>
-      <stop offset="50%" stop-color="#d97706"/>
-      <stop offset="100%" stop-color="#b45309"/>
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
     </linearGradient>
     <linearGradient id="cheeseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef3c7"/>
-      <stop offset="100%" stop-color="#fde047"/>
+      <stop offset="0%" stop-color="#fce7f3"/>
+      <stop offset="100%" stop-color="#f472b6"/>
     </linearGradient>
     <linearGradient id="sauceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ef4444"/>
-      <stop offset="100%" stop-color="#dc2626"/>
+      <stop offset="0%" stop-color="#e11d48"/>
+      <stop offset="100%" stop-color="#be185d"/>
     </linearGradient>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
@@ -27,7 +27,7 @@
   <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
   
   <!-- Outer glowing accent ring -->
-  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="#f59e0b" stroke-width="3" stroke-opacity="0.25"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="#ec4899" stroke-width="3" stroke-opacity="0.25"/>
 
   <!-- Pizza Slice Graphic -->
   <g filter="url(#shadow)" transform="translate(0, 8)">
@@ -41,9 +41,9 @@
     <path d="M 155,185 C 215,145 297,145 357,185 L 256,390 Z" fill="url(#cheeseGrad)"/>
     
     <!-- Basil leaves / Pepperoni accents -->
-    <circle cx="230" cy="220" r="18" fill="#ef4444" opacity="0.9"/>
-    <circle cx="282" cy="245" r="16" fill="#ef4444" opacity="0.9"/>
-    <circle cx="245" cy="300" r="15" fill="#ef4444" opacity="0.9"/>
+    <circle cx="230" cy="220" r="18" fill="#9d174d" opacity="0.9"/>
+    <circle cx="282" cy="245" r="16" fill="#9d174d" opacity="0.9"/>
+    <circle cx="245" cy="300" r="15" fill="#9d174d" opacity="0.9"/>
     
     <path d="M 210,250 C 200,240 195,255 205,265 C 215,275 225,260 210,250 Z" fill="#22c55e"/>
     <path d="M 290,290 C 280,280 275,295 285,305 C 295,315 305,300 290,290 Z" fill="#22c55e"/>
