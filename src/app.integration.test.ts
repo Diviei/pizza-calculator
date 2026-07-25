@@ -372,4 +372,50 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     const hydrationVal = document.getElementById('hydrationVal');
     expect(hydrationVal?.textContent).toBe('70');
   });
+
+  it('renders dynamic preparation guide steps and copy recipe button in both simple and advanced modes', () => {
+    // 1. Simple Mode Preparation Guide
+    const simplePrepSteps = document.getElementById('simplePrepSteps');
+    expect(simplePrepSteps?.children.length).toBe(3);
+    expect(simplePrepSteps?.textContent).toMatch(/Impasto|Amasado|Mezcla|Mixing|Preparation|Pétrissage|Mischen/i);
+
+    // Click simple copy recipe button
+    const simpleCopyBtn = document.getElementById('simpleCopyBtn') as HTMLButtonElement;
+    expect(simpleCopyBtn).not.toBeNull();
+    simpleCopyBtn.click();
+    const copyToast = document.getElementById('copyToast');
+    expect(copyToast?.classList.contains('hidden')).toBe(false);
+
+    // 2. Switch to Advanced Mode and test fermentation time variations (Ambient only, Fridge only, Combined)
+    const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
+    tabAdvanced.click();
+
+    const hoursRtInput = document.getElementById('hoursRt') as HTMLInputElement;
+    const hoursFridgeInput = document.getElementById('hoursFridge') as HTMLInputElement;
+    const advancedPrepSteps = document.getElementById('advancedPrepSteps');
+
+    // Case A: Ambient only (hoursRt=8, hoursFridge=0)
+    hoursRtInput.value = '8';
+    hoursFridgeInput.value = '0';
+    hoursRtInput.dispatchEvent(new Event('input', { bubbles: true }));
+    expect(advancedPrepSteps?.textContent).toMatch(/temperatura ambiente|room temp/i);
+
+    // Case B: Fridge only (hoursRt=0, hoursFridge=24)
+    hoursRtInput.value = '0';
+    hoursFridgeInput.value = '24';
+    hoursRtInput.dispatchEvent(new Event('input', { bubbles: true }));
+    expect(advancedPrepSteps?.textContent).toMatch(/nevera|frigo|fridge/i);
+
+    // Case C: Combined mixed fermentation (hoursRt=4, hoursFridge=20)
+    hoursRtInput.value = '4';
+    hoursFridgeInput.value = '20';
+    hoursRtInput.dispatchEvent(new Event('input', { bubbles: true }));
+    expect(advancedPrepSteps?.textContent).toMatch(/Mixta|Mixed|temperatura ambiente/i);
+
+    // Click advanced copy recipe button
+    const advancedCopyBtn = document.getElementById('advancedCopyBtn') as HTMLButtonElement;
+    expect(advancedCopyBtn).not.toBeNull();
+    advancedCopyBtn.click();
+    expect(copyToast?.classList.contains('hidden')).toBe(false);
+  });
 });

@@ -88,6 +88,19 @@ export interface TranslationDictionary {
   simpleDoughSummary: string;
   simpleDefaultsInfo: string;
 
+  copyRecipeBtn: string;
+  recipeCopiedToast: string;
+  quickSummaryTitle: string;
+
+  prepStep1Title: string;
+  prepStep1Body: string;
+  prepStep2Title: string;
+  prepStep2AmbientOnly: string;
+  prepStep2FridgeOnly: string;
+  prepStep2Combined: string;
+  prepStep3Title: string;
+  prepStep3Body: string;
+
   footerText: string;
 }
 
@@ -178,6 +191,24 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleDoughSummary: 'Masa total: {total}g ({balls} bolas de 280g)',
     simpleDefaultsInfo: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal • Levadura fresca',
 
+    copyRecipeBtn: '📋 Copiar Receta',
+    recipeCopiedToast: '✅ ¡Receta copiada al portapapeles!',
+    quickSummaryTitle: 'Resumen en Tiempo Real',
+
+    prepStep1Title: '🥣 1. Amasado y Mezcla',
+    prepStep1Body:
+      'Disuelve {yeast}g de levadura en {water}g de agua. Añade {flour}g de harina y {salt}g de sal. Amasa 10 min hasta obtener una masa lisa y elástica.',
+    prepStep2Title: '⏱️ 2. Fermentación y Control de Tiempo',
+    prepStep2AmbientOnly:
+      'Deja fermentar en un bol tapado a temperatura ambiente ({tempRt}°C) durante {hoursRt} horas. Divide en bolas 2 horas antes de hornear.',
+    prepStep2FridgeOnly:
+      'Deja reposar 1 hora a temp. ambiente, guarda en nevera ({tempFridge}°C) durante {hoursFridge} horas. Saca las bolas 2.5h antes de hornear para atemperar.',
+    prepStep2Combined:
+      'Fermentación Mixta: Mantén la masa {hoursRt} horas a temperatura ambiente ({tempRt}°C) y {hoursFridge} horas en nevera ({tempFridge}°C). Saca y atempera 2 horas antes de estirar.',
+    prepStep3Title: '🍕 3. Formado y Horneado',
+    prepStep3Body:
+      'Forma {balls} bolas de {weight}g. Estira con las manos desde el centro sobre sémola dejando el borde (cornicione). Hornea al máximo de temperatura.',
+
     footerText: 'Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta',
   },
 
@@ -257,6 +288,24 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleDoughSummary: 'Total dough: {total}g ({balls} balls of 280g)',
     simpleDefaultsInfo: 'Neapolitan Standard: 280g ball • 65% Hydration • 2.5% Salt • Fresh yeast',
 
+    copyRecipeBtn: '📋 Copy Recipe',
+    recipeCopiedToast: '✅ Recipe copied to clipboard!',
+    quickSummaryTitle: 'Real-time Summary',
+
+    prepStep1Title: '🥣 1. Mixing & Kneading',
+    prepStep1Body:
+      'Dissolve {yeast}g of yeast in {water}g of water. Add {flour}g of flour and {salt}g of salt. Knead 10 minutes until smooth and elastic.',
+    prepStep2Title: '⏱️ 2. Fermentation & Timing',
+    prepStep2AmbientOnly:
+      'Let ferment in a covered bowl at room temp ({tempRt}°C) for {hoursRt} hours. Shape into dough balls 2 hours before baking.',
+    prepStep2FridgeOnly:
+      'Rest 1 hour at room temp, then chill in fridge ({tempFridge}°C) for {hoursFridge} hours. Remove dough balls 2.5 hours before baking to reach room temp.',
+    prepStep2Combined:
+      'Mixed Fermentation: Keep dough for {hoursRt} hours at room temp ({tempRt}°C) and {hoursFridge} hours in fridge ({tempFridge}°C). Warm up 2 hours before stretching.',
+    prepStep3Title: '🍕 3. Balling & Baking',
+    prepStep3Body:
+      'Divide into {balls} balls of {weight}g. Stretch by hand on semolina outward leaving raised crust edges (cornicione). Bake at max heat.',
+
     footerText: 'PWA Pizza Dough Calculator • Kinetic Fermentation Model',
   },
 
@@ -300,7 +349,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     yeastDryLabel: '🌱 Lievito Secco',
 
     faqSectionTitle: 'Domande Frequenti e Guida alla Lievitazione',
-    faqQ1: 'Come funziona il calcolo della lievitazione mista (Frigo + Ambiente)?',
+    faqQ1: 'Come funciona il calcolo della lievitazione mista (Frigo + Ambiente)?',
     faqA1:
       "Il calcolatore utilizza un algoritmo cinetico esponenziale che modella l'attività del lievito alle diverse temperature. L'attività è vicina allo zero a 3.5°C (frigo) e cresce esponenzialmente a temperatura ambiente.",
     faqQ2: "Cos'è la percentuale del pizzaiolo / panificatore?",
@@ -336,6 +385,24 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       "Sciogli il lievito fresco nell'acqua. Aggiungi la farina, impasta 5 min, unisci il sale e impasta fino a ottenere un panetto liscio.",
     simpleDoughSummary: 'Impasto totale: {total}g ({balls} panetti da 280g)',
     simpleDefaultsInfo: 'Standard Napoletano: Panetto 280g • 65% Idratazione • 2.5% Sale • Lievito fresco',
+
+    copyRecipeBtn: '📋 Copia Ricetta',
+    recipeCopiedToast: '✅ Ricetta copiata negli appunti!',
+    quickSummaryTitle: 'Riepilogo in Tempo Reale',
+
+    prepStep1Title: '🥣 1. Impasto e Miscelazione',
+    prepStep1Body:
+      'Sciogli {yeast}g di lievito in {water}g di acqua. Aggiungi {flour}g di farina e {salt}g di sale. Impasta 10 minuti fino a ottenere un panetto liscio.',
+    prepStep2Title: '⏱️ 2. Lievitazione e Tempi',
+    prepStep2AmbientOnly:
+      'Lascia lievitare a temperatura ambiente ({tempRt}°C) per {hoursRt} ore. Forma i panetti 2 ore prima di infornare.',
+    prepStep2FridgeOnly:
+      'Riposo 1 ora a TA, poi in frigorifero ({tempFridge}°C) per {hoursFridge} ore. Togli i panetti dal frigo 2.5 ore prima di stendere.',
+    prepStep2Combined:
+      'Lievitazione Mista: {hoursRt} ore a temperatura ambiente ({tempRt}°C) e {hoursFridge} ore in frigorifero ({tempFridge}°C). Porta a temperatura ambiente 2 ore prima di stendere.',
+    prepStep3Title: '🍕 3. Stesura e Cottura',
+    prepStep3Body:
+      'Forma {balls} panetti da {weight}g. Stendi a mano lasciando il cornicione alto. Inforna alla massima temperatura.',
 
     footerText: 'Calcolatore Impasto Pizza PWA • Modello Cinetico di Lievitazione',
   },
@@ -417,6 +484,24 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleDoughSummary: 'Pâte totale : {total}g ({balls} pâtons de 280g)',
     simpleDefaultsInfo: 'Standard Napolitain : Pâton de 280g • 65% Hydratation • 2.5% Sel • Levure fraîche',
 
+    copyRecipeBtn: '📋 Copier la Recette',
+    recipeCopiedToast: '✅ Recette copiée dans le presse-papier !',
+    quickSummaryTitle: 'Résumé en Temps Réel',
+
+    prepStep1Title: '🥣 1. Pétrissage et Mélange',
+    prepStep1Body:
+      "Dissolvez {yeast}g de levure dans {water}g d'eau. Ajoutez {flour}g de farine et {salt}g de sel. Pétrissez 10 min jusqu'à obtenir une pâte lisse.",
+    prepStep2Title: '⏱️ 2. Fermentation & Gestion du Temps',
+    prepStep2AmbientOnly:
+      'Laissez fermenter dans un bol couvert à température ambiante ({tempRt}°C) pendant {hoursRt} heures. Formez les pâtons 2h avant la cuisson.',
+    prepStep2FridgeOnly:
+      'Reposez 1h à TA, puis mettez au frigo ({tempFridge}°C) pendant {hoursFridge}h. Sortez les pâtons 2.5h avant cuisson pour réchauffer.',
+    prepStep2Combined:
+      "Fermentation Mixte : {hoursRt}h à température ambiante ({tempRt}°C) et {hoursFridge}h au réfrigérateur ({tempFridge}°C). Sortez 2h avant d'étaler.",
+    prepStep3Title: '🍕 3. Façonnage et Cuisson',
+    prepStep3Body:
+      'Divisez en {balls} pâtons de {weight}g. Étalez à la main en préservant les bords. Enfournez au maximum de votre four.',
+
     footerText: 'Calculateur de Pâte à Pizza PWA • Modèle Cinétique de Fermentation',
   },
 
@@ -494,6 +579,24 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       'Frische Hefe im Wasser auflösen. Mehl hinzufügen, 5 Min. kneten, Salz zugeben und zu einem glatten Teig kneten.',
     simpleDoughSummary: 'Gesamte Teigmenge: {total}g ({balls} Teigkugeln à 280g)',
     simpleDefaultsInfo: 'Neapolitanischer Standard: 280g Teigkugel • 65% Hydratation • 2.5% Salz • Frische Hefe',
+
+    copyRecipeBtn: '📋 Rezept kopieren',
+    recipeCopiedToast: '✅ Rezept in die Zwischenablage kopiert!',
+    quickSummaryTitle: 'Echtzeit-Zusammenfassung',
+
+    prepStep1Title: '🥣 1. Mischen & Kneten',
+    prepStep1Body:
+      'Löse {yeast}g Hefe in {water}g Wasser auf. Gib {flour}g Mehl und {salt}g Salz hinzu. 10 Min. kneten bis ein glatter Teig entsteht.',
+    prepStep2Title: '⏱️ 2. Gärung & Zeitverwaltung',
+    prepStep2AmbientOnly:
+      'Teig abgedeckt bei Raumtemperatur ({tempRt}°C) für {hoursRt} Std. gehen lassen. 2 Std. vor dem Backen zu Kugeln formen.',
+    prepStep2FridgeOnly:
+      '1 Std. bei Raumtemperatur ruhen lassen, dann {hoursFridge} Std. im Kühlschrank ({tempFridge}°C) kühlen. Teiglinge 2.5 Std. vor dem Backen herausnehmen.',
+    prepStep2Combined:
+      'Gemischte Gärung: {hoursRt} Std. bei Raumtemperatur ({tempRt}°C) und {hoursFridge} Std. im Kühlschrank ({tempFridge}°C). 2 Std. vor dem Dehnen temperieren.',
+    prepStep3Title: '🍕 3. Formung & Backen',
+    prepStep3Body:
+      'Teil den Teig in {balls} Teiglinge à {weight}g. Mit den Händen von innen nach außen dehnen (Rand hoch lassen). Bei Maximalhitze backen.',
 
     footerText: 'Pizzateig Rechner PWA • Kinetisches Gärmodell',
   },
