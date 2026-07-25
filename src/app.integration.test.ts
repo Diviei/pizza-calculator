@@ -468,4 +468,57 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(ballWeightInput.value).toBe('280');
     expect(hydrationSlider.value).toBe('65');
   });
+
+  it('builds shareable URL and handles share button clicks in simple and advanced mode', () => {
+    const simpleShareBtn = document.getElementById('simpleShareBtn') as HTMLButtonElement;
+    expect(simpleShareBtn).not.toBeNull();
+    simpleShareBtn.click();
+
+    const copyToast = document.getElementById('copyToast');
+    expect(copyToast?.classList.contains('hidden')).toBe(false);
+
+    // Switch to advanced mode and test share button
+    const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
+    tabAdvanced.click();
+
+    const advancedShareBtn = document.getElementById('advancedShareBtn') as HTMLButtonElement;
+    expect(advancedShareBtn).not.toBeNull();
+    advancedShareBtn.click();
+    expect(copyToast?.classList.contains('hidden')).toBe(false);
+  });
+
+  it('parses URL query parameters correctly on initialization', () => {
+    delete (window as any).location;
+    (window as any).location = new URL(
+      'https://pizzacalc.app/?mode=advanced&style=tonda_romana&balls=6&weight=200&hydration=60&salt=3&hoursRt=6&tempRt=24&hoursFridge=12&tempFridge=4&lang=en',
+    );
+
+    initApp();
+
+    const ballWeightInput = document.getElementById('ballWeight') as HTMLInputElement;
+    const hydrationSlider = document.getElementById('hydrationSlider') as HTMLInputElement;
+    expect(ballWeightInput.value).toBe('200');
+    expect(hydrationSlider.value).toBe('60');
+
+    // Simple mode URL params test
+    (window as any).location = new URL(
+      'https://pizzacalc.app/?mode=simple&style=neapolitan&balls=8&hours=12&tempRt=25&tempFridge=5&yeast=Instant%20Dry&lang=es',
+    );
+    initApp();
+
+    const simpleBallsInput = document.getElementById('simpleBalls') as HTMLInputElement;
+    const simpleHoursInput = document.getElementById('simpleHours') as HTMLInputElement;
+    expect(simpleBallsInput.value).toBe('8');
+    expect(simpleHoursInput.value).toBe('12');
+  });
+
+  it('handles clipboard fallback when navigator.clipboard is unavailable', () => {
+    vi.spyOn(navigator, 'clipboard', 'get').mockReturnValue(undefined as any);
+
+    const simpleCopyBtn = document.getElementById('simpleCopyBtn') as HTMLButtonElement;
+    simpleCopyBtn.click();
+
+    const copyToast = document.getElementById('copyToast');
+    expect(copyToast?.classList.contains('hidden')).toBe(false);
+  });
 });

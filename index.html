@@ -9,6 +9,23 @@
   
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="canonical" href="https://pizzacalc.app/">
+
+  <!-- Open Graph Meta Tags for Social Media Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pizzacalc.app/">
+  <meta property="og:title" content="PizzaCalc | Calculadora de Masa de Pizza & Fermentación">
+  <meta property="og:description" content="Calcula la masa perfecta para pizza napolitana, romana o casera con fermentación mixta (Ambiente + Nevera). Gratuita, precisa y PWA offline.">
+  <meta property="og:image" content="https://pizzacalc.app/og-image.png">
+  <meta property="og:site_name" content="PizzaCalc">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://pizzacalc.app/">
+  <meta name="twitter:title" content="PizzaCalc | Calculadora de Masa de Pizza & Fermentación">
+  <meta name="twitter:description" content="Calcula la masa perfecta para pizza napolitana o casera con fermentación mixta (Ambiente + Nevera).">
+  <meta name="twitter:image" content="https://pizzacalc.app/og-image.png">
   
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +46,7 @@
       {
         "@type": "WebApplication",
         "name": "Pizza Dough Calculator",
-        "url": "https://diviei.github.io/pizza-calculator/",
+        "url": "https://pizzacalc.app/",
         "applicationCategory": "LifestyleApplication",
         "operatingSystem": "All",
         "browserRequirements": "Requires JavaScript & HTML5 support",
@@ -229,7 +246,10 @@
                   <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
                   <span id="simpleDoughSummaryDisplay" class="results-subtitle">Masa total: 1120.0 g (4 bolas de 280g)</span>
                 </div>
-                <button id="simpleCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                <div class="header-action-buttons">
+                  <button id="simpleShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
+                  <button id="simpleCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                </div>
               </div>
 
               <div class="simple-ingredients-grid">
@@ -365,7 +385,10 @@
                   <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
                   <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
                 </div>
-                <button id="advancedCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                <div class="header-action-buttons">
+                  <button id="advancedShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
+                  <button id="advancedCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                </div>
               </div>
 
               <div id="warningNotice" class="warning-notice hidden">
