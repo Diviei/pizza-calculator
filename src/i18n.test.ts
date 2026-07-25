@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { translations, SUPPORTED_LANGUAGES, LanguageCode } from './i18n.ts';
+import { describe, expect, it } from 'vitest';
+import { getInitialLanguage, type LanguageCode, SUPPORTED_LANGUAGES, setSavedLanguage, translations } from './i18n.ts';
 
 describe('Internationalization (i18n)', () => {
   const supportedLangs = Object.keys(SUPPORTED_LANGUAGES) as LanguageCode[];
@@ -11,16 +11,26 @@ describe('Internationalization (i18n)', () => {
   it('ensures all translation dictionaries contain non-empty strings for all keys', () => {
     const masterKeys = Object.keys(translations.es);
 
-    supportedLangs.forEach(lang => {
+    supportedLangs.forEach((lang) => {
       const dict = translations[lang];
       expect(dict).toBeDefined();
 
-      masterKeys.forEach(key => {
+      masterKeys.forEach((key) => {
         const val = dict[key as keyof typeof dict];
         expect(val, `Missing key "${key}" in language "${lang}"`).toBeDefined();
         expect(typeof val).toBe('string');
         expect(val.trim().length).toBeGreaterThan(0);
       });
     });
+  });
+
+  it('handles getInitialLanguage and setSavedLanguage correctly', () => {
+    setSavedLanguage('it');
+    expect(getInitialLanguage()).toBe('it');
+
+    localStorage.removeItem('pizza_calculator_language');
+    // Fallback detection
+    const initial = getInitialLanguage();
+    expect(['es', 'en', 'it', 'fr', 'de']).toContain(initial);
   });
 });

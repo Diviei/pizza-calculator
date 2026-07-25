@@ -23,13 +23,26 @@ export default defineConfig({
             src: 'icon.svg',
             sizes: '192x192 512x512',
             type: 'image/svg+xml',
-            purpose: 'any maskable'
-          }
-        ]
+            purpose: 'any maskable',
+          },
+        ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
-      }
-    })
-  ]
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+      },
+    }),
+  ],
+  test: {
+    environment: 'happy-dom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      thresholds: {
+        statements: 90,
+        branches: 80,
+        functions: 90,
+        lines: 90,
+      },
+    },
+  },
 });

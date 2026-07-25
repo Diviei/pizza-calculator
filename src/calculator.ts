@@ -35,7 +35,7 @@ export const DEFAULTS: DoughInputs = {
   hoursRt: 4,
   tempRt: 22,
   hoursFridge: 0,
-  tempFridge: 4
+  tempFridge: 4,
 };
 
 /**
@@ -54,7 +54,7 @@ export function calculateDough(inputs: DoughInputs): CalculationResults {
 
   // Step 1: Base Flour Calculation (Baker's Percentage)
   const totalDoughWeight = numberOfBalls * ballWeight;
-  const flourGrams = totalDoughWeight / (1 + (hydrationPercentage / 100) + (saltPercentage / 100));
+  const flourGrams = totalDoughWeight / (1 + hydrationPercentage / 100 + saltPercentage / 100);
 
   // Step 2: Water & Salt Calculation
   const waterGrams = flourGrams * (hydrationPercentage / 100);
@@ -64,8 +64,8 @@ export function calculateDough(inputs: DoughInputs): CalculationResults {
   const afRt = Math.max(0, tempRt - 3.5);
   const afFridge = Math.max(0, tempFridge - 3.5);
 
-  const contributionRt = hoursRt * Math.pow(afRt, 2);
-  const contributionFridge = hoursFridge * Math.pow(afFridge, 2);
+  const contributionRt = hoursRt * afRt ** 2;
+  const contributionFridge = hoursFridge * afFridge ** 2;
   const totalFermentationCapacity = contributionRt + contributionFridge;
 
   let yeastGrams = 0;
@@ -89,6 +89,54 @@ export function calculateDough(inputs: DoughInputs): CalculationResults {
     waterGrams,
     saltGrams,
     yeastGrams,
-    yeastPercentage
+    yeastPercentage,
+  };
+}
+
+export interface SimpleDoughInputs {
+  numberOfBalls: number;
+  hoursTotal: number;
+  yeastType?: YeastType;
+  tempRt?: number;
+  tempFridge?: number;
+}
+
+/**
+ * Calculate dough for Simple Mode with Neapolitan base defaults:
+ * Ball weight: 280g, Hydration: 65%, Salt: 2.5%
+ * Configurable: yeastType, tempRt, tempFridge
+ * Smart fermentation allocation:
+ * - <= 8 hours: 100% Room Temp
+ * - > 8 hours: 4h Room Temp + (hours - 4) Fridge
+ */
+export function calculateSimpleDough(
+  numberOfBalls: number,
+  hoursTotal: number,
+  yeastType: YeastType = 'Fresh',
+  tempRt: number = 22,
+  tempFridge: number = 4,
+): CalculationResults & { hoursRt: number; hoursFridge: number } {
+  const safeBalls = Math.max(1, numberOfBalls || 1);
+  const safeHours = Math.max(0, hoursTotal || 0);
+
+  const hoursRt = safeHours <= 8 ? safeHours : 4;
+  const hoursFridge = safeHours <= 8 ? 0 : safeHours - 4;
+
+  const results = calculateDough({
+    numberOfBalls: safeBalls,
+    ballWeight: 280,
+    hydrationPercentage: 65,
+    saltPercentage: 2.5,
+    yeastType,
+    hoursRt,
+    tempRt,
+    hoursFridge,
+    tempFridge,
+  });
+
+  return {
+    ...results,
+    hoursRt,
+    hoursFridge,
   };
 }

@@ -160,183 +160,206 @@
     </header>
 
     <main class="main-card">
-      <!-- Section 1: Dough Dimensions -->
-      <section class="form-block">
-        <div class="block-header">
-          <span class="block-number">1</span>
-          <h2 data-i18n="block1Title">Dimensiones de la Masa</h2>
-        </div>
+      <!-- Mode Switcher Tabs Component -->
+      <pizza-mode-tabs active-mode="simple"></pizza-mode-tabs>
 
-        <div class="grid-2cols">
-          <div class="input-group">
-            <label for="numberOfBalls" data-i18n="numberOfBalls">Número de bolas</label>
-            <div class="number-control">
-              <button type="button" class="btn-step" data-target="numberOfBalls" data-action="-1">-</button>
-              <input type="number" id="numberOfBalls" min="1" max="100" value="1" step="1" required>
-              <button type="button" class="btn-step" data-target="numberOfBalls" data-action="1">+</button>
-            </div>
-          </div>
-
-          <div class="input-group">
-            <label for="ballWeight" data-i18n="ballWeight">Peso por bola (g)</label>
-            <div class="number-control">
-              <button type="button" class="btn-step" data-target="ballWeight" data-action="-10">-</button>
-              <input type="number" id="ballWeight" min="50" max="1000" value="280" step="5" required>
-              <button type="button" class="btn-step" data-target="ballWeight" data-action="10">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="info-badge">
-          <span data-i18n="totalDoughWeightLabel">Peso total de masa:</span>
-          <strong id="totalDoughWeightDisplay">280.0 g</strong>
-        </div>
-      </section>
-
-      <!-- Section 2: Core Parameters -->
-      <section class="form-block">
-        <div class="block-header">
-          <span class="block-number">2</span>
-          <h2 data-i18n="block2Title">Parámetros Clave</h2>
-        </div>
-
-        <!-- Hydration -->
-        <div class="input-group">
-          <div class="label-row">
-            <label for="hydrationSlider" data-i18n="hydration">Hidratación</label>
-            <span class="value-display"><strong id="hydrationVal">65</strong>%</span>
-          </div>
-          <div class="range-wrapper">
-            <input type="range" id="hydrationSlider" min="50" max="80" value="65" step="1">
-          </div>
-        </div>
-
-        <!-- Salt -->
-        <div class="input-group">
-          <div class="label-row">
-            <label for="saltSlider" data-i18n="salt">Sal</label>
-            <span class="value-display"><strong id="saltVal">2.5</strong>%</span>
-          </div>
-          <div class="range-wrapper">
-            <input type="range" id="saltSlider" min="1.0" max="4.0" value="2.5" step="0.1">
-          </div>
-        </div>
-
-        <!-- Yeast Type Selector -->
-        <div class="input-group">
-          <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
-          <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
-            <input type="radio" id="yeastFresh" name="yeastType" value="Fresh" checked>
-            <label for="yeastFresh" class="segment-label">
-              <span data-i18n="yeastFresh">🌾 Fresca</span>
-            </label>
-
-            <input type="radio" id="yeastDry" name="yeastType" value="Instant Dry">
-            <label for="yeastDry" class="segment-label">
-              <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 3: Fermentation Times & Temps -->
-      <section class="form-block">
-        <div class="block-header">
-          <span class="block-number">3</span>
-          <h2 data-i18n="block3Title">Tiempos y Temperaturas</h2>
-        </div>
-
-        <!-- Room Temperature Phase -->
-        <div class="phase-card">
-          <div class="phase-title">
-            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-            <span data-i18n="phaseRt">Fase Temperatura Ambiente (TA)</span>
-          </div>
-          
-          <div class="grid-2cols">
-            <div class="input-group">
-              <label for="hoursRt" data-i18n="hoursRt">Tiempo TA (horas)</label>
-              <input type="number" id="hoursRt" min="0" max="72" value="4" step="0.5">
-            </div>
-
-            <div class="input-group">
-              <div class="label-row">
-                <label for="tempRtSlider" data-i18n="tempRt">Temperatura TA</label>
-                <span class="value-display"><strong id="tempRtVal">22</strong>°C</span>
-              </div>
-              <input type="range" id="tempRtSlider" min="10" max="35" value="22" step="1">
-            </div>
-          </div>
-        </div>
-
-        <!-- Fridge Phase -->
-        <div class="phase-card">
-          <div class="phase-title">
-            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-              <line x1="4" y1="10" x2="20" y2="10"></line>
-              <line x1="9" y1="6" x2="9" y2="6.01"></line>
-              <line x1="9" y1="15" x2="9" y2="15.01"></line>
-            </svg>
-            <span data-i18n="phaseFridge">Fase Nevera / Frío (TC)</span>
+      <!-- Container: Modo Simple -->
+      <div id="simpleModeContainer" class="mode-content">
+        <section class="form-block">
+          <div class="block-header">
+            <span class="block-number">1</span>
+            <h2 data-i18n="simpleSectionTitle">Configuración Rápida</h2>
           </div>
 
           <div class="grid-2cols">
             <div class="input-group">
-              <label for="hoursFridge" data-i18n="hoursFridge">Tiempo Nevera (horas)</label>
-              <input type="number" id="hoursFridge" min="0" max="120" value="0" step="1">
+              <label for="simpleBalls" data-i18n="numberOfBalls">Número de bolas</label>
+              <number-stepper target-id="simpleBalls" min="1" max="100" value="4" step="1" action-step="1"></number-stepper>
+            </div>
+
+            <range-slider label-key="simpleHoursLabel" unit="h" target-id="simpleHours" val-id="simpleHoursVal" min="2" max="72" value="8" step="1"></range-slider>
+          </div>
+
+          <!-- Preset Buttons Component -->
+          <preset-buttons value="8"></preset-buttons>
+
+          <!-- Yeast Type Selector in Simple Mode -->
+          <div class="input-group" style="margin-top: 14px;">
+            <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
+            <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
+              <input type="radio" id="simpleYeastFresh" name="simpleYeastType" value="Fresh" checked>
+              <label for="simpleYeastFresh" class="segment-label">
+                <span data-i18n="yeastFresh">🌾 Fresca</span>
+              </label>
+
+              <input type="radio" id="simpleYeastDry" name="simpleYeastType" value="Instant Dry">
+              <label for="simpleYeastDry" class="segment-label">
+                <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Temperatures in Simple Mode -->
+          <div class="grid-2cols" style="margin-top: 14px;">
+            <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+            <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+          </div>
+
+          <div class="info-badge highlight-badge">
+            <span id="simpleTimeSplitDisplay">⚡ 4h a Temp. Ambiente (22°C) + ❄️ 4h en Nevera (4°C)</span>
+          </div>
+
+          <div class="defaults-notice" data-i18n="simpleDefaultsInfo">
+            Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal
+          </div>
+        </section>
+
+        <!-- Resultados Modo Simple -->
+        <section class="results-section simple-results-card" aria-live="polite">
+          <div class="results-header">
+            <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
+            <span id="simpleDoughSummaryDisplay" class="results-subtitle">Masa total: 1120.0 g (4 bolas de 280g)</span>
+          </div>
+
+          <div class="simple-ingredients-grid">
+            <ingredient-card simple icon="🌾" title-key="flour" res-id="simpleFlourRes" value="668.7" card-class="ingredient-flour"></ingredient-card>
+            <ingredient-card simple icon="💧" title-key="water" res-id="simpleWaterRes" value="434.6" card-class="ingredient-water"></ingredient-card>
+            <ingredient-card simple icon="🧂" title-key="saltIngredient" res-id="simpleSaltRes" value="16.7" card-class="ingredient-salt"></ingredient-card>
+            <ingredient-card simple title-id="simpleYeastTitle" title-key="yeastFreshLabel" res-id="simpleYeastRes" value="2.08" card-class="ingredient-yeast"></ingredient-card>
+          </div>
+
+          <div class="simple-tip-box">
+            <div class="tip-title" data-i18n="simpleTipTitle">💡 Guía Rápida de Preparación</div>
+            <div class="tip-body" data-i18n="simpleTipBody">Disuelve la levadura fresca en el agua. Agrega la harina, amasa 5 min, añade la sal y amasa hasta obtener una masa lisa. Deja reposar cubierta.</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Container: Modo Avanzado -->
+      <div id="advancedModeContainer" class="mode-content hidden">
+        <!-- Section 1: Dough Dimensions -->
+        <section class="form-block">
+          <div class="block-header">
+            <span class="block-number">1</span>
+            <h2 data-i18n="block1Title">Dimensiones de la Masa</h2>
+          </div>
+
+          <div class="grid-2cols">
+            <div class="input-group">
+              <label for="numberOfBalls" data-i18n="numberOfBalls">Número de bolas</label>
+              <number-stepper target-id="numberOfBalls" min="1" max="100" value="1" step="1" action-step="1"></number-stepper>
             </div>
 
             <div class="input-group">
-              <div class="label-row">
-                <label for="tempFridgeSlider" data-i18n="tempFridge">Temp. Nevera</label>
-                <span class="value-display"><strong id="tempFridgeVal">4</strong>°C</span>
-              </div>
-              <input type="range" id="tempFridgeSlider" min="2" max="10" value="4" step="1">
+              <label for="ballWeight" data-i18n="ballWeight">Peso por bola (g)</label>
+              <number-stepper target-id="ballWeight" min="50" max="1000" value="280" step="5" action-step="10"></number-stepper>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- Section 4: Results Display -->
-      <section class="results-section" aria-live="polite">
-        <div class="results-header">
-          <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
-          <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
-        </div>
+          <div class="info-badge">
+            <span data-i18n="totalDoughWeightLabel">Peso total de masa:</span>
+            <strong id="totalDoughWeightDisplay">280.0 g</strong>
+          </div>
+        </section>
 
-        <div id="warningNotice" class="warning-notice hidden">
-          <span data-i18n="warningNotice">⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
-        </div>
-
-        <div class="results-grid">
-          <div class="result-card primary">
-            <span class="ingredient-name" data-i18n="flour">🌾 Harina</span>
-            <div class="ingredient-value"><span id="flourRes">0.0</span> <small>g</small></div>
-            <span class="baker-pct">100%</span>
+        <!-- Section 2: Core Parameters -->
+        <section class="form-block">
+          <div class="block-header">
+            <span class="block-number">2</span>
+            <h2 data-i18n="block2Title">Parámetros Clave</h2>
           </div>
 
-          <div class="result-card">
-            <span class="ingredient-name" data-i18n="water">💧 Agua</span>
-            <div class="ingredient-value"><span id="waterRes">0.0</span> <small>g</small></div>
-            <span class="baker-pct" id="waterPctDisplay">65%</span>
+          <!-- Hydration -->
+          <range-slider label-key="hydration" unit="%" target-id="hydrationSlider" val-id="hydrationVal" min="50" max="80" value="65" step="1"></range-slider>
+
+          <!-- Salt -->
+          <range-slider label-key="salt" unit="%" target-id="saltSlider" val-id="saltVal" min="1.0" max="4.0" value="2.5" step="0.1"></range-slider>
+
+          <!-- Yeast Type Selector -->
+          <div class="input-group">
+            <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
+            <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
+              <input type="radio" id="yeastFresh" name="yeastType" value="Fresh" checked>
+              <label for="yeastFresh" class="segment-label">
+                <span data-i18n="yeastFresh">🌾 Fresca</span>
+              </label>
+
+              <input type="radio" id="yeastDry" name="yeastType" value="Instant Dry">
+              <label for="yeastDry" class="segment-label">
+                <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Fermentation Times & Temps -->
+        <section class="form-block">
+          <div class="block-header">
+            <span class="block-number">3</span>
+            <h2 data-i18n="block3Title">Tiempos y Temperaturas</h2>
           </div>
 
-          <div class="result-card">
-            <span class="ingredient-name" data-i18n="saltIngredient">🧂 Sal</span>
-            <div class="ingredient-value"><span id="saltRes">0.0</span> <small>g</small></div>
-            <span class="baker-pct" id="saltPctDisplay">2.5%</span>
+          <!-- Room Temperature Phase -->
+          <div class="phase-card">
+            <div class="phase-title">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+              <span data-i18n="phaseRt">Fase Temperatura Ambiente (TA)</span>
+            </div>
+            
+            <div class="grid-2cols">
+              <div class="input-group">
+                <label for="hoursRt" data-i18n="hoursRt">Tiempo TA (horas)</label>
+                <input type="number" id="hoursRt" min="0" max="72" value="4" step="0.5">
+              </div>
+
+              <range-slider label-key="tempRt" unit="°C" target-id="tempRtSlider" val-id="tempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+            </div>
           </div>
 
-          <div class="result-card highlight">
-            <span class="ingredient-name" id="yeastLabel">🧫 Levadura Fresca</span>
-            <div class="ingredient-value"><span id="yeastRes">0.00</span> <small>g</small></div>
-            <span class="baker-pct" id="yeastPctDisplay">0.00%</span>
+          <!-- Fridge Phase -->
+          <div class="phase-card">
+            <div class="phase-title">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                <line x1="4" y1="10" x2="20" y2="10"></line>
+                <line x1="9" y1="6" x2="9" y2="6.01"></line>
+                <line x1="9" y1="15" x2="9" y2="15.01"></line>
+              </svg>
+              <span data-i18n="phaseFridge">Fase Nevera / Frío (TC)</span>
+            </div>
+
+            <div class="grid-2cols">
+              <div class="input-group">
+                <label for="hoursFridge" data-i18n="hoursFridge">Tiempo Nevera (horas)</label>
+                <input type="number" id="hoursFridge" min="0" max="120" value="0" step="1">
+              </div>
+
+              <range-slider label-key="tempFridge" unit="°C" target-id="tempFridgeSlider" val-id="tempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- Section 4: Results Display -->
+        <section class="results-section" aria-live="polite">
+          <div class="results-header">
+            <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
+            <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
+          </div>
+
+          <div id="warningNotice" class="warning-notice hidden">
+            <span data-i18n="warningNotice">⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
+          </div>
+
+          <div class="results-grid">
+            <ingredient-card title-key="flour" res-id="flourRes" value="0.0" baker-pct="100%" card-class="primary"></ingredient-card>
+            <ingredient-card title-key="water" res-id="waterRes" value="0.0" pct-id="waterPctDisplay" baker-pct="65%"></ingredient-card>
+            <ingredient-card title-key="saltIngredient" res-id="saltRes" value="0.0" pct-id="saltPctDisplay" baker-pct="2.5%"></ingredient-card>
+            <ingredient-card title-id="yeastLabel" title-key="yeastFreshLabel" res-id="yeastRes" value="0.00" pct-id="yeastPctDisplay" baker-pct="0.00%" card-class="highlight"></ingredient-card>
+          </div>
+        </section>
+      </div>
 
       <!-- FAQ & Fermentation Guide Section for Search & Rich Snippets -->
       <section class="faq-card" aria-labelledby="faqHeader">

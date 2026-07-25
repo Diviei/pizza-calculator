@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { calculateDough, DoughInputs, DEFAULTS } from './calculator.ts';
+import { describe, expect, it } from 'vitest';
+import { calculateDough, calculateSimpleDough, DEFAULTS, type DoughInputs, type YeastType } from './calculator.ts';
 
 describe('Calculator Engine - Baker Percentages', () => {
   it('calculates exact flour, water, and salt for 1 ball of 280g at 65% hydration and 2.5% salt', () => {
@@ -12,7 +12,7 @@ describe('Calculator Engine - Baker Percentages', () => {
       hoursRt: 4,
       tempRt: 22,
       hoursFridge: 0,
-      tempFridge: 4
+      tempFridge: 4,
     };
 
     const res = calculateDough(inputs);
@@ -30,7 +30,7 @@ describe('Calculator Engine - Baker Percentages', () => {
     const inputs: DoughInputs = {
       ...DEFAULTS,
       numberOfBalls: 4,
-      ballWeight: 250
+      ballWeight: 250,
     };
 
     const res = calculateDough(inputs);
@@ -46,7 +46,7 @@ describe('Calculator Engine - Mixed Fermentation Yeast Model', () => {
       tempRt: 22,
       hoursFridge: 0,
       tempFridge: 4,
-      yeastType: 'Fresh'
+      yeastType: 'Fresh',
     };
 
     const res = calculateDough(inputs);
@@ -64,12 +64,12 @@ describe('Calculator Engine - Mixed Fermentation Yeast Model', () => {
       tempRt: 20,
       hoursFridge: 24,
       tempFridge: 4,
-      yeastType: 'Fresh'
+      yeastType: 'Fresh',
     };
 
     const dryInputs: DoughInputs = {
       ...freshInputs,
-      yeastType: 'Instant Dry'
+      yeastType: 'Instant Dry',
     };
 
     const freshRes = calculateDough(freshInputs);
@@ -83,11 +83,56 @@ describe('Calculator Engine - Mixed Fermentation Yeast Model', () => {
     const inputs: DoughInputs = {
       ...DEFAULTS,
       hoursRt: 0,
-      hoursFridge: 0
+      hoursFridge: 0,
     };
 
     const res = calculateDough(inputs);
     expect(res.yeastPercentage).toBe(0);
     expect(res.yeastGrams).toBe(0);
+  });
+});
+
+describe('Calculator Engine - Simple Mode Helper', () => {
+  it('allocates 100% room temp time when hoursTotal <= 8', () => {
+    const res = calculateSimpleDough(4, 6);
+    expect(res.hoursRt).toBe(6);
+    expect(res.hoursFridge).toBe(0);
+    expect(res.totalDoughWeight).toBe(4 * 280);
+    expect(res.yeastGrams).toBeGreaterThan(0);
+  });
+
+  it('allocates 4h room temp and remaining time in fridge when hoursTotal > 8', () => {
+    const res = calculateSimpleDough(4, 24);
+    expect(res.hoursRt).toBe(4);
+    expect(res.hoursFridge).toBe(20);
+    expect(res.totalDoughWeight).toBe(4 * 280);
+    expect(res.yeastGrams).toBeGreaterThan(0);
+  });
+
+  it('supports custom yeastType and temperatures in Simple Mode', () => {
+    const freshRes = calculateSimpleDough(4, 24, 'Fresh', 24, 4);
+    const dryRes = calculateSimpleDough(4, 24, 'Instant Dry', 24, 4);
+
+    expect(dryRes.yeastGrams).toBeCloseTo(freshRes.yeastGrams / 3, 3);
+  });
+
+  it('handles empty or zero fallback values gracefully', () => {
+    const res = calculateDough({
+      numberOfBalls: 0,
+      ballWeight: 0,
+      hydrationPercentage: undefined as unknown as number,
+      saltPercentage: undefined as unknown as number,
+      yeastType: '' as unknown as YeastType,
+      hoursRt: -5,
+      tempRt: undefined as unknown as number,
+      hoursFridge: -10,
+      tempFridge: undefined as unknown as number,
+    });
+
+    expect(res.totalDoughWeight).toBe(280);
+    expect(res.flourGrams).toBeGreaterThan(0);
+
+    const simpleRes = calculateSimpleDough(0, 0);
+    expect(simpleRes.totalDoughWeight).toBe(280);
   });
 });
