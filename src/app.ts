@@ -7,7 +7,6 @@ import {
   type CalculationResults,
   calculateDough,
   calculateSimpleDough,
-  DEFAULTS,
   type DoughInputs,
   PIZZA_STYLES,
   type PizzaStyle,
