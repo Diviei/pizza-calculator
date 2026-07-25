@@ -7,13 +7,17 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
-    name: Type Check, Test & Build
+  quality:
+    name: Code Quality, Tests & Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -24,11 +28,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Type check (TypeScript)
-        run: npm run type-check
+      - name: Auto-fix formatting and linting (Biome)
+        run: npm run lint:fix
 
-      - name: Run Unit Tests (Vitest)
-        run: npm test
+      - name: Auto-commit formatted code back to PR
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-fix formatting and linting with Biome"
+          branch: ${{ github.head_ref }}
+
+      - name: Deterministic Quality Gate (Type Check + Biome Check + Vitest Coverage)
+        run: npm run quality
 
       - name: Build Production Bundle
         run: npm run build

@@ -5,16 +5,16 @@
 /* 1. Theme Color Tokens & CSS Variables */
 :root {
   /* Brand Palettes */
-  --color-primary: #d97706;        /* Warm Amber / Crust */
+  --color-primary: #d97706; /* Warm Amber / Crust */
   --color-primary-hover: #b45309;
   --color-primary-light: rgba(217, 119, 6, 0.12);
-  --color-accent: #f59e0b;         /* Bright Amber */
-  --color-danger: #ef4444;         /* Tomato Red */
+  --color-accent: #f59e0b; /* Bright Amber */
+  --color-danger: #ef4444; /* Tomato Red */
   --color-success: #10b981;
 
   /* Typography */
-  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Layout Tokens */
   --radius-sm: 8px;
@@ -32,18 +32,18 @@ body.light-theme {
   --bg-input: #f8fafc;
   --bg-block: #f8fafc;
   --bg-phase: #f1f5f9;
-  
+
   --text-main: #0f172a;
   --text-muted: #475569;
   --text-subtle: #475569;
-  
+
   --border-color: #cbd5e1;
   --border-focus: #d97706;
-  
+
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 20px 40px -15px rgba(15, 23, 42, 0.07);
-  
+
   --result-bg: #f8fafc;
   --result-highlight-bg: #fffbeb;
   --result-highlight-border: #fde68a;
@@ -56,25 +56,27 @@ body.dark-theme {
   --bg-input: #292522;
   --bg-block: #24211e;
   --bg-phase: #2a2622;
-  
+
   --text-main: #f8fafc;
   --text-muted: #cbd5e1;
   --text-subtle: #94a3b8;
-  
+
   --border-color: #38332e;
   --border-focus: #f59e0b;
-  
+
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
   --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-  
+
   --result-bg: #24211e;
   --result-highlight-bg: #2d2417;
   --result-highlight-border: #78350f;
 }
 
 /* 2. Global Resets & Layout */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -96,7 +98,9 @@ body {
   align-items: flex-start;
   padding: 16px 12px 32px 12px;
   background: radial-gradient(circle at 50% 0%, var(--color-primary-light), transparent 60%), var(--bg-app);
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
 }
 
 .app-container {
@@ -180,7 +184,10 @@ body {
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
   box-shadow: var(--shadow-sm);
   user-select: none;
 }
@@ -269,7 +276,9 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .lang-option-item:hover {
@@ -310,7 +319,10 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
   box-shadow: var(--shadow-sm);
 }
 
@@ -346,6 +358,241 @@ body {
     padding: 0;
     box-shadow: none;
   }
+}
+
+/* 4b. Mode Switcher & Simple Mode Layout */
+.mode-tabs-container {
+  display: flex;
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  gap: 4px;
+}
+
+.mode-tab {
+  flex: 1;
+  padding: 10px 16px;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-subtle);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.mode-tab:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mode-tab.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: modeFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mode-content.hidden {
+  display: none;
+}
+
+@keyframes modeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Preset Section */
+.preset-section {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preset-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.preset-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.preset-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.preset-btn.active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Highlight & Defaults Notice */
+.highlight-badge {
+  background: var(--result-highlight-bg) !important;
+  border-color: var(--result-highlight-border) !important;
+  color: var(--color-accent) !important;
+  font-weight: 700;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+.defaults-notice {
+  font-size: 0.78rem;
+  color: var(--text-subtle);
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* Simple Ingredients Cards Grid */
+.simple-ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 480px) {
+  .simple-ingredients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+.simple-card {
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.simple-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.simple-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.simple-card-icon {
+  font-size: 1.1rem;
+}
+
+.simple-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.simple-card-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.simple-card-value small {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+}
+
+.ingredient-yeast .simple-card-value {
+  color: var(--color-primary);
+}
+
+/* Simple Tip Box */
+.simple-tip-box {
+  background: var(--bg-block);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tip-title {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.tip-body {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
 }
 
 .form-block {
@@ -472,7 +719,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
   user-select: none;
 }
 
@@ -507,7 +756,9 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--color-primary);
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -539,7 +790,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
   user-select: none;
   text-align: center;
 }
@@ -659,7 +912,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   flex-direction: column;
   gap: 4px;
   position: relative;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .result-card:hover {
@@ -775,7 +1030,7 @@ body.light-theme .baker-pct {
 }
 
 .faq-question::after {
-  content: '❯';
+  content: "❯";
   font-size: 0.75rem;
   color: var(--color-primary);
   transition: transform var(--transition-fast);
@@ -857,7 +1112,9 @@ body.light-theme .baker-pct {
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .btn-toast-action:hover {
