@@ -1362,7 +1362,11 @@ function initEventListeners(): void {
     });
 
     document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && elements.colorThemePopover && !elements.colorThemePopover.classList.contains('hidden')) {
+      if (
+        e.key === 'Escape' &&
+        elements.colorThemePopover &&
+        !elements.colorThemePopover.classList.contains('hidden')
+      ) {
         elements.colorThemePopover.classList.add('hidden');
         if (elements.colorThemeMenuBtn) elements.colorThemeMenuBtn.setAttribute('aria-expanded', 'false');
       }

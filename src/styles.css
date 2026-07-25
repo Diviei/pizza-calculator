@@ -229,9 +229,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding: 16px 12px 90px 12px;
-  background:
-    radial-gradient(circle at 50% 0%, var(--color-primary-light), transparent 60%),
-    var(--bg-app);
+  background: radial-gradient(circle at 50% 0%, var(--color-primary-light), transparent 60%), var(--bg-app);
   transition:
     background-color var(--transition-normal),
     color var(--transition-normal);
@@ -240,15 +238,13 @@ body {
 body[data-color-theme="chic"] {
   background:
     radial-gradient(circle at 20% 0%, rgba(236, 72, 153, 0.16), transparent 50%),
-    radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.12), transparent 50%),
-    var(--bg-app);
+    radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.12), transparent 50%), var(--bg-app);
 }
 
 body[data-color-theme="basil"] {
   background:
     radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.16), transparent 50%),
-    radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.12), transparent 50%),
-    var(--bg-app);
+    radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.12), transparent 50%), var(--bg-app);
 }
 
 .app-container {
