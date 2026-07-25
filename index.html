@@ -141,6 +141,35 @@
           </div>
         </div>
 
+        <!-- Color Theme Palette Popover -->
+        <div class="color-theme-dropdown-container">
+          <button id="colorThemeMenuBtn" class="color-theme-menu-btn" title="Paleta de Color" data-i18n-title="colorThemeTitle" aria-expanded="false" aria-haspopup="true">
+            <span class="color-palette-icon">🎨</span>
+            <span id="currentColorThemeBadge" class="current-color-theme-badge">🍕</span>
+          </button>
+          
+          <div id="colorThemePopover" class="color-theme-popover hidden" role="menu">
+            <div class="color-theme-popover-header" data-i18n="colorThemeTitle">Paleta de Color</div>
+            <div class="color-theme-options-list" role="none">
+              <button type="button" class="color-theme-option-item active" data-color-theme="amber" role="menuitem">
+                <span class="theme-swatch swatch-amber"></span>
+                <span class="theme-name" data-i18n="colorThemeAmber">Clásico (Ámbar)</span>
+                <span class="theme-check">✓</span>
+              </button>
+              <button type="button" class="color-theme-option-item" data-color-theme="chic" role="menuitem">
+                <span class="theme-swatch swatch-chic"></span>
+                <span class="theme-name" data-i18n="colorThemeChic">Chic (Rosa)</span>
+                <span class="theme-check"></span>
+              </button>
+              <button type="button" class="color-theme-option-item" data-color-theme="basil" role="menuitem">
+                <span class="theme-swatch swatch-basil"></span>
+                <span class="theme-name" data-i18n="colorThemeBasil">Basílico (Verde)</span>
+                <span class="theme-check"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <button id="resetBtn" class="icon-button" title="Restablecer valores por defecto" aria-label="Restablecer valores" data-i18n-title="resetTitle">
           <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
