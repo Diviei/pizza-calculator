@@ -176,9 +176,6 @@ const elements = {
   },
 
   // Buttons & Controls
-  get resetBtn() {
-    return document.getElementById('resetBtn') as HTMLButtonElement;
-  },
   get themeToggleBtn() {
     return document.getElementById('themeToggleBtn') as HTMLButtonElement;
   },
@@ -1447,60 +1444,6 @@ function initEventListeners(): void {
       }
     });
   });
-
-  // Reset Button
-  if (elements.resetBtn) {
-    elements.resetBtn.addEventListener('click', () => {
-      if (elements.simpleBalls) elements.simpleBalls.value = '4';
-      if (elements.simpleHours) elements.simpleHours.value = '8';
-      if (elements.simpleYeastInputs) {
-        elements.simpleYeastInputs.forEach((input) => {
-          input.checked = input.value === 'Fresh';
-        });
-      }
-      if (elements.simpleTempRtSlider) {
-        elements.simpleTempRtSlider.value = '22';
-        if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = '22';
-      }
-      if (elements.simpleTempFridgeSlider) {
-        elements.simpleTempFridgeSlider.value = '4';
-        if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = '4';
-      }
-
-      if (elements.numberOfBalls) elements.numberOfBalls.value = DEFAULTS.numberOfBalls.toString();
-      if (elements.ballWeight) elements.ballWeight.value = DEFAULTS.ballWeight.toString();
-
-      if (elements.hydrationSlider) {
-        elements.hydrationSlider.value = DEFAULTS.hydrationPercentage.toString();
-        if (elements.hydrationVal) elements.hydrationVal.textContent = DEFAULTS.hydrationPercentage.toString();
-      }
-
-      if (elements.saltSlider) {
-        elements.saltSlider.value = DEFAULTS.saltPercentage.toString();
-        if (elements.saltVal) elements.saltVal.textContent = DEFAULTS.saltPercentage.toString();
-      }
-
-      if (elements.yeastInputs) {
-        elements.yeastInputs.forEach((input) => {
-          input.checked = String(input.value) === String(DEFAULTS.yeastType);
-        });
-      }
-
-      if (elements.hoursRt) elements.hoursRt.value = DEFAULTS.hoursRt.toString();
-      if (elements.tempRtSlider) {
-        elements.tempRtSlider.value = DEFAULTS.tempRt.toString();
-        if (elements.tempRtVal) elements.tempRtVal.textContent = DEFAULTS.tempRt.toString();
-      }
-
-      if (elements.hoursFridge) elements.hoursFridge.value = DEFAULTS.hoursFridge.toString();
-      if (elements.tempFridgeSlider) {
-        elements.tempFridgeSlider.value = DEFAULTS.tempFridge.toString();
-        if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = DEFAULTS.tempFridge.toString();
-      }
-
-      setPizzaStyle('neapolitan', true);
-    });
-  }
 }
 
 // Initial Bootstrapping

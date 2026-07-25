@@ -152,7 +152,7 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(localStorage.getItem('pizza_calculator_color_theme')).toBe('basil');
   });
 
-  it('handles reset button and preset buttons correctly', () => {
+  it('handles preset buttons correctly', () => {
     const tabSimple = document.getElementById('tabSimple') as HTMLButtonElement;
     const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
     tabAdvanced.click();
@@ -164,9 +164,9 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     const simpleHours = document.getElementById('simpleHours') as HTMLInputElement;
     expect(simpleHours.value).toBe('24');
 
-    const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
-    resetBtn.click();
-    expect(simpleHours.value).toBe('8');
+    const btn4 = document.querySelector('.preset-btn[data-hours="4"]') as HTMLButtonElement;
+    btn4.click();
+    expect(simpleHours.value).toBe('4');
   });
 
   it('handles stepper buttons (+ / -) in both modes', () => {
