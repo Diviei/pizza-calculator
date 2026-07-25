@@ -7,7 +7,6 @@ import {
   type CalculationResults,
   calculateDough,
   calculateSimpleDough,
-  DEFAULTS,
   type DoughInputs,
   PIZZA_STYLES,
   type PizzaStyle,
@@ -20,12 +19,14 @@ import { getInitialLanguage, type LanguageCode, setSavedLanguage, translations }
 registerCustomElements();
 
 export type ThemeMode = 'dark' | 'light';
+export type ColorTheme = 'amber' | 'chic' | 'basil';
 export type AppMode = 'simple' | 'advanced';
 
 const DEFAULT_THEME: ThemeMode = 'dark';
 const STORAGE_KEY = 'pizza_calculator_settings_v1';
 const SIMPLE_STORAGE_KEY = 'pizza_calculator_simple_settings_v1';
 const THEME_KEY = 'pizza_calculator_theme';
+const COLOR_THEME_KEY = 'pizza_calculator_color_theme';
 const MODE_KEY = 'pizza_calculator_mode';
 const STYLE_KEY = 'pizza_calculator_style_v1';
 
@@ -174,9 +175,6 @@ const elements = {
   },
 
   // Buttons & Controls
-  get resetBtn() {
-    return document.getElementById('resetBtn') as HTMLButtonElement;
-  },
   get themeToggleBtn() {
     return document.getElementById('themeToggleBtn') as HTMLButtonElement;
   },
@@ -196,6 +194,17 @@ const elements = {
   },
   get langPopover() {
     return document.getElementById('langPopover') as HTMLElement | null;
+  },
+
+  // Color Theme Palette Popover UI
+  get colorThemeMenuBtn() {
+    return document.getElementById('colorThemeMenuBtn') as HTMLButtonElement | null;
+  },
+  get currentColorThemeBadge() {
+    return document.getElementById('currentColorThemeBadge') as HTMLElement | null;
+  },
+  get colorThemePopover() {
+    return document.getElementById('colorThemePopover') as HTMLElement | null;
   },
 
   // Copy Buttons & Mobile Quick Bar
@@ -733,11 +742,48 @@ function loadState(): void {
 }
 
 /**
- * Manage Light/Dark Theme Switching
+ * Manage Light/Dark Theme & Color Palette Theme Switching
  */
+const THEME_EMOJIS: Record<ColorTheme, string> = {
+  amber: '🍕',
+  chic: '💅',
+  basil: '🌿',
+};
+
+export function setColorTheme(colorTheme: ColorTheme): void {
+  const validTheme: ColorTheme = ['amber', 'chic', 'basil'].includes(colorTheme) ? colorTheme : 'amber';
+  document.body.setAttribute('data-color-theme', validTheme);
+
+  if (elements.currentColorThemeBadge) {
+    elements.currentColorThemeBadge.textContent = THEME_EMOJIS[validTheme] || '🍕';
+  }
+
+  // Update active state in popover menu
+  document.querySelectorAll<HTMLButtonElement>('.color-theme-option-item').forEach((btn) => {
+    const itemTheme = btn.getAttribute('data-color-theme') as ColorTheme;
+    const checkEl = btn.querySelector('.theme-check');
+    if (itemTheme === validTheme) {
+      btn.classList.add('active');
+      if (checkEl) checkEl.textContent = '✓';
+    } else {
+      btn.classList.remove('active');
+      if (checkEl) checkEl.textContent = '';
+    }
+  });
+
+  try {
+    localStorage.setItem(COLOR_THEME_KEY, validTheme);
+  } catch (e) {
+    console.warn('LocalStorage error saving color theme:', e);
+  }
+}
+
 function initTheme(): void {
   const savedTheme = (localStorage.getItem(THEME_KEY) as ThemeMode) || DEFAULT_THEME;
   setTheme(savedTheme);
+
+  const savedColorTheme = (localStorage.getItem(COLOR_THEME_KEY) as ColorTheme) || 'amber';
+  setColorTheme(savedColorTheme);
 
   if (elements.themeToggleBtn) {
     elements.themeToggleBtn.addEventListener('click', () => {
@@ -1277,6 +1323,61 @@ function initEventListeners(): void {
     });
   }
 
+  // Color Theme Palette Popover Menu Listeners
+  if (elements.colorThemeMenuBtn && elements.colorThemePopover) {
+    elements.colorThemeMenuBtn.addEventListener('click', (e: MouseEvent) => {
+      e.stopPropagation();
+      const isHidden = elements.colorThemePopover?.classList.contains('hidden');
+      if (isHidden) {
+        elements.colorThemePopover?.classList.remove('hidden');
+        elements.colorThemeMenuBtn?.setAttribute('aria-expanded', 'true');
+        // Close language popover if open
+        if (elements.langPopover) {
+          elements.langPopover.classList.add('hidden');
+          if (elements.langMenuBtn) elements.langMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+      } else {
+        elements.colorThemePopover?.classList.add('hidden');
+        elements.colorThemeMenuBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('.color-theme-option-item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-color-theme') as ColorTheme;
+        if (theme) {
+          setColorTheme(theme);
+          elements.colorThemePopover?.classList.add('hidden');
+          elements.colorThemeMenuBtn?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      if (elements.colorThemePopover && elements.colorThemeMenuBtn) {
+        if (
+          !elements.colorThemePopover.classList.contains('hidden') &&
+          !elements.colorThemePopover.contains(e.target as Node) &&
+          !elements.colorThemeMenuBtn.contains(e.target as Node)
+        ) {
+          elements.colorThemePopover.classList.add('hidden');
+          elements.colorThemeMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (
+        e.key === 'Escape' &&
+        elements.colorThemePopover &&
+        !elements.colorThemePopover.classList.contains('hidden')
+      ) {
+        elements.colorThemePopover.classList.add('hidden');
+        if (elements.colorThemeMenuBtn) elements.colorThemeMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Sync slider label values and trigger calculate for Advanced mode
   if (elements.hydrationSlider) {
     elements.hydrationSlider.addEventListener('input', (e: Event) => {
@@ -1352,60 +1453,6 @@ function initEventListeners(): void {
       }
     });
   });
-
-  // Reset Button
-  if (elements.resetBtn) {
-    elements.resetBtn.addEventListener('click', () => {
-      if (elements.simpleBalls) elements.simpleBalls.value = '4';
-      if (elements.simpleHours) elements.simpleHours.value = '8';
-      if (elements.simpleYeastInputs) {
-        elements.simpleYeastInputs.forEach((input) => {
-          input.checked = input.value === 'Fresh';
-        });
-      }
-      if (elements.simpleTempRtSlider) {
-        elements.simpleTempRtSlider.value = '22';
-        if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = '22';
-      }
-      if (elements.simpleTempFridgeSlider) {
-        elements.simpleTempFridgeSlider.value = '4';
-        if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = '4';
-      }
-
-      if (elements.numberOfBalls) elements.numberOfBalls.value = DEFAULTS.numberOfBalls.toString();
-      if (elements.ballWeight) elements.ballWeight.value = DEFAULTS.ballWeight.toString();
-
-      if (elements.hydrationSlider) {
-        elements.hydrationSlider.value = DEFAULTS.hydrationPercentage.toString();
-        if (elements.hydrationVal) elements.hydrationVal.textContent = DEFAULTS.hydrationPercentage.toString();
-      }
-
-      if (elements.saltSlider) {
-        elements.saltSlider.value = DEFAULTS.saltPercentage.toString();
-        if (elements.saltVal) elements.saltVal.textContent = DEFAULTS.saltPercentage.toString();
-      }
-
-      if (elements.yeastInputs) {
-        elements.yeastInputs.forEach((input) => {
-          input.checked = String(input.value) === String(DEFAULTS.yeastType);
-        });
-      }
-
-      if (elements.hoursRt) elements.hoursRt.value = DEFAULTS.hoursRt.toString();
-      if (elements.tempRtSlider) {
-        elements.tempRtSlider.value = DEFAULTS.tempRt.toString();
-        if (elements.tempRtVal) elements.tempRtVal.textContent = DEFAULTS.tempRt.toString();
-      }
-
-      if (elements.hoursFridge) elements.hoursFridge.value = DEFAULTS.hoursFridge.toString();
-      if (elements.tempFridgeSlider) {
-        elements.tempFridgeSlider.value = DEFAULTS.tempFridge.toString();
-        if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = DEFAULTS.tempFridge.toString();
-      }
-
-      setPizzaStyle('neapolitan', true);
-    });
-  }
 }
 
 // Initial Bootstrapping

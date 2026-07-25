@@ -18,6 +18,10 @@ export interface TranslationDictionary {
   resetTitle: string;
   themeTitle: string;
   langSelectTitle: string;
+  colorThemeTitle: string;
+  colorThemeAmber: string;
+  colorThemeChic: string;
+  colorThemeBasil: string;
 
   // Block 1: Dimensions
   block1Title: string;
@@ -134,6 +138,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     resetTitle: 'Restablecer valores por defecto',
     themeTitle: 'Cambiar tema claro/oscuro',
     langSelectTitle: 'Seleccionar idioma',
+    colorThemeTitle: 'Paleta de Color',
+    colorThemeAmber: 'Clásico (Ámbar)',
+    colorThemeChic: 'Chic (Rosa)',
+    colorThemeBasil: 'Basílico (Verde)',
 
     block1Title: 'Dimensiones de la Masa',
     numberOfBalls: 'Número de bolas',
@@ -246,6 +254,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     resetTitle: 'Reset default values',
     themeTitle: 'Toggle light/dark theme',
     langSelectTitle: 'Select language',
+    colorThemeTitle: 'Color Palette',
+    colorThemeAmber: 'Classic (Amber)',
+    colorThemeChic: 'Chic (Pink)',
+    colorThemeBasil: 'Basil (Green)',
 
     block1Title: 'Dough Dimensions',
     numberOfBalls: 'Number of dough balls',
@@ -358,6 +370,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     resetTitle: 'Ripristina valori predefiniti',
     themeTitle: 'Cambia tema chiaro/scuro',
     langSelectTitle: 'Seleziona lingua',
+    colorThemeTitle: 'Tavolozza Colori',
+    colorThemeAmber: 'Classico (Ambra)',
+    colorThemeChic: 'Chic (Rosa)',
+    colorThemeBasil: 'Basilico (Verde)',
 
     block1Title: "Dimensioni dell'Impasto",
     numberOfBalls: 'Numero di panetti',
@@ -470,6 +486,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     resetTitle: 'Réinitialiser les valeurs',
     themeTitle: 'Changer le thème clair/sombre',
     langSelectTitle: 'Choisir la langue',
+    colorThemeTitle: 'Palette de Couleurs',
+    colorThemeAmber: 'Classique (Ambre)',
+    colorThemeChic: 'Chic (Rose)',
+    colorThemeBasil: 'Basilic (Vert)',
 
     block1Title: 'Dimensions de la Pâte',
     numberOfBalls: 'Nombre de pâtons',
@@ -581,6 +601,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     resetTitle: 'Standardwerte zurücksetzen',
     themeTitle: 'Dunkel/Hell-Design umschalten',
     langSelectTitle: 'Sprache auswählen',
+    colorThemeTitle: 'Farbpalette',
+    colorThemeAmber: 'Klassisch (Bernstein)',
+    colorThemeChic: 'Chic (Rosa)',
+    colorThemeBasil: 'Basilikum (Grün)',
 
     block1Title: 'Teig-Dimensionen',
     numberOfBalls: 'Anzahl Teiglinge',

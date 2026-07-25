@@ -122,7 +122,37 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(document.body.classList.contains('dark-theme')).toBe(true);
   });
 
-  it('handles reset button and preset buttons correctly', () => {
+  it('handles color theme palette selection and persistence correctly', () => {
+    const colorThemeBtn = document.getElementById('colorThemeMenuBtn') as HTMLButtonElement;
+    expect(colorThemeBtn).not.toBeNull();
+
+    // Default theme attribute should be 'amber'
+    expect(document.body.getAttribute('data-color-theme')).toBe('amber');
+
+    // Click menu to open popover
+    colorThemeBtn.click();
+    const popover = document.getElementById('colorThemePopover');
+    expect(popover?.classList.contains('hidden')).toBe(false);
+
+    // Select 'chic' theme
+    const chicBtn = document.querySelector('.color-theme-option-item[data-color-theme="chic"]') as HTMLButtonElement;
+    expect(chicBtn).not.toBeNull();
+    chicBtn.click();
+
+    expect(document.body.getAttribute('data-color-theme')).toBe('chic');
+    expect(localStorage.getItem('pizza_calculator_color_theme')).toBe('chic');
+    expect(popover?.classList.contains('hidden')).toBe(true);
+
+    // Select 'basil' theme
+    colorThemeBtn.click();
+    const basilBtn = document.querySelector('.color-theme-option-item[data-color-theme="basil"]') as HTMLButtonElement;
+    basilBtn.click();
+
+    expect(document.body.getAttribute('data-color-theme')).toBe('basil');
+    expect(localStorage.getItem('pizza_calculator_color_theme')).toBe('basil');
+  });
+
+  it('handles preset buttons correctly', () => {
     const tabSimple = document.getElementById('tabSimple') as HTMLButtonElement;
     const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
     tabAdvanced.click();
@@ -134,9 +164,9 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     const simpleHours = document.getElementById('simpleHours') as HTMLInputElement;
     expect(simpleHours.value).toBe('24');
 
-    const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
-    resetBtn.click();
-    expect(simpleHours.value).toBe('8');
+    const btn4 = document.querySelector('.preset-btn[data-hours="4"]') as HTMLButtonElement;
+    btn4.click();
+    expect(simpleHours.value).toBe('4');
   });
 
   it('handles stepper buttons (+ / -) in both modes', () => {
