@@ -820,9 +820,11 @@ function initPwaToasts(): void {
       if (waitingWorker) {
         waitingWorker.postMessage({ type: 'SKIP_WAITING' });
       }
-      if (!isRefreshing) {
-        isRefreshing = true;
-        window.location.reload();
+      if (!('serviceWorker' in navigator) || !waitingWorker) {
+        if (!isRefreshing) {
+          isRefreshing = true;
+          window.location.reload();
+        }
       }
     });
   }
@@ -835,6 +837,18 @@ function initPwaToasts(): void {
       }
     });
   }
+
+  // Automatic recovery for 404 chunk load failures after deployment
+  window.addEventListener('error', (event) => {
+    const target = event.target as HTMLElement | null;
+    if (target && target.tagName === 'SCRIPT') {
+      console.warn('[PWA] Script load error detected (outdated chunk). Auto-reloading page...');
+      if (!isRefreshing) {
+        isRefreshing = true;
+        window.location.reload();
+      }
+    }
+  }, true);
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('previewPwa')) {
