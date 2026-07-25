@@ -752,10 +752,13 @@ function setTheme(theme: ThemeMode): void {
   localStorage.setItem(THEME_KEY, theme);
 }
 
-/**
- * PWA Install & Update Toast Handlers
- */
 let deferredInstallPrompt: any = null;
+let activeSwRegistration: ServiceWorkerRegistration | null = null;
+let isRefreshing = false;
+
+export function setSwRegistration(reg: ServiceWorkerRegistration | null): void {
+  activeSwRegistration = reg;
+}
 
 function initPwaToasts(): void {
   const pwaUpdateToast = document.getElementById('pwaUpdateToast');
@@ -802,14 +805,22 @@ function initPwaToasts(): void {
 
   if (pwaUpdateBtn) {
     pwaUpdateBtn.addEventListener('click', () => {
-      window.location.reload();
+      const waitingWorker = activeSwRegistration?.waiting;
+      if (waitingWorker) {
+        waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+      }
+      if (!isRefreshing) {
+        isRefreshing = true;
+        window.location.reload();
+      }
     });
   }
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (pwaUpdateToast) {
-        pwaUpdateToast.classList.remove('hidden');
+      if (!isRefreshing) {
+        isRefreshing = true;
+        window.location.reload();
       }
     });
   }
@@ -1180,6 +1191,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker
       .register('./sw.js')
       .then((reg) => {
+        setSwRegistration(reg);
         console.log('[PWA] ServiceWorker registered with scope:', reg.scope);
         const pwaUpdateToast = document.getElementById('pwaUpdateToast');
 
