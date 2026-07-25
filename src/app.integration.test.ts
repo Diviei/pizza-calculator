@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import indexHtml from '../index.html?raw';
-import { initApp } from './app.ts';
+import { initApp, setSwRegistration } from './app.ts';
 
 describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
   beforeEach(() => {
@@ -320,9 +320,20 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     }
 
     if (pwaUpdateBtn) {
+      const postMessageSpy = vi.fn();
+      const mockRegistration = {
+        waiting: {
+          postMessage: postMessageSpy,
+        },
+      } as unknown as ServiceWorkerRegistration;
+
+      setSwRegistration(mockRegistration);
+
       const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => {});
       pwaUpdateBtn.click();
+      expect(postMessageSpy).toHaveBeenCalledWith({ type: 'SKIP_WAITING' });
       expect(reloadSpy).toHaveBeenCalled();
+      reloadSpy.mockRestore();
     }
   });
 
