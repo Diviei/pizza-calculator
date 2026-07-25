@@ -174,4 +174,3 @@ export function calculateSimpleDough(
     ballWeight: styleConfig.ballWeight,
   };
 }
-

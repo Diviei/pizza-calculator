@@ -458,4 +458,3 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(hydrationSlider.value).toBe('65');
   });
 });
-

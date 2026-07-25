@@ -471,9 +471,7 @@ function calculateSimple(): void {
   // Update defaults notice depending on active pizza style
   if (elements.simpleDefaultsNotice) {
     elements.simpleDefaultsNotice.textContent =
-      currentPizzaStyle === 'tonda_romana'
-        ? t.simpleDefaultsInfoTondaRomana
-        : t.simpleDefaultsInfoNeapolitan;
+      currentPizzaStyle === 'tonda_romana' ? t.simpleDefaultsInfoTondaRomana : t.simpleDefaultsInfoNeapolitan;
   }
 
   // Time split display text

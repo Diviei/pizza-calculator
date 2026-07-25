@@ -1378,7 +1378,10 @@ pizza-style-selector {
   border-radius: var(--radius-md);
   cursor: pointer;
   text-align: left;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
   user-select: none;
   width: 100%;
 }
@@ -1391,7 +1394,9 @@ pizza-style-selector {
 .pizza-style-card.active {
   background: var(--bg-card);
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary-light), var(--shadow-sm);
+  box-shadow:
+    0 0 0 2px var(--color-primary-light),
+    var(--shadow-sm);
 }
 
 .style-card-header {
@@ -1421,4 +1426,3 @@ pizza-style-selector {
   color: var(--text-subtle);
   line-height: 1.35;
 }
-

@@ -123,7 +123,7 @@ describe('Calculator Engine - Simple Mode Helper', () => {
     // Flour = 720 / (1 + 0.57 + 0.025) = 720 / 1.595 = 451.41
     expect(res.flourGrams).toBeCloseTo(451.41, 1);
     // Water = 451.41 * 0.57 = 257.30
-    expect(res.waterGrams).toBeCloseTo(257.30, 1);
+    expect(res.waterGrams).toBeCloseTo(257.3, 1);
   });
 
   it('handles empty or zero fallback values gracefully', () => {

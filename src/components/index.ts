@@ -4,8 +4,8 @@
 
 import { IngredientCard } from './ingredient-card.ts';
 import { PizzaModeTabs } from './mode-tabs.ts';
-import { PizzaStyleSelector } from './pizza-style-selector.ts';
 import { NumberStepper } from './number-stepper.ts';
+import { PizzaStyleSelector } from './pizza-style-selector.ts';
 import { PresetButtons } from './preset-buttons.ts';
 import { RangeSlider } from './range-slider.ts';
 
@@ -31,4 +31,3 @@ export function registerCustomElements(): void {
     customElements.define('ingredient-card', IngredientCard);
   }
 }
-
