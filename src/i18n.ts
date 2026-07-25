@@ -199,7 +199,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTimeSplitCombined: '⚡ {rt}h a Temp. Ambiente (22°C) + ❄️ {fridge}h en Nevera (4°C)',
     simpleTipTitle: '💡 Guía Rápida de Preparación',
     simpleTipBody:
-      'Disuelve la levadura fresca en el agua. Agrega la harina, amasa 5 min, añade la sal y amasa hasta obtener una masa lisa. Deja reposar cubierta.',
+      'Disuelve la levadura en el agua. Agrega la harina, amasa 5 min, añade la sal y amasa hasta obtener una masa lisa. Haz las bolas y déjalas reposar de 2 a 3 horas. En el caso de la tonda romana, el estirado es completo, sin borde y se puede usar un rodillo.',
     simpleDoughSummary: 'Masa total: {total}g ({balls} bolas de {weight}g)',
     simpleDefaultsInfo: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal • Levadura fresca',
     simpleDefaultsInfoNeapolitan: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal',
@@ -233,7 +233,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3BodyNeapolitan:
       'Forma {balls} bolas de {weight}g y déjalas reposar de 2 a 3 horas. Estira a mano empujando el aire desde el centro hacia los bordes para crear el cornicione (borde alto). Hornea a máxima temperatura.',
     prepStep3BodyTondaRomana:
-      'Forma {balls} bolas de {weight}g y déjalas reposar de 2 a 3 horas. Estira la masa totalmente fina de borde a borde (puedes usar un rodillo si lo deseas). Hornea a máxima temperatura.',
+      'Forma {balls} bolas de {weight}g y déjalas reposar de 2 a 3 horas. En el caso de la tonda romana, el estirado es completo, sin borde y se puede usar un rodillo. Hornea a máxima temperatura.',
 
     footerText: 'Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta',
   },
@@ -310,7 +310,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTimeSplitCombined: '⚡ {rt}h Room Temp (22°C) + ❄️ {fridge}h Fridge (4°C)',
     simpleTipTitle: '💡 Quick Preparation Guide',
     simpleTipBody:
-      'Dissolve fresh yeast in water. Add flour, knead 5 min, add salt and knead until smooth. Let rest covered.',
+      'Dissolve yeast in water. Add flour, knead 5 min, add salt and knead until smooth. Shape into dough balls and let rest for 2 to 3 hours. For Tonda Romana, stretching is complete, with no rim, and a rolling pin can be used.',
     simpleDoughSummary: 'Total dough: {total}g ({balls} balls of {weight}g)',
     simpleDefaultsInfo: 'Neapolitan Standard: 280g ball • 65% Hydration • 2.5% Salt • Fresh yeast',
     simpleDefaultsInfoNeapolitan: 'Neapolitan Formula: 280g ball • 65% Hydration • 2.5% Salt',
@@ -344,7 +344,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3BodyNeapolitan:
       'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. Stretch by hand gently pushing air from the center towards the edges to build the cornicione (puffy crust). Bake at maximum temperature.',
     prepStep3BodyTondaRomana:
-      'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. Stretch completely thin from edge to edge (use a rolling pin if desired). Bake at maximum temperature.',
+      'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. For Tonda Romana, stretching is complete, with no edge/rim, and a rolling pin can be used. Bake at maximum temperature.',
 
     footerText: 'PWA Pizza Dough Calculator • Kinetic Fermentation Model',
   },
@@ -422,7 +422,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTimeSplitCombined: '⚡ {rt}h Temp. Ambiente (22°C) + ❄️ {fridge}h Frigo (4°C)',
     simpleTipTitle: '💡 Guida Rapida di Preparazione',
     simpleTipBody:
-      "Sciogli il lievito fresco nell'acqua. Aggiungi la farina, impasta 5 min, unisci il sale e impasta fino a ottenere un panetto liscio.",
+      "Sciogli il lievito nell'acqua. Aggiungi la farina, impasta 5 min, unisci il sale e impasta fino a ottenere un panetto liscio. Forma i panetti e lascia riposare da 2 a 3 ore. Nella tonda romana la stesura è completa, senza cornicione e si può usare un mattarello.",
     simpleDoughSummary: 'Impasto totale: {total}g ({balls} panetti da {weight}g)',
     simpleDefaultsInfo: 'Standard Napoletano: Panetto 280g • 65% Idratazione • 2.5% Sale • Lievito fresco',
     simpleDefaultsInfoNeapolitan: 'Formula Napoletana: Panetto 280g • 65% Idratazione • 2.5% Sale',
@@ -456,7 +456,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3BodyNeapolitan:
       'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi a mano spingendo l aria dal centro verso i bordi per formare il cornicione. Cuoci alla massima temperatura.',
     prepStep3BodyTondaRomana:
-      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi la pasta completamente sottile da bordo a bordo (puoi usare un mattarello se desideri). Cuoci alla massima temperatura.',
+      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Nel caso della tonda romana, la stesura è completa, senza cornicione e si può usare un mattarello. Cuoci alla massima temperatura.',
 
     footerText: 'Calcolatore Impasto Pizza PWA • Modello Cinetico di Lievitazione',
   },
@@ -534,7 +534,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTimeSplitCombined: '⚡ {rt}h Temp. Ambiante (22°C) + ❄️ {fridge}h Frigo (4°C)',
     simpleTipTitle: '💡 Guide de Préparation Rapide',
     simpleTipBody:
-      "Dissolvez la levure fraîche dans l'eau. Ajoutez la farine, pétrissez 5 min, ajoutez le sel et pétrissez jusqu'à obtenir une pâte lisse.",
+      "Dissolvez la levure dans l'eau. Ajoutez la farine, pétrissez 5 min, ajoutez le sel et pétrissez jusqu'à obtenir une pâte lisse. Formez les pâtons et laissez reposer 2 à 3 heures. Pour la tonda romana, l'étalage est complet, sans bord et on peut utiliser un rouleau.",
     simpleDoughSummary: 'Pâte totale : {total}g ({balls} pâtons de {weight}g)',
     simpleDefaultsInfo: 'Standard Napolitain : Pâton de 280g • 65% Hydratation • 2.5% Sel • Levure fraîche',
     simpleDefaultsInfoNeapolitan: 'Formule Napolitaine : Pâton de 280g • 65% Hydratation • 2.5% Sel',
@@ -568,7 +568,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3BodyNeapolitan:
       'Formez {balls} pâtons de {weight}g et laissez reposer 2 à 3 heures. Étalez à la main en poussant doucement l air du centre vers les bords pour créer le cornicione. Enfournez à température maximale.',
     prepStep3BodyTondaRomana:
-      'Formez {balls} pâtons de {weight}g et laissez reposer 2 à 3 heures. Étalez la pâte très fine d un bord à l autre (utilisez un rouleau à pâtisserie si désiré). Enfournez à température maximale.',
+      "Formez {balls} pâtons de {weight}g et laissez reposer 2 à 3 heures. Dans le cas de la tonda romana, l'étalage est complet, sans bord et on peut utiliser un rouleau à pâtisserie. Enfournez à température maximale.",
 
     footerText: 'Calculateur de Pâte à Pizza PWA • Modèle Cinétique de Fermentation',
   },
@@ -644,7 +644,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleTimeSplitCombined: '⚡ {rt} Std. Raumtemp. (22°C) + ❄️ {fridge} Std. Kühlschrank (4°C)',
     simpleTipTitle: '💡 Kurzanleitung zur Zubereitung',
     simpleTipBody:
-      'Frische Hefe im Wasser auflösen. Mehl hinzufügen, 5 Min. kneten, Salz zugeben und zu einem glatten Teig kneten.',
+      'Hefe im Wasser auflösen. Mehl hinzufügen, 5 Min. kneten, Salz zugeben und zu einem glatten Teig kneten. Zu Teigkugeln formen und 2 bis 3 Stunden ruhen lassen. Bei Tonda Romana wird der Teig komplett flach ohne Rand ausgerollt (Nudelholz erlaubt).',
     simpleDoughSummary: 'Gesamte Teigmenge: {total}g ({balls} Teigkugeln à {weight}g)',
     simpleDefaultsInfo: 'Neapolitanischer Standard: 280g Teigkugel • 65% Hydratation • 2.5% Salz • Frische Hefe',
     simpleDefaultsInfoNeapolitan: 'Neapolitanische Formel: 280g Teigkugel • 65% Hydratation • 2.5% Salz',
@@ -678,7 +678,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3BodyNeapolitan:
       'Forme {balls} Teigkugeln zu {weight}g und lass sie 2 bis 3 Std. ruhen. Sanft von der Mitte nach außen dehnen, um den Rand (Cornicione) zu bilden. Bei Maximalhitze backen.',
     prepStep3BodyTondaRomana:
-      'Forme {balls} Teigkugeln zu {weight}g und lass sie 2 bis 3 Std. ruhen. Den Teig ganz dünn ausrollen (bei Bedarf mit einem Nudelholz). Bei Maximalhitze backen.',
+      'Forme {balls} Teigkugeln zu {weight}g und lass sie 2 bis 3 Std. ruhen. Im Falle der Tonda Romana ist das Ausrollen komplett flach, ohne Rand, und ein Nudelholz kann verwendet werden. Bei Maximalhitze backen.',
 
     footerText: 'Pizzateig Rechner PWA • Kinetisches Gärmodell',
   },
