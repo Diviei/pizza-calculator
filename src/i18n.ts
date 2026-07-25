@@ -110,6 +110,8 @@ export interface TranslationDictionary {
   prepStep2Combined: string;
   prepStep3Title: string;
   prepStep3Body: string;
+  prepStep3BodyNeapolitan: string;
+  prepStep3BodyTondaRomana: string;
 
   footerText: string;
 }
@@ -220,14 +222,18 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       'Disuelve {yeast}g de levadura en {water}g de agua. Añade {flour}g de harina y {salt}g de sal. Amasa 10 min hasta obtener una masa lisa y elástica.',
     prepStep2Title: '⏱️ 2. Fermentación y Control de Tiempo',
     prepStep2AmbientOnly:
-      'Deja fermentar en un bol tapado a temperatura ambiente ({tempRt}°C) durante {hoursRt} horas. Divide en bolas 2 horas antes de hornear.',
+      'Deja fermentar en un bol tapado a temperatura ambiente ({tempRt}°C) durante {hoursRt} horas. Divide la masa en bolas y déjalas reposar de 2 a 3 horas antes de estirar.',
     prepStep2FridgeOnly:
-      'Deja reposar 1 hora a temp. ambiente, guarda en nevera ({tempFridge}°C) durante {hoursFridge} horas. Saca las bolas 2.5h antes de hornear para atemperar.',
+      'Deja reposar 1 hora a temp. ambiente, guarda en nevera ({tempFridge}°C) durante {hoursFridge} horas. Saca las bolas de 2 a 3 horas antes para atemperar y reposar.',
     prepStep2Combined:
-      'Fermentación Mixta: Mantén la masa {hoursRt} horas a temperatura ambiente ({tempRt}°C) y {hoursFridge} horas en nevera ({tempFridge}°C). Saca y atempera 2 horas antes de estirar.',
-    prepStep3Title: '🍕 3. Formado y Horneado',
+      'Fermentación Mixta: Mantén la masa {hoursRt} horas a temperatura ambiente ({tempRt}°C) y {hoursFridge} horas en nevera ({tempFridge}°C). Forma las bolas y atempera/reposa de 2 a 3 horas antes de estirar.',
+    prepStep3Title: '🍕 3. Boleado, Formado y Horneado',
     prepStep3Body:
-      'Forma {balls} bolas de {weight}g. Estira con las manos desde el centro sobre sémola dejando el borde (cornicione). Hornea al máximo de temperatura.',
+      'Forma {balls} bolas de {weight}g. Tras el reposo de 2-3h, estira con cuidado y hornea a máxima temperatura.',
+    prepStep3BodyNeapolitan:
+      'Forma {balls} bolas de {weight}g y déjalas reposar de 2 a 3 horas. Estira a mano empujando el aire desde el centro hacia los bordes para crear el cornicione (borde alto). Hornea a máxima temperatura.',
+    prepStep3BodyTondaRomana:
+      'Forma {balls} bolas de {weight}g y déjalas reposar de 2 a 3 horas. Estira la masa totalmente fina de borde a borde (puedes usar un rodillo si lo deseas). Hornea a máxima temperatura.',
 
     footerText: 'Calculadora de Masa de Pizza PWA • Algoritmo Cinético de Fermentación Mixta',
   },
@@ -327,14 +333,18 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       'Dissolve {yeast}g of yeast in {water}g of water. Add {flour}g of flour and {salt}g of salt. Knead 10 minutes until smooth and elastic.',
     prepStep2Title: '⏱️ 2. Fermentation & Timing',
     prepStep2AmbientOnly:
-      'Let ferment in a covered bowl at room temp ({tempRt}°C) for {hoursRt} hours. Shape into dough balls 2 hours before baking.',
+      'Let ferment in a covered bowl at room temp ({tempRt}°C) for {hoursRt} hours. Divide into dough balls and let rest for 2 to 3 hours before stretching.',
     prepStep2FridgeOnly:
-      'Rest 1 hour at room temp, then chill in fridge ({tempFridge}°C) for {hoursFridge} hours. Remove dough balls 2.5 hours before baking to reach room temp.',
+      'Rest 1 hour at room temp, then chill in fridge ({tempFridge}°C) for {hoursFridge} hours. Remove dough balls 2 to 3 hours before stretching to warm up and rest.',
     prepStep2Combined:
-      'Mixed Fermentation: Keep dough for {hoursRt} hours at room temp ({tempRt}°C) and {hoursFridge} hours in fridge ({tempFridge}°C). Warm up 2 hours before stretching.',
-    prepStep3Title: '🍕 3. Balling & Baking',
+      'Mixed Fermentation: Keep dough for {hoursRt} hours at room temp ({tempRt}°C) and {hoursFridge} hours in fridge ({tempFridge}°C). Shape into balls and let rest 2 to 3 hours before stretching.',
+    prepStep3Title: '🍕 3. Balling, Stretching & Baking',
     prepStep3Body:
-      'Divide into {balls} balls of {weight}g. Stretch by hand on semolina outward leaving raised crust edges (cornicione). Bake at max heat.',
+      'Shape into {balls} balls of {weight}g. After resting 2-3h, stretch carefully and bake at maximum temperature.',
+    prepStep3BodyNeapolitan:
+      'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. Stretch by hand gently pushing air from the center towards the edges to build the cornicione (puffy crust). Bake at maximum temperature.',
+    prepStep3BodyTondaRomana:
+      'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. Stretch completely thin from edge to edge (use a rolling pin if desired). Bake at maximum temperature.',
 
     footerText: 'PWA Pizza Dough Calculator • Kinetic Fermentation Model',
   },
@@ -435,14 +445,18 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       'Sciogli {yeast}g di lievito in {water}g di acqua. Aggiungi {flour}g di farina e {salt}g di sale. Impasta 10 minuti fino a ottenere un panetto liscio.',
     prepStep2Title: '⏱️ 2. Lievitazione e Tempi',
     prepStep2AmbientOnly:
-      'Lascia lievitare a temperatura ambiente ({tempRt}°C) per {hoursRt} ore. Forma i panetti 2 ore prima di infornare.',
+      'Lascia lievitare a temperatura ambiente ({tempRt}°C) per {hoursRt} ore. Forma i panetti e lascia riposare da 2 a 3 ore prima di stendere.',
     prepStep2FridgeOnly:
-      'Riposo 1 ora a TA, poi in frigorifero ({tempFridge}°C) per {hoursFridge} ore. Togli i panetti dal frigo 2.5 ore prima di stendere.',
+      'Riposo 1 ora a TA, poi in frigorifero ({tempFridge}°C) per {hoursFridge} ore. Togli i panetti dal frigo 2-3 ore prima per farli riposare e temperare.',
     prepStep2Combined:
-      'Lievitazione Mista: {hoursRt} ore a temperatura ambiente ({tempRt}°C) e {hoursFridge} ore in frigorifero ({tempFridge}°C). Porta a temperatura ambiente 2 ore prima di stendere.',
+      'Lievitazione Mista: {hoursRt} ore a temperatura ambiente ({tempRt}°C) e {hoursFridge} ore in frigorifero ({tempFridge}°C). Forma i panetti e lascia riposare 2-3 ore.',
     prepStep3Title: '🍕 3. Stesura e Cottura',
     prepStep3Body:
-      'Forma {balls} panetti da {weight}g. Stendi a mano lasciando il cornicione alto. Inforna alla massima temperatura.',
+      'Forma {balls} panetti da {weight}g. Dopo 2-3 ore di riposo, stendi con cura e cuoci alla massima temperatura.',
+    prepStep3BodyNeapolitan:
+      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi a mano spingendo l aria dal centro verso i bordi per formare il cornicione. Cuoci alla massima temperatura.',
+    prepStep3BodyTondaRomana:
+      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi la pasta completamente sottile da bordo a bordo (puoi usare un mattarello se desideri). Cuoci alla massima temperatura.',
 
     footerText: 'Calcolatore Impasto Pizza PWA • Modello Cinetico di Lievitazione',
   },
@@ -543,14 +557,18 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       "Dissolvez {yeast}g de levure dans {water}g d'eau. Ajoutez {flour}g de farine et {salt}g de sel. Pétrissez 10 min jusqu'à obtenir une pâte lisse.",
     prepStep2Title: '⏱️ 2. Fermentation & Gestion du Temps',
     prepStep2AmbientOnly:
-      'Laissez fermenter dans un bol couvert à température ambiante ({tempRt}°C) pendant {hoursRt} heures. Formez les pâtons 2h avant la cuisson.',
+      'Laissez fermenter dans un bol couvert à température ambiante ({tempRt}°C) pendant {hoursRt} heures. Divisez en pâtons et laissez reposer 2 à 3 heures avant d étaler.',
     prepStep2FridgeOnly:
-      'Reposez 1h à TA, puis mettez au frigo ({tempFridge}°C) pendant {hoursFridge}h. Sortez les pâtons 2.5h avant cuisson pour réchauffer.',
+      'Reposez 1h à TA, puis mettez au frigo ({tempFridge}°C) pendant {hoursFridge}h. Sortez les pâtons 2 à 3 heures avant d étaler.',
     prepStep2Combined:
-      "Fermentation Mixte : {hoursRt}h à température ambiante ({tempRt}°C) et {hoursFridge}h au réfrigérateur ({tempFridge}°C). Sortez 2h avant d'étaler.",
+      'Fermentation Mixte : {hoursRt}h à température ambiante ({tempRt}°C) et {hoursFridge}h au réfrigérateur ({tempFridge}°C). Formez les pâtons et laissez reposer 2 à 3h.',
     prepStep3Title: '🍕 3. Façonnage et Cuisson',
     prepStep3Body:
-      'Divisez en {balls} pâtons de {weight}g. Étalez à la main en préservant les bords. Enfournez au maximum de votre four.',
+      'Divisez en {balls} pâtons de {weight}g. Après 2-3h de repos, étalez avec soin et enfournez à température maximale.',
+    prepStep3BodyNeapolitan:
+      'Formez {balls} pâtons de {weight}g et laissez reposer 2 à 3 heures. Étalez à la main en poussant doucement l air du centre vers les bords pour créer le cornicione. Enfournez à température maximale.',
+    prepStep3BodyTondaRomana:
+      'Formez {balls} pâtons de {weight}g et laissez reposer 2 à 3 heures. Étalez la pâte très fine d un bord à l autre (utilisez un rouleau à pâtisserie si désiré). Enfournez à température maximale.',
 
     footerText: 'Calculateur de Pâte à Pizza PWA • Modèle Cinétique de Fermentation',
   },
@@ -649,14 +667,18 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
       'Löse {yeast}g Hefe in {water}g Wasser auf. Gib {flour}g Mehl und {salt}g Salz hinzu. 10 Min. kneten bis ein glatter Teig entsteht.',
     prepStep2Title: '⏱️ 2. Gärung & Zeitverwaltung',
     prepStep2AmbientOnly:
-      'Teig abgedeckt bei Raumtemperatur ({tempRt}°C) für {hoursRt} Std. gehen lassen. 2 Std. vor dem Backen zu Kugeln formen.',
+      'Teig abgedeckt bei Raumtemperatur ({tempRt}°C) für {hoursRt} Std. gehen lassen. Zu Teigkugeln teilen und vor dem Dehnen 2 bis 3 Stunden ruhen lassen.',
     prepStep2FridgeOnly:
-      '1 Std. bei Raumtemperatur ruhen lassen, dann {hoursFridge} Std. im Kühlschrank ({tempFridge}°C) kühlen. Teiglinge 2.5 Std. vor dem Backen herausnehmen.',
+      '1 Std. bei Raumtemperatur ruhen lassen, dann {hoursFridge} Std. im Kühlschrank ({tempFridge}°C) kühlen. Teiglinge 2 bis 3 Std. vor dem Dehnen herausnehmen.',
     prepStep2Combined:
-      'Gemischte Gärung: {hoursRt} Std. bei Raumtemperatur ({tempRt}°C) und {hoursFridge} Std. im Kühlschrank ({tempFridge}°C). 2 Std. vor dem Dehnen temperieren.',
+      'Gemischte Gärung: {hoursRt} Std. bei Raumtemperatur ({tempRt}°C) und {hoursFridge} Std. im Kühlschrank ({tempFridge}°C). Zu Kugeln formen und 2 bis 3 Std. ruhen lassen.',
     prepStep3Title: '🍕 3. Formung & Backen',
     prepStep3Body:
-      'Teil den Teig in {balls} Teiglinge à {weight}g. Mit den Händen von innen nach außen dehnen (Rand hoch lassen). Bei Maximalhitze backen.',
+      'Teile den Teig in {balls} Teiglinge à {weight}g. Nach 2-3 Std. Ruhezeit vorsichtig dehnen und bei Maximalhitze backen.',
+    prepStep3BodyNeapolitan:
+      'Forme {balls} Teigkugeln zu {weight}g und lass sie 2 bis 3 Std. ruhen. Sanft von der Mitte nach außen dehnen, um den Rand (Cornicione) zu bilden. Bei Maximalhitze backen.',
+    prepStep3BodyTondaRomana:
+      'Forme {balls} Teigkugeln zu {weight}g und lass sie 2 bis 3 Std. ruhen. Den Teig ganz dünn ausrollen (bei Bedarf mit einem Nudelholz). Bei Maximalhitze backen.',
 
     footerText: 'Pizzateig Rechner PWA • Kinetisches Gärmodell',
   },

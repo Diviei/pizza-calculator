@@ -365,8 +365,13 @@ function renderPrepGuide(
       .replace('{tempFridge}', data.tempFridge.toString());
   }
 
-  const step3Title = t.prepStep3Title || '🍕 3. Formado y Horneado';
-  const step3Body = (t.prepStep3Body || '')
+  const step3Title = t.prepStep3Title || '🍕 3. Boleado, Formado y Horneado';
+  const rawStep3 =
+    currentPizzaStyle === 'tonda_romana'
+      ? t.prepStep3BodyTondaRomana || t.prepStep3Body
+      : t.prepStep3BodyNeapolitan || t.prepStep3Body;
+
+  const step3Body = (rawStep3 || '')
     .replace('{balls}', data.numberOfBalls.toString())
     .replace('{weight}', data.ballWeight.toString());
 
