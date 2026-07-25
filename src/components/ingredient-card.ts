@@ -40,6 +40,14 @@ export class IngredientCard extends HTMLElement {
     } else if (name === 'baker-pct') {
       const pctEl = pctId ? this.querySelector(`#${pctId}`) : this.querySelector('.baker-pct');
       if (pctEl) pctEl.textContent = newValue;
+
+      const fillEl = this.querySelector<HTMLElement>('.baker-progress-fill');
+      if (fillEl) {
+        const numericVal = parseFloat(newValue.replace('%', '')) || 0;
+        const widthVal =
+          numericVal >= 100 ? '100%' : numericVal >= 40 ? `${numericVal}%` : `${Math.max(6, numericVal * 2.5)}%`;
+        fillEl.style.width = widthVal;
+      }
     } else if (name === 'icon') {
       const iconEl = this.querySelector('.simple-card-icon');
       if (iconEl) iconEl.textContent = newValue;
@@ -61,6 +69,13 @@ export class IngredientCard extends HTMLElement {
     const existingTitleText = this.querySelector('[data-i18n]')?.textContent || '';
 
     if (isSimple) {
+      const widthVal = cardClass.includes('flour')
+        ? '100%'
+        : cardClass.includes('water')
+          ? '65%'
+          : cardClass.includes('salt')
+            ? '12%'
+            : '8%';
       this.innerHTML = `
         <div class="simple-card ${cardClass}">
           <div class="simple-card-header">
@@ -70,16 +85,24 @@ export class IngredientCard extends HTMLElement {
           <div class="simple-card-value">
             <span ${resId ? `id="${resId}"` : ''}>${value}</span> <small>${unit}</small>
           </div>
+          <div class="baker-progress-bar"><div class="baker-progress-fill" style="width: ${widthVal}"></div></div>
         </div>
       `;
     } else {
+      const pctStr = bakerPct || '100%';
+      const numericVal = parseFloat(pctStr.replace('%', '')) || 0;
+      const widthVal =
+        numericVal >= 100 ? '100%' : numericVal >= 40 ? `${numericVal}%` : `${Math.max(6, numericVal * 2.5)}%`;
       this.innerHTML = `
         <div class="result-card ${cardClass}">
-          <span ${titleId ? `id="${titleId}"` : ''} class="ingredient-name" ${titleKey ? `data-i18n="${titleKey}"` : ''}>${existingTitleText}</span>
+          <div class="result-card-header">
+            <span ${titleId ? `id="${titleId}"` : ''} class="ingredient-name" ${titleKey ? `data-i18n="${titleKey}"` : ''}>${existingTitleText}</span>
+            ${bakerPct !== null ? `<span class="baker-pct" ${pctId ? `id="${pctId}"` : ''}>${bakerPct}</span>` : ''}
+          </div>
           <div class="ingredient-value">
             <span ${resId ? `id="${resId}"` : ''}>${value}</span> <small>${unit}</small>
           </div>
-          ${bakerPct !== null ? `<span class="baker-pct" ${pctId ? `id="${pctId}"` : ''}>${bakerPct}</span>` : ''}
+          <div class="baker-progress-bar"><div class="baker-progress-fill" style="width: ${widthVal}"></div></div>
         </div>
       `;
     }

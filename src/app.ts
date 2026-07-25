@@ -190,6 +190,35 @@ const elements = {
   get langPopover() {
     return document.getElementById('langPopover') as HTMLElement | null;
   },
+
+  // Copy Buttons & Mobile Quick Bar
+  get simpleCopyBtn() {
+    return document.getElementById('simpleCopyBtn') as HTMLButtonElement | null;
+  },
+  get advancedCopyBtn() {
+    return document.getElementById('advancedCopyBtn') as HTMLButtonElement | null;
+  },
+  get mobileQuickBar() {
+    return document.getElementById('mobileQuickBar') as HTMLElement | null;
+  },
+  get quickFlour() {
+    return document.getElementById('quickFlour') as HTMLElement | null;
+  },
+  get quickWater() {
+    return document.getElementById('quickWater') as HTMLElement | null;
+  },
+  get quickYeast() {
+    return document.getElementById('quickYeast') as HTMLElement | null;
+  },
+  get copyToast() {
+    return document.getElementById('copyToast') as HTMLElement | null;
+  },
+  get simplePrepSteps() {
+    return document.getElementById('simplePrepSteps') as HTMLElement | null;
+  },
+  get advancedPrepSteps() {
+    return document.getElementById('advancedPrepSteps') as HTMLElement | null;
+  },
 };
 
 /**
@@ -278,6 +307,73 @@ function setMode(mode: AppMode): void {
 }
 
 /**
+ * Render Dynamic Step-by-Step Preparation Guide
+ */
+function renderPrepGuide(
+  targetEl: HTMLElement | null,
+  data: {
+    flourGrams: number;
+    waterGrams: number;
+    saltGrams: number;
+    yeastGrams: number;
+    hoursRt: number;
+    tempRt: number;
+    hoursFridge: number;
+    tempFridge: number;
+    numberOfBalls: number;
+    ballWeight: number;
+  },
+): void {
+  if (!targetEl) return;
+  const t = translations[currentLang] || translations.en || translations.es;
+
+  const step1Title = t.prepStep1Title || '🥣 1. Amasado y Mezcla';
+  const step1Body = (t.prepStep1Body || '')
+    .replace('{yeast}', data.yeastGrams.toFixed(2))
+    .replace('{water}', data.waterGrams.toFixed(1))
+    .replace('{flour}', data.flourGrams.toFixed(1))
+    .replace('{salt}', data.saltGrams.toFixed(1));
+
+  const step2Title = t.prepStep2Title || '⏱️ 2. Fermentación y Control de Tiempo';
+  let step2Body = '';
+  if (data.hoursFridge === 0) {
+    step2Body = (t.prepStep2AmbientOnly || '')
+      .replace('{tempRt}', data.tempRt.toString())
+      .replace('{hoursRt}', data.hoursRt.toString());
+  } else if (data.hoursRt === 0) {
+    step2Body = (t.prepStep2FridgeOnly || '')
+      .replace('{tempFridge}', data.tempFridge.toString())
+      .replace('{hoursFridge}', data.hoursFridge.toString());
+  } else {
+    step2Body = (t.prepStep2Combined || '')
+      .replace('{hoursRt}', data.hoursRt.toString())
+      .replace('{tempRt}', data.tempRt.toString())
+      .replace('{hoursFridge}', data.hoursFridge.toString())
+      .replace('{tempFridge}', data.tempFridge.toString());
+  }
+
+  const step3Title = t.prepStep3Title || '🍕 3. Formado y Horneado';
+  const step3Body = (t.prepStep3Body || '')
+    .replace('{balls}', data.numberOfBalls.toString())
+    .replace('{weight}', data.ballWeight.toString());
+
+  targetEl.innerHTML = `
+    <div class="prep-step-item">
+      <div class="prep-step-header">${step1Title}</div>
+      <div class="prep-step-text">${step1Body}</div>
+    </div>
+    <div class="prep-step-item">
+      <div class="prep-step-header">${step2Title}</div>
+      <div class="prep-step-text">${step2Body}</div>
+    </div>
+    <div class="prep-step-item">
+      <div class="prep-step-header">${step3Title}</div>
+      <div class="prep-step-text">${step3Body}</div>
+    </div>
+  `;
+}
+
+/**
  * Perform calculation for Simple Mode
  */
 function calculateSimple(): void {
@@ -309,6 +405,12 @@ function calculateSimple(): void {
   if (elements.simpleWaterRes) elements.simpleWaterRes.textContent = results.waterGrams.toFixed(1);
   if (elements.simpleSaltRes) elements.simpleSaltRes.textContent = results.saltGrams.toFixed(1);
   if (elements.simpleYeastRes) elements.simpleYeastRes.textContent = results.yeastGrams.toFixed(2);
+
+  if (currentMode === 'simple') {
+    if (elements.quickFlour) elements.quickFlour.textContent = `🌾 ${results.flourGrams.toFixed(1)}g`;
+    if (elements.quickWater) elements.quickWater.textContent = `💧 ${results.waterGrams.toFixed(1)}g`;
+    if (elements.quickYeast) elements.quickYeast.textContent = `🧫 ${results.yeastGrams.toFixed(2)}g`;
+  }
 
   // Update simple yeast label title
   if (elements.simpleYeastTitle) {
@@ -355,6 +457,20 @@ function calculateSimple(): void {
     } else {
       btn.classList.remove('active');
     }
+  });
+
+  // Render Dynamic Preparation Guide
+  renderPrepGuide(elements.simplePrepSteps, {
+    flourGrams: results.flourGrams,
+    waterGrams: results.waterGrams,
+    saltGrams: results.saltGrams,
+    yeastGrams: results.yeastGrams,
+    hoursRt: results.hoursRt,
+    tempRt: tempRt,
+    hoursFridge: results.hoursFridge,
+    tempFridge: tempFridge,
+    numberOfBalls: numberOfBalls,
+    ballWeight: 280,
   });
 
   saveSimpleState({ numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge });
@@ -404,6 +520,12 @@ function calculate(): CalculationResults {
   if (elements.saltRes) elements.saltRes.textContent = results.saltGrams.toFixed(1);
   if (elements.yeastRes) elements.yeastRes.textContent = results.yeastGrams.toFixed(2);
 
+  if (currentMode === 'advanced') {
+    if (elements.quickFlour) elements.quickFlour.textContent = `🌾 ${results.flourGrams.toFixed(1)}g`;
+    if (elements.quickWater) elements.quickWater.textContent = `💧 ${results.waterGrams.toFixed(1)}g`;
+    if (elements.quickYeast) elements.quickYeast.textContent = `🧫 ${results.yeastGrams.toFixed(2)}g`;
+  }
+
   // Percentage Badges
   if (elements.waterPctDisplay) elements.waterPctDisplay.textContent = `${hydrationPercentage}%`;
   if (elements.saltPctDisplay) elements.saltPctDisplay.textContent = `${saltPercentage}%`;
@@ -422,6 +544,20 @@ function calculate(): CalculationResults {
       elements.warningNotice.classList.add('hidden');
     }
   }
+
+  // Render Dynamic Preparation Guide
+  renderPrepGuide(elements.advancedPrepSteps, {
+    flourGrams: results.flourGrams,
+    waterGrams: results.waterGrams,
+    saltGrams: results.saltGrams,
+    yeastGrams: results.yeastGrams,
+    hoursRt: hoursRt,
+    tempRt: tempRt,
+    hoursFridge: hoursFridge,
+    tempFridge: tempFridge,
+    numberOfBalls: numberOfBalls,
+    ballWeight: ballWeight,
+  });
 
   saveState(inputs);
   return results;
@@ -625,6 +761,69 @@ function initPwaToasts(): void {
 }
 
 /**
+ * Copy Recipe to Clipboard
+ */
+function copyRecipeToClipboard(): void {
+  const t = translations[currentLang] || translations.en || translations.es;
+  let text = '';
+  if (currentMode === 'simple') {
+    const balls = elements.simpleBalls?.value || '4';
+    const flour = elements.simpleFlourRes?.textContent || '0';
+    const water = elements.simpleWaterRes?.textContent || '0';
+    const salt = elements.simpleSaltRes?.textContent || '0';
+    const yeast = elements.simpleYeastRes?.textContent || '0';
+    const yeastTitle = elements.simpleYeastTitle?.textContent || 'Levadura';
+    const timeSplit = elements.simpleTimeSplitDisplay?.textContent || '';
+
+    text =
+      `🍕 Pizza Calculator (${t.modeSimple})\n` +
+      `-------------------------\n` +
+      `• ${t.numberOfBalls}: ${balls}\n` +
+      `• ${t.flour}: ${flour}g\n` +
+      `• ${t.water}: ${water}g\n` +
+      `• ${t.saltIngredient}: ${salt}g\n` +
+      `• ${yeastTitle}: ${yeast}g\n` +
+      `• ${timeSplit}\n` +
+      `-------------------------\n` +
+      `${t.simpleDefaultsInfo}`;
+  } else {
+    const balls = elements.numberOfBalls?.value || '1';
+    const weight = elements.ballWeight?.value || '280';
+    const flour = elements.flourRes?.textContent || '0';
+    const water = elements.waterRes?.textContent || '0';
+    const salt = elements.saltRes?.textContent || '0';
+    const yeast = elements.yeastRes?.textContent || '0';
+    const yeastTitle = elements.yeastLabel?.textContent || 'Levadura';
+    const hydration = elements.hydrationVal?.textContent || '65';
+    const saltPct = elements.saltVal?.textContent || '2.5';
+    const yeastPct = elements.yeastPctDisplay?.textContent || '0';
+
+    text =
+      `🍕 Pizza Calculator (${t.modeAdvanced})\n` +
+      `-------------------------\n` +
+      `• ${t.numberOfBalls}: ${balls} (${weight}g/c.u.)\n` +
+      `• ${t.flour}: ${flour}g (100%)\n` +
+      `• ${t.water}: ${water}g (${hydration}%)\n` +
+      `• ${t.saltIngredient}: ${salt}g (${saltPct}%)\n` +
+      `• ${yeastTitle}: ${yeast}g (${yeastPct})\n` +
+      `-------------------------\n` +
+      `TA: ${elements.hoursRt?.value || 0}h @ ${elements.tempRtVal?.textContent || 22}°C | Frigo: ${elements.hoursFridge?.value || 0}h @ ${elements.tempFridgeVal?.textContent || 4}°C`;
+  }
+
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {});
+  }
+
+  const toast = elements.copyToast;
+  if (toast) {
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2500);
+  }
+}
+
+/**
  * Attach Event Listeners
  */
 
@@ -638,6 +837,13 @@ export function initApp(): void {
 }
 
 function initEventListeners(): void {
+  // Copy Recipe Buttons
+  if (elements.simpleCopyBtn) {
+    elements.simpleCopyBtn.addEventListener('click', copyRecipeToClipboard);
+  }
+  if (elements.advancedCopyBtn) {
+    elements.advancedCopyBtn.addEventListener('click', copyRecipeToClipboard);
+  }
   // Mode Switcher Tabs
   if (elements.tabSimple && elements.tabAdvanced) {
     elements.tabSimple.addEventListener('click', () => setMode('simple'));
@@ -905,7 +1111,25 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('./sw.js')
-      .then((reg) => console.log('[PWA] ServiceWorker registered with scope:', reg.scope))
+      .then((reg) => {
+        console.log('[PWA] ServiceWorker registered with scope:', reg.scope);
+        const pwaUpdateToast = document.getElementById('pwaUpdateToast');
+
+        if (reg.waiting && navigator.serviceWorker.controller && pwaUpdateToast) {
+          pwaUpdateToast.classList.remove('hidden');
+        }
+
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          if (installingWorker) {
+            installingWorker.onstatechange = () => {
+              if (installingWorker.state === 'installed' && navigator.serviceWorker.controller && pwaUpdateToast) {
+                pwaUpdateToast.classList.remove('hidden');
+              }
+            };
+          }
+        };
+      })
       .catch((err) => console.warn('[PWA] ServiceWorker registration failed:', err));
   });
 }
