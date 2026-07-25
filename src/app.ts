@@ -847,7 +847,9 @@ function initPwaToasts(): void {
       const isStyleError = target && target.tagName === 'LINK';
 
       if (isScriptError || isStyleError) {
-        console.warn(`[PWA] ${isScriptError ? 'Script' : 'Stylesheet'} load error detected (outdated asset). Auto-reloading page...`);
+        console.warn(
+          `[PWA] ${isScriptError ? 'Script' : 'Stylesheet'} load error detected (outdated asset). Auto-reloading page...`,
+        );
         if (!isRefreshing) {
           isRefreshing = true;
           window.location.reload();
