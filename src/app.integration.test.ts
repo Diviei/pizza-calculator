@@ -337,6 +337,25 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     }
   });
 
+  it('reproduces 404 stylesheet load failure handling when CSS link fails to load', () => {
+    const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => {});
+
+    // Create a link element simulating an outdated stylesheet that returns 404
+    const linkEl = document.createElement('link');
+    linkEl.rel = 'stylesheet';
+    linkEl.href = './assets/outdated-styles-old.css';
+
+    // Dispatch error event on the link element (captured by window error listener)
+    const errorEvent = new Event('error', { bubbles: true });
+    Object.defineProperty(errorEvent, 'target', { value: linkEl, enumerable: true });
+    window.dispatchEvent(errorEvent);
+
+    // Expect window.location.reload to have been called to recover from the 404 CSS failure
+    expect(reloadSpy).toHaveBeenCalled();
+
+    reloadSpy.mockRestore();
+  });
+
   it('handles localStorage errors gracefully', () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('QuotaExceeded');

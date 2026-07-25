@@ -838,13 +838,16 @@ function initPwaToasts(): void {
     });
   }
 
-  // Automatic recovery for 404 chunk load failures after deployment
+  // Automatic recovery for 404 asset/chunk load failures (scripts & stylesheets) after deployment
   window.addEventListener(
     'error',
     (event) => {
       const target = event.target as HTMLElement | null;
-      if (target && target.tagName === 'SCRIPT') {
-        console.warn('[PWA] Script load error detected (outdated chunk). Auto-reloading page...');
+      const isScriptError = target && target.tagName === 'SCRIPT';
+      const isStyleError = target && target.tagName === 'LINK';
+
+      if (isScriptError || isStyleError) {
+        console.warn(`[PWA] ${isScriptError ? 'Script' : 'Stylesheet'} load error detected (outdated asset). Auto-reloading page...`);
         if (!isRefreshing) {
           isRefreshing = true;
           window.location.reload();
@@ -1111,6 +1114,7 @@ export function parseUrlParameters(): boolean {
  */
 
 export function initApp(): void {
+  isRefreshing = false;
   initTheme();
   const hasUrlParams = parseUrlParameters();
   if (!hasUrlParams) {
