@@ -226,6 +226,12 @@ const elements = {
   get advancedPrepSteps() {
     return document.getElementById('advancedPrepSteps') as HTMLElement | null;
   },
+  get simpleShareBtn() {
+    return document.getElementById('simpleShareBtn') as HTMLButtonElement | null;
+  },
+  get advancedShareBtn() {
+    return document.getElementById('advancedShareBtn') as HTMLButtonElement | null;
+  },
 };
 
 /**
@@ -888,6 +894,9 @@ function copyRecipeToClipboard(): void {
 
   const toast = elements.copyToast;
   if (toast) {
+    const msgEl = document.getElementById('copyToastMsg');
+    const t = translations[currentLang] || translations.es;
+    if (msgEl) msgEl.textContent = t.recipeCopiedToast;
     toast.classList.remove('hidden');
     setTimeout(() => {
       toast.classList.add('hidden');
@@ -896,12 +905,194 @@ function copyRecipeToClipboard(): void {
 }
 
 /**
+ * Build shareable URL containing recipe parameters
+ */
+export function buildShareableUrl(): string {
+  const url = new URL(window.location.origin + window.location.pathname);
+  url.searchParams.set('mode', currentMode);
+  url.searchParams.set('style', currentPizzaStyle);
+  url.searchParams.set('lang', currentLang);
+
+  if (currentMode === 'simple') {
+    if (elements.simpleBalls) url.searchParams.set('balls', elements.simpleBalls.value);
+    if (elements.simpleHours) url.searchParams.set('hours', elements.simpleHours.value);
+    if (elements.simpleTempRtSlider) url.searchParams.set('tempRt', elements.simpleTempRtSlider.value);
+    if (elements.simpleTempFridgeSlider) url.searchParams.set('tempFridge', elements.simpleTempFridgeSlider.value);
+    const simpleYeast = Array.from(elements.simpleYeastInputs || []).find((i) => i.checked)?.value || 'Fresh';
+    url.searchParams.set('yeast', simpleYeast);
+  } else {
+    if (elements.numberOfBalls) url.searchParams.set('balls', elements.numberOfBalls.value);
+    if (elements.ballWeight) url.searchParams.set('weight', elements.ballWeight.value);
+    if (elements.hydrationSlider) url.searchParams.set('hydration', elements.hydrationSlider.value);
+    if (elements.saltSlider) url.searchParams.set('salt', elements.saltSlider.value);
+    if (elements.hoursRt) url.searchParams.set('hoursRt', elements.hoursRt.value);
+    if (elements.tempRtSlider) url.searchParams.set('tempRt', elements.tempRtSlider.value);
+    if (elements.hoursFridge) url.searchParams.set('hoursFridge', elements.hoursFridge.value);
+    if (elements.tempFridgeSlider) url.searchParams.set('tempFridge', elements.tempFridgeSlider.value);
+    const yeast = Array.from(elements.yeastInputs || []).find((i) => i.checked)?.value || 'Fresh';
+    url.searchParams.set('yeast', yeast);
+  }
+
+  return url.toString();
+}
+
+/**
+ * Share Recipe URL handler (Web Share API with fallback to Clipboard)
+ */
+function shareRecipeToClipboard(): void {
+  const shareUrl = buildShareableUrl();
+  const t = translations[currentLang] || translations.es;
+
+  if (navigator.share) {
+    navigator
+      .share({
+        title: 'PizzaCalc | Recipe',
+        text: '¡Mira mi receta de masa de pizza en PizzaCalc! 🍕',
+        url: shareUrl,
+      })
+      .catch(() => {
+        copyUrlToClipboard(shareUrl, t.linkCopiedToast);
+      });
+  } else {
+    copyUrlToClipboard(shareUrl, t.linkCopiedToast);
+  }
+}
+
+function copyUrlToClipboard(text: string, toastMsg: string): void {
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => showToast(toastMsg))
+      .catch(() => {});
+  }
+  showToast(toastMsg);
+}
+
+function showToast(customMessage?: string): void {
+  const toast = elements.copyToast;
+  const msgEl = document.getElementById('copyToastMsg');
+  if (msgEl && customMessage) {
+    msgEl.textContent = customMessage;
+  }
+  if (toast) {
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2500);
+  }
+}
+
+/**
+ * Parse URL Query Parameters on App Load
+ */
+export function parseUrlParameters(): boolean {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('mode') && !params.has('style') && !params.has('balls') && !params.has('lang')) {
+    return false;
+  }
+
+  const lang = params.get('lang') as LanguageCode | null;
+  if (lang && ['es', 'en', 'it', 'fr', 'de'].includes(lang)) {
+    currentLang = lang;
+    setSavedLanguage(lang);
+  }
+
+  const mode = params.get('mode') as AppMode | null;
+  if (mode === 'simple' || mode === 'advanced') {
+    currentMode = mode;
+  }
+
+  const style = params.get('style') as PizzaStyle | null;
+  if (style === 'neapolitan' || style === 'tonda_romana') {
+    currentPizzaStyle = style;
+  }
+
+  if (currentMode === 'simple') {
+    const balls = params.get('balls');
+    if (balls && elements.simpleBalls) elements.simpleBalls.value = balls;
+
+    const hours = params.get('hours');
+    if (hours && elements.simpleHours) {
+      elements.simpleHours.value = hours;
+      if (elements.simpleHoursVal) elements.simpleHoursVal.textContent = hours;
+    }
+
+    const tempRt = params.get('tempRt');
+    if (tempRt && elements.simpleTempRtSlider) {
+      elements.simpleTempRtSlider.value = tempRt;
+      if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = tempRt;
+    }
+
+    const tempFridge = params.get('tempFridge');
+    if (tempFridge && elements.simpleTempFridgeSlider) {
+      elements.simpleTempFridgeSlider.value = tempFridge;
+      if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = tempFridge;
+    }
+
+    const yeast = params.get('yeast');
+    if (yeast && elements.simpleYeastInputs) {
+      elements.simpleYeastInputs.forEach((i) => {
+        i.checked = i.value === yeast;
+      });
+    }
+  } else {
+    const balls = params.get('balls');
+    if (balls && elements.numberOfBalls) elements.numberOfBalls.value = balls;
+
+    const weight = params.get('weight');
+    if (weight && elements.ballWeight) elements.ballWeight.value = weight;
+
+    const hydration = params.get('hydration');
+    if (hydration && elements.hydrationSlider) {
+      elements.hydrationSlider.value = hydration;
+      if (elements.hydrationVal) elements.hydrationVal.textContent = hydration;
+    }
+
+    const salt = params.get('salt');
+    if (salt && elements.saltSlider) {
+      elements.saltSlider.value = salt;
+      if (elements.saltVal) elements.saltVal.textContent = salt;
+    }
+
+    const hoursRt = params.get('hoursRt');
+    if (hoursRt && elements.hoursRt) elements.hoursRt.value = hoursRt;
+
+    const tempRt = params.get('tempRt');
+    if (tempRt && elements.tempRtSlider) {
+      elements.tempRtSlider.value = tempRt;
+      if (elements.tempRtVal) elements.tempRtVal.textContent = tempRt;
+    }
+
+    const hoursFridge = params.get('hoursFridge');
+    if (hoursFridge && elements.hoursFridge) elements.hoursFridge.value = hoursFridge;
+
+    const tempFridge = params.get('tempFridge');
+    if (tempFridge && elements.tempFridgeSlider) {
+      elements.tempFridgeSlider.value = tempFridge;
+      if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = tempFridge;
+    }
+
+    const yeast = params.get('yeast');
+    if (yeast && elements.yeastInputs) {
+      elements.yeastInputs.forEach((i) => {
+        i.checked = i.value === yeast;
+      });
+    }
+  }
+
+  return true;
+}
+
+/**
  * Attach Event Listeners
  */
 
 export function initApp(): void {
   initTheme();
-  loadState();
+  const hasUrlParams = parseUrlParameters();
+  if (!hasUrlParams) {
+    loadState();
+  }
   setMode(currentMode);
   applyLanguage(currentLang);
   initEventListeners();
@@ -912,10 +1103,18 @@ function initEventListeners(): void {
   // Listen for pizza style changes
   document.addEventListener('style-change', (e: Event) => {
     const customEvent = e as CustomEvent<{ style: PizzaStyle }>;
-    if (customEvent.detail && customEvent.detail.style) {
+    if (customEvent.detail?.style) {
       setPizzaStyle(customEvent.detail.style, true);
     }
   });
+
+  // Share Recipe Buttons
+  if (elements.simpleShareBtn) {
+    elements.simpleShareBtn.addEventListener('click', shareRecipeToClipboard);
+  }
+  if (elements.advancedShareBtn) {
+    elements.advancedShareBtn.addEventListener('click', shareRecipeToClipboard);
+  }
 
   // Copy Recipe Buttons
   if (elements.simpleCopyBtn) {

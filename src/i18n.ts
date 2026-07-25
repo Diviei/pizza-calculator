@@ -98,6 +98,8 @@ export interface TranslationDictionary {
 
   copyRecipeBtn: string;
   recipeCopiedToast: string;
+  shareRecipeBtn: string;
+  linkCopiedToast: string;
   quickSummaryTitle: string;
 
   prepStep1Title: string;
@@ -209,6 +211,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     copyRecipeBtn: '📋 Copiar Receta',
     recipeCopiedToast: '✅ ¡Receta copiada al portapapeles!',
+    shareRecipeBtn: '🔗 Compartir Receta',
+    linkCopiedToast: '✅ ¡Enlace de receta copiado al portapapeles!',
     quickSummaryTitle: 'Resumen en Tiempo Real',
 
     prepStep1Title: '🥣 1. Amasado y Mezcla',
@@ -314,6 +318,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     copyRecipeBtn: '📋 Copy Recipe',
     recipeCopiedToast: '✅ Recipe copied to clipboard!',
+    shareRecipeBtn: '🔗 Share Recipe',
+    linkCopiedToast: '✅ Recipe link copied to clipboard!',
     quickSummaryTitle: 'Real-time Summary',
 
     prepStep1Title: '🥣 1. Mixing & Kneading',
@@ -420,6 +426,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     copyRecipeBtn: '📋 Copia Ricetta',
     recipeCopiedToast: '✅ Ricetta copiata negli appunti!',
+    shareRecipeBtn: '🔗 Condividi Ricetta',
+    linkCopiedToast: '✅ Link della ricetta copiato negli appunti!',
     quickSummaryTitle: 'Riepilogo in Tempo Reale',
 
     prepStep1Title: '🥣 1. Impasto e Miscelazione',
@@ -526,6 +534,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     copyRecipeBtn: '📋 Copier la Recette',
     recipeCopiedToast: '✅ Recette copiée dans le presse-papier !',
+    shareRecipeBtn: '🔗 Partager la Recette',
+    linkCopiedToast: '✅ Lien de la recette copié dans le presse-papiers !',
     quickSummaryTitle: 'Résumé en Temps Réel',
 
     prepStep1Title: '🥣 1. Pétrissage et Mélange',
@@ -630,6 +640,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     copyRecipeBtn: '📋 Rezept kopieren',
     recipeCopiedToast: '✅ Rezept in die Zwischenablage kopiert!',
+    shareRecipeBtn: '🔗 Rezept Teilen',
+    linkCopiedToast: '✅ Rezept-Link in Zwischenablage kopiert!',
     quickSummaryTitle: 'Echtzeit-Zusammenfassung',
 
     prepStep1Title: '🥣 1. Mischen & Kneten',

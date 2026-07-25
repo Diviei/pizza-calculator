@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://pizzacalc.app/sitemap.xml
