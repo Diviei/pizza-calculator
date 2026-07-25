@@ -4,6 +4,35 @@
  */
 
 export type YeastType = 'Fresh' | 'Instant Dry';
+export type PizzaStyle = 'neapolitan' | 'tonda_romana';
+
+export interface PizzaStyleConfig {
+  id: PizzaStyle;
+  nameKey: string;
+  descKey: string;
+  ballWeight: number;
+  hydrationPercentage: number;
+  saltPercentage: number;
+}
+
+export const PIZZA_STYLES: Record<PizzaStyle, PizzaStyleConfig> = {
+  neapolitan: {
+    id: 'neapolitan',
+    nameKey: 'styleNeapolitan',
+    descKey: 'styleNeapolitanDesc',
+    ballWeight: 280,
+    hydrationPercentage: 65,
+    saltPercentage: 2.5,
+  },
+  tonda_romana: {
+    id: 'tonda_romana',
+    nameKey: 'styleTondaRomana',
+    descKey: 'styleTondaRomanaDesc',
+    ballWeight: 180,
+    hydrationPercentage: 57,
+    saltPercentage: 2.5,
+  },
+};
 
 export interface DoughInputs {
   numberOfBalls: number;
@@ -99,11 +128,13 @@ export interface SimpleDoughInputs {
   yeastType?: YeastType;
   tempRt?: number;
   tempFridge?: number;
+  pizzaStyle?: PizzaStyle;
 }
 
 /**
- * Calculate dough for Simple Mode with Neapolitan base defaults:
- * Ball weight: 280g, Hydration: 65%, Salt: 2.5%
+ * Calculate dough for Simple Mode based on selected Pizza Style defaults
+ * - Neapolitan: 280g ball, 65% hydration, 2.5% salt
+ * - Tonda Romana: 180g ball, 57% hydration, 2.5% salt
  * Configurable: yeastType, tempRt, tempFridge
  * Smart fermentation allocation:
  * - <= 8 hours: 100% Room Temp
@@ -115,18 +146,20 @@ export function calculateSimpleDough(
   yeastType: YeastType = 'Fresh',
   tempRt: number = 22,
   tempFridge: number = 4,
-): CalculationResults & { hoursRt: number; hoursFridge: number } {
+  pizzaStyle: PizzaStyle = 'neapolitan',
+): CalculationResults & { hoursRt: number; hoursFridge: number; ballWeight: number } {
   const safeBalls = Math.max(1, numberOfBalls || 1);
   const safeHours = Math.max(0, hoursTotal || 0);
+  const styleConfig = PIZZA_STYLES[pizzaStyle] || PIZZA_STYLES.neapolitan;
 
   const hoursRt = safeHours <= 8 ? safeHours : 4;
   const hoursFridge = safeHours <= 8 ? 0 : safeHours - 4;
 
   const results = calculateDough({
     numberOfBalls: safeBalls,
-    ballWeight: 280,
-    hydrationPercentage: 65,
-    saltPercentage: 2.5,
+    ballWeight: styleConfig.ballWeight,
+    hydrationPercentage: styleConfig.hydrationPercentage,
+    saltPercentage: styleConfig.saltPercentage,
     yeastType,
     hoursRt,
     tempRt,
@@ -138,5 +171,6 @@ export function calculateSimpleDough(
     ...results,
     hoursRt,
     hoursFridge,
+    ballWeight: styleConfig.ballWeight,
   };
 }

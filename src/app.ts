@@ -9,6 +9,8 @@ import {
   calculateSimpleDough,
   DEFAULTS,
   type DoughInputs,
+  PIZZA_STYLES,
+  type PizzaStyle,
   type YeastType,
 } from './calculator.ts';
 import { registerCustomElements } from './components/index.ts';
@@ -25,10 +27,12 @@ const STORAGE_KEY = 'pizza_calculator_settings_v1';
 const SIMPLE_STORAGE_KEY = 'pizza_calculator_simple_settings_v1';
 const THEME_KEY = 'pizza_calculator_theme';
 const MODE_KEY = 'pizza_calculator_mode';
+const STYLE_KEY = 'pizza_calculator_style_v1';
 
-// Current active language & mode state
+// Current active language, mode & style state
 let currentLang: LanguageCode = getInitialLanguage();
 let currentMode: AppMode = 'simple';
+let currentPizzaStyle: PizzaStyle = 'neapolitan';
 
 // DOM Element Registry (Dynamic Getters for Live References)
 const elements = {
@@ -91,6 +95,9 @@ const elements = {
   },
   get simpleYeastTitle() {
     return document.getElementById('simpleYeastTitle') as HTMLElement;
+  },
+  get simpleDefaultsNotice() {
+    return document.querySelector('.defaults-notice') as HTMLElement;
   },
 
   // Advanced Mode Inputs
@@ -374,6 +381,40 @@ function renderPrepGuide(
 }
 
 /**
+ * Switch Active Pizza Style (Neapolitan vs Tonda Romana)
+ */
+function setPizzaStyle(style: PizzaStyle, updateAdvancedInputs: boolean = false): void {
+  currentPizzaStyle = style;
+  const styleConfig = PIZZA_STYLES[style] || PIZZA_STYLES.neapolitan;
+
+  // Sync custom element attributes across the app
+  document.querySelectorAll('pizza-style-selector').forEach((el) => {
+    el.setAttribute('active-style', style);
+  });
+
+  if (updateAdvancedInputs) {
+    if (elements.ballWeight) elements.ballWeight.value = styleConfig.ballWeight.toString();
+    if (elements.hydrationSlider) {
+      elements.hydrationSlider.value = styleConfig.hydrationPercentage.toString();
+      if (elements.hydrationVal) elements.hydrationVal.textContent = styleConfig.hydrationPercentage.toString();
+    }
+    if (elements.saltSlider) {
+      elements.saltSlider.value = styleConfig.saltPercentage.toString();
+      if (elements.saltVal) elements.saltVal.textContent = styleConfig.saltPercentage.toString();
+    }
+  }
+
+  try {
+    localStorage.setItem(STYLE_KEY, style);
+  } catch (e) {
+    console.warn('LocalStorage error saving style:', e);
+  }
+
+  calculateSimple();
+  calculate();
+}
+
+/**
  * Perform calculation for Simple Mode
  */
 function calculateSimple(): void {
@@ -398,7 +439,7 @@ function calculateSimple(): void {
   if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = tempRt.toString();
   if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = tempFridge.toString();
 
-  const results = calculateSimpleDough(numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge);
+  const results = calculateSimpleDough(numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge, currentPizzaStyle);
 
   // Update ingredient displays
   if (elements.simpleFlourRes) elements.simpleFlourRes.textContent = results.flourGrams.toFixed(1);
@@ -420,10 +461,17 @@ function calculateSimple(): void {
 
   // Dough Summary text
   if (elements.simpleDoughSummaryDisplay) {
-    const summaryTemplate = t.simpleDoughSummary || 'Masa total: {total}g ({balls} bolas de 280g)';
+    const summaryTemplate = t.simpleDoughSummary || 'Masa total: {total}g ({balls} bolas de {weight}g)';
     elements.simpleDoughSummaryDisplay.textContent = summaryTemplate
       .replace('{total}', results.totalDoughWeight.toFixed(1))
-      .replace('{balls}', numberOfBalls.toString());
+      .replace('{balls}', numberOfBalls.toString())
+      .replace('{weight}', results.ballWeight.toString());
+  }
+
+  // Update defaults notice depending on active pizza style
+  if (elements.simpleDefaultsNotice) {
+    elements.simpleDefaultsNotice.textContent =
+      currentPizzaStyle === 'tonda_romana' ? t.simpleDefaultsInfoTondaRomana : t.simpleDefaultsInfoNeapolitan;
   }
 
   // Time split display text
@@ -470,10 +518,10 @@ function calculateSimple(): void {
     hoursFridge: results.hoursFridge,
     tempFridge: tempFridge,
     numberOfBalls: numberOfBalls,
-    ballWeight: 280,
+    ballWeight: results.ballWeight,
   });
 
-  saveSimpleState({ numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge });
+  saveSimpleState({ numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge, pizzaStyle: currentPizzaStyle });
 }
 
 /**
@@ -580,6 +628,7 @@ function saveSimpleState(state: {
   yeastType: YeastType;
   tempRt: number;
   tempFridge: number;
+  pizzaStyle?: PizzaStyle;
 }): void {
   try {
     localStorage.setItem(SIMPLE_STORAGE_KEY, JSON.stringify(state));
@@ -596,6 +645,11 @@ function loadState(): void {
     const savedMode = localStorage.getItem(MODE_KEY) as AppMode | null;
     if (savedMode === 'simple' || savedMode === 'advanced') {
       currentMode = savedMode;
+    }
+
+    const savedStyle = localStorage.getItem(STYLE_KEY) as PizzaStyle | null;
+    if (savedStyle === 'neapolitan' || savedStyle === 'tonda_romana') {
+      currentPizzaStyle = savedStyle;
     }
 
     const savedSimple = localStorage.getItem(SIMPLE_STORAGE_KEY);
@@ -618,7 +672,14 @@ function loadState(): void {
         elements.simpleTempFridgeSlider.value = simpleData.tempFridge.toString();
         if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = simpleData.tempFridge.toString();
       }
+      if (simpleData.pizzaStyle === 'neapolitan' || simpleData.pizzaStyle === 'tonda_romana') {
+        currentPizzaStyle = simpleData.pizzaStyle;
+      }
     }
+
+    document.querySelectorAll('pizza-style-selector').forEach((el) => {
+      el.setAttribute('active-style', currentPizzaStyle);
+    });
 
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -785,7 +846,7 @@ function copyRecipeToClipboard(): void {
       `• ${yeastTitle}: ${yeast}g\n` +
       `• ${timeSplit}\n` +
       `-------------------------\n` +
-      `${t.simpleDefaultsInfo}`;
+      `${currentPizzaStyle === 'tonda_romana' ? t.simpleDefaultsInfoTondaRomana : t.simpleDefaultsInfoNeapolitan}`;
   } else {
     const balls = elements.numberOfBalls?.value || '1';
     const weight = elements.ballWeight?.value || '280';
@@ -837,6 +898,14 @@ export function initApp(): void {
 }
 
 function initEventListeners(): void {
+  // Listen for pizza style changes
+  document.addEventListener('style-change', (e: Event) => {
+    const customEvent = e as CustomEvent<{ style: PizzaStyle }>;
+    if (customEvent.detail && customEvent.detail.style) {
+      setPizzaStyle(customEvent.detail.style, true);
+    }
+  });
+
   // Copy Recipe Buttons
   if (elements.simpleCopyBtn) {
     elements.simpleCopyBtn.addEventListener('click', copyRecipeToClipboard);
@@ -1095,8 +1164,7 @@ function initEventListeners(): void {
         if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = DEFAULTS.tempFridge.toString();
       }
 
-      calculateSimple();
-      calculate();
+      setPizzaStyle('neapolitan', true);
     });
   }
 }

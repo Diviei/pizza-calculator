@@ -418,4 +418,43 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     advancedCopyBtn.click();
     expect(copyToast?.classList.contains('hidden')).toBe(false);
   });
+
+  it('updates calculations and defaults when switching to Tonda Romana pizza style', () => {
+    // 1. Simple mode initial state (Neapolitan 4 balls @ 280g = 1120g)
+    const summaryDisplay = document.getElementById('simpleDoughSummaryDisplay');
+    expect(summaryDisplay?.textContent).toContain('280g');
+
+    // Select Tonda Romana style card in Simple mode
+    const styleSelector = document.getElementById('simpleStyleSelector');
+    const tondaBtn = styleSelector?.querySelector('#styleTondaRomanaBtn') as HTMLButtonElement;
+    expect(tondaBtn).not.toBeNull();
+    tondaBtn.click();
+
+    // Summary display should now show 180g balls (4 * 180 = 720g total)
+    expect(summaryDisplay?.textContent).toContain('720');
+    expect(summaryDisplay?.textContent).toContain('180g');
+
+    // Flour should be updated to ~451.4g for 720g total at 57% hyd, 2.5% salt
+    const flourRes = document.getElementById('simpleFlourRes');
+    expect(flourRes?.textContent).toBe('451.4');
+
+    // 2. Switch to Advanced mode
+    const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
+    tabAdvanced.click();
+
+    const ballWeightInput = document.getElementById('ballWeight') as HTMLInputElement;
+    const hydrationSlider = document.getElementById('hydrationSlider') as HTMLInputElement;
+
+    // Advanced inputs should reflect Tonda Romana defaults (180g ball, 57% hydration)
+    expect(ballWeightInput.value).toBe('180');
+    expect(hydrationSlider.value).toBe('57');
+
+    // Switch back to Neapolitan in Advanced mode
+    const advStyleSelector = document.getElementById('advancedStyleSelector');
+    const neapolitanBtn = advStyleSelector?.querySelector('#styleNeapolitanBtn') as HTMLButtonElement;
+    neapolitanBtn.click();
+
+    expect(ballWeightInput.value).toBe('280');
+    expect(hydrationSlider.value).toBe('65');
+  });
 });
