@@ -8,13 +8,23 @@ export class NumberStepper extends HTMLElement {
     return ['value', 'min', 'max', 'step', 'action-step', 'target-id'];
   }
 
+  private isRendered = false;
+
   connectedCallback() {
-    this.render();
+    if (!this.isRendered) {
+      this.render();
+      this.isRendered = true;
+    }
   }
 
-  attributeChangedCallback(_name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue !== newValue && this.isConnected) {
-      this.render();
+      if (!this.isRendered) {
+        this.render();
+        this.isRendered = true;
+      } else {
+        this.updateDOM(name, newValue);
+      }
     }
   }
 
@@ -41,6 +51,12 @@ export class NumberStepper extends HTMLElement {
   private step(delta: number) {
     const next = Math.min(this.max, Math.max(this.min, this.value + delta));
     this.value = next;
+    const inputEl = this.querySelector<HTMLInputElement>('input');
+    if (inputEl) {
+      inputEl.value = next.toString();
+      inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+      inputEl.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     this.dispatchEvent(
       new CustomEvent('stepper-change', {
         detail: { value: next },
@@ -48,6 +64,18 @@ export class NumberStepper extends HTMLElement {
         composed: true,
       }),
     );
+  }
+
+  private updateDOM(name: string, newValue: string) {
+    if (name === 'value') {
+      const inputEl = this.querySelector<HTMLInputElement>('input');
+      if (inputEl && inputEl.value !== newValue) {
+        inputEl.value = newValue;
+      }
+    } else if (name === 'min' || name === 'max' || name === 'step') {
+      const inputEl = this.querySelector<HTMLInputElement>('input');
+      if (inputEl) inputEl.setAttribute(name, newValue);
+    }
   }
 
   private render() {
@@ -71,14 +99,16 @@ export class NumberStepper extends HTMLElement {
 
     inputEl?.addEventListener('input', (e) => {
       const val = parseFloat((e.target as HTMLInputElement).value) || this.min;
-      this.setAttribute('value', val.toString());
-      this.dispatchEvent(
-        new CustomEvent('stepper-change', {
-          detail: { value: val },
-          bubbles: true,
-          composed: true,
-        }),
-      );
+      if (this.value !== val) {
+        this.setAttribute('value', val.toString());
+        this.dispatchEvent(
+          new CustomEvent('stepper-change', {
+            detail: { value: val },
+            bubbles: true,
+            composed: true,
+          }),
+        );
+      }
     });
   }
 }

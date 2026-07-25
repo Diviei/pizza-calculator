@@ -29,8 +29,19 @@ describe('Internationalization (i18n)', () => {
     expect(getInitialLanguage()).toBe('it');
 
     localStorage.removeItem('pizza_calculator_language');
-    // Fallback detection
-    const initial = getInitialLanguage();
-    expect(['es', 'en', 'it', 'fr', 'de']).toContain(initial);
+
+    // Mock navigator.language for different locales
+    const originalLanguage = navigator.language;
+
+    Object.defineProperty(navigator, 'language', { value: 'de-DE', configurable: true });
+    expect(getInitialLanguage()).toBe('de');
+
+    Object.defineProperty(navigator, 'language', { value: 'fr-FR', configurable: true });
+    expect(getInitialLanguage()).toBe('fr');
+
+    Object.defineProperty(navigator, 'language', { value: 'ja-JP', configurable: true });
+    expect(getInitialLanguage()).toBe('en');
+
+    Object.defineProperty(navigator, 'language', { value: originalLanguage, configurable: true });
   });
 });

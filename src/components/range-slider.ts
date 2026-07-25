@@ -8,13 +8,23 @@ export class RangeSlider extends HTMLElement {
     return ['value', 'min', 'max', 'step', 'label-key', 'unit', 'target-id', 'val-id'];
   }
 
+  private isRendered = false;
+
   connectedCallback() {
-    this.render();
+    if (!this.isRendered) {
+      this.render();
+      this.isRendered = true;
+    }
   }
 
-  attributeChangedCallback(_name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue !== newValue && this.isConnected) {
-      this.render();
+      if (!this.isRendered) {
+        this.render();
+        this.isRendered = true;
+      } else {
+        this.updateDOM(name, newValue);
+      }
     }
   }
 
@@ -26,6 +36,25 @@ export class RangeSlider extends HTMLElement {
     this.setAttribute('value', val.toString());
   }
 
+  private updateDOM(name: string, newValue: string) {
+    if (name === 'value') {
+      const input = this.querySelector<HTMLInputElement>('input');
+      const valDisplay = this.querySelector<HTMLElement>('strong');
+      if (input && input.value !== newValue) {
+        input.value = newValue;
+      }
+      if (valDisplay && valDisplay.textContent !== newValue) {
+        valDisplay.textContent = newValue;
+      }
+    } else if (name === 'min' || name === 'max' || name === 'step') {
+      const input = this.querySelector<HTMLInputElement>('input');
+      if (input) input.setAttribute(name, newValue);
+    } else if (name === 'label-key') {
+      const label = this.querySelector<HTMLLabelElement>('label');
+      if (label) label.setAttribute('data-i18n', newValue);
+    }
+  }
+
   private render() {
     const labelKey = this.getAttribute('label-key') || '';
     const unit = this.getAttribute('unit') || '';
@@ -35,10 +64,12 @@ export class RangeSlider extends HTMLElement {
     const max = this.getAttribute('max') || '100';
     const step = this.getAttribute('step') || '1';
 
+    const existingLabelText = this.querySelector('label')?.textContent || '';
+
     this.innerHTML = `
       <div class="input-group">
         <div class="label-row">
-          <label ${targetId ? `for="${targetId}"` : ''} ${labelKey ? `data-i18n="${labelKey}"` : ''}></label>
+          <label ${targetId ? `for="${targetId}"` : ''} ${labelKey ? `data-i18n="${labelKey}"` : ''}>${existingLabelText}</label>
           <span class="value-display"><strong ${valId ? `id="${valId}"` : ''}>${this.value}</strong>${unit}</span>
         </div>
         <div class="range-wrapper">
