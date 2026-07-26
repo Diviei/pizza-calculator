@@ -1,9 +1,11 @@
 import { defineConfig } from 'astro/config';
 import VitePWA from '@vite-pwa/astro';
+import icon from 'astro-icon';
 
 export default defineConfig({
   site: 'https://pizzacalc.app',
   integrations: [
+    icon(),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: false,

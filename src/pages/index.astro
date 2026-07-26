@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
 <Layout
@@ -17,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="mode-form-col">
           <section class="form-block">
             <div class="block-header">
-              <span class="block-icon">⚡</span>
+              <span class="block-icon"><Icon name="lucide:zap" /></span>
               <h2 data-i18n="simpleSectionTitle">Configuración Rápida</h2>
             </div>
 
@@ -42,12 +43,14 @@ import Layout from '../layouts/Layout.astro';
               <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
                 <input type="radio" id="simpleYeastFresh" name="simpleYeastType" value="Fresh" checked>
                 <label for="simpleYeastFresh" class="segment-label">
-                  <span data-i18n="yeastFresh">🌾 Fresca</span>
+                  <Icon name="lucide:wheat" class="inline-icon-svg" />
+                  <span data-i18n="yeastFresh">Fresca</span>
                 </label>
 
                 <input type="radio" id="simpleYeastDry" name="simpleYeastType" value="Instant Dry">
                 <label for="simpleYeastDry" class="segment-label">
-                  <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+                  <Icon name="lucide:sprout" class="inline-icon-svg" />
+                  <span data-i18n="yeastDry">Seca Instantánea</span>
                 </label>
               </div>
             </div>
@@ -59,7 +62,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <div class="info-badge highlight-badge">
-              <span id="simpleTimeSplitDisplay">⚡ 4h a Temp. Ambiente (22°C) + ❄️ 4h en Nevera (4°C)</span>
+              <span id="simpleTimeSplitDisplay">4h a Temp. Ambiente (22°C) + 4h en Nevera (4°C)</span>
             </div>
 
             <div class="defaults-notice" data-i18n="simpleDefaultsInfo">
@@ -77,21 +80,30 @@ import Layout from '../layouts/Layout.astro';
                 <span id="simpleDoughSummaryDisplay" class="results-subtitle">Masa total: 1120.0 g (4 bolas de 280g)</span>
               </div>
               <div class="header-action-buttons">
-                <button id="simpleShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
-                <button id="simpleCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                <button id="simpleShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta">
+                  <Icon name="lucide:share-2" class="btn-icon-svg" />
+                  <span data-i18n="shareRecipeBtn">Compartir Receta</span>
+                </button>
+                <button id="simpleCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles">
+                  <Icon name="lucide:copy" class="btn-icon-svg" />
+                  <span data-i18n="copyRecipeBtn">Copiar Receta</span>
+                </button>
               </div>
             </div>
 
             <div class="simple-ingredients-grid">
-              <ingredient-card simple icon="🌾" title-key="flour" res-id="simpleFlourRes" value="668.7" card-class="ingredient-flour"></ingredient-card>
-              <ingredient-card simple icon="💧" title-key="water" res-id="simpleWaterRes" value="434.6" card-class="ingredient-water"></ingredient-card>
-              <ingredient-card simple icon="🧂" title-key="saltIngredient" res-id="simpleSaltRes" value="16.7" card-class="ingredient-salt"></ingredient-card>
-              <ingredient-card simple title-id="simpleYeastTitle" title-key="yeastFreshLabel" res-id="simpleYeastRes" value="2.08" card-class="ingredient-yeast"></ingredient-card>
+              <ingredient-card simple icon="flour" title-key="flour" res-id="simpleFlourRes" value="668.7" card-class="ingredient-flour"></ingredient-card>
+              <ingredient-card simple icon="water" title-key="water" res-id="simpleWaterRes" value="434.6" card-class="ingredient-water"></ingredient-card>
+              <ingredient-card simple icon="salt" title-key="saltIngredient" res-id="simpleSaltRes" value="16.7" card-class="ingredient-salt"></ingredient-card>
+              <ingredient-card simple icon="yeast" title-id="simpleYeastTitle" title-key="yeastFreshLabel" res-id="simpleYeastRes" value="2.08" card-class="ingredient-yeast"></ingredient-card>
             </div>
 
             <div class="prep-guide-card">
               <div class="prep-guide-header">
-                <span class="prep-guide-title" data-i18n="simpleTipTitle">💡 Guía Rápida de Preparación</span>
+                <span class="prep-guide-title">
+                  <Icon name="lucide:lightbulb" class="inline-icon-svg" />
+                  <span data-i18n="simpleTipTitle">Guía Rápida de Preparación</span>
+                </span>
               </div>
               <div id="simplePrepSteps" class="prep-steps-list"></div>
             </div>
@@ -108,7 +120,7 @@ import Layout from '../layouts/Layout.astro';
           <!-- Section 1: Dough Dimensions -->
           <section class="form-block">
             <div class="block-header">
-              <span class="block-icon">🍕</span>
+              <span class="block-icon"><Icon name="lucide:pizza" /></span>
               <h2 data-i18n="block1Title">Dimensiones de la Masa</h2>
             </div>
 
@@ -136,7 +148,7 @@ import Layout from '../layouts/Layout.astro';
           <!-- Section 2: Core Parameters -->
           <section class="form-block">
             <div class="block-header">
-              <span class="block-icon">⚖️</span>
+              <span class="block-icon"><Icon name="lucide:scale" /></span>
               <h2 data-i18n="block2Title">Parámetros Clave</h2>
             </div>
 
@@ -152,12 +164,14 @@ import Layout from '../layouts/Layout.astro';
               <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
                 <input type="radio" id="yeastFresh" name="yeastType" value="Fresh" checked>
                 <label for="yeastFresh" class="segment-label">
-                  <span data-i18n="yeastFresh">🌾 Fresca</span>
+                  <Icon name="lucide:wheat" class="inline-icon-svg" />
+                  <span data-i18n="yeastFresh">Fresca</span>
                 </label>
 
                 <input type="radio" id="yeastDry" name="yeastType" value="Instant Dry">
                 <label for="yeastDry" class="segment-label">
-                  <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+                  <Icon name="lucide:sprout" class="inline-icon-svg" />
+                  <span data-i18n="yeastDry">Seca Instantánea</span>
                 </label>
               </div>
             </div>
@@ -166,14 +180,14 @@ import Layout from '../layouts/Layout.astro';
           <!-- Section 3: Fermentation Times & Temps -->
           <section class="form-block">
             <div class="block-header">
-              <span class="block-icon">⏱️</span>
+              <span class="block-icon"><Icon name="lucide:timer" /></span>
               <h2 data-i18n="block3Title">Tiempos y Temperaturas</h2>
             </div>
 
             <!-- Room Temperature Phase -->
             <div class="phase-card phase-rt-card">
               <div class="phase-title">
-                <span class="phase-icon">🔥</span>
+                <span class="phase-icon"><Icon name="lucide:sun" /></span>
                 <span data-i18n="phaseRt">Fase Temperatura Ambiente (TA)</span>
               </div>
               
@@ -190,7 +204,7 @@ import Layout from '../layouts/Layout.astro';
             <!-- Fridge Phase -->
             <div class="phase-card phase-fridge-card">
               <div class="phase-title">
-                <span class="phase-icon">❄️</span>
+                <span class="phase-icon"><Icon name="lucide:snowflake" /></span>
                 <span data-i18n="phaseFridge">Fase Nevera / Frío (TC)</span>
               </div>
 
@@ -216,13 +230,20 @@ import Layout from '../layouts/Layout.astro';
                 <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
               </div>
               <div class="header-action-buttons">
-                <button id="advancedShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
-                <button id="advancedCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+                <button id="advancedShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta">
+                  <Icon name="lucide:share-2" class="btn-icon-svg" />
+                  <span data-i18n="shareRecipeBtn">Compartir Receta</span>
+                </button>
+                <button id="advancedCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles">
+                  <Icon name="lucide:copy" class="btn-icon-svg" />
+                  <span data-i18n="copyRecipeBtn">Copiar Receta</span>
+                </button>
               </div>
             </div>
 
             <div id="warningNotice" class="warning-notice hidden">
-              <span data-i18n="warningNotice">⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
+              <Icon name="lucide:alert-triangle" class="warning-icon-svg" />
+              <span data-i18n="warningNotice">Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
             </div>
 
             <div class="results-grid">
@@ -234,7 +255,10 @@ import Layout from '../layouts/Layout.astro';
 
             <div class="prep-guide-card" style="margin-top: 14px;">
               <div class="prep-guide-header">
-                <span class="prep-guide-title" data-i18n="simpleTipTitle">💡 Guía Rápida de Preparación</span>
+                <span class="prep-guide-title">
+                  <Icon name="lucide:lightbulb" class="inline-icon-svg" />
+                  <span data-i18n="simpleTipTitle">Guía Rápida de Preparación</span>
+                </span>
               </div>
               <div id="advancedPrepSteps" class="prep-steps-list"></div>
             </div>
@@ -276,9 +300,9 @@ import Layout from '../layouts/Layout.astro';
     <div class="quick-bar-content">
       <span class="quick-bar-title" data-i18n="quickSummaryTitle">Resumen en Tiempo Real</span>
       <div class="quick-bar-items">
-        <span id="quickFlour">🌾 0g</span>
-        <span id="quickWater">💧 0g</span>
-        <span id="quickYeast">🧫 0g</span>
+        <span id="quickFlour">0g</span>
+        <span id="quickWater">0g</span>
+        <span id="quickYeast">0g</span>
       </div>
     </div>
   </div>

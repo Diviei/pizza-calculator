@@ -73,7 +73,9 @@ export class PizzaStyleSelector extends HTMLElement {
         <div class="pizza-style-grid" role="radiogroup" aria-label="Estilo de Pizza">
           <button type="button" id="styleNeapolitanBtn" class="pizza-style-card ${isNeapolitan ? 'active' : ''}" role="radio" aria-checked="${isNeapolitan}" data-style="neapolitan">
             <div class="style-card-header">
-              <span class="style-icon">🍕</span>
+              <span class="style-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16Z"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>
+              </span>
               <span class="style-title" data-i18n="styleNeapolitan">Napolitana</span>
             </div>
             <span class="style-desc" data-i18n="styleNeapolitanDesc">Masa esponjosa (Bola 280g • 65% Hidr.)</span>
@@ -81,7 +83,9 @@ export class PizzaStyleSelector extends HTMLElement {
           
           <button type="button" id="styleTondaRomanaBtn" class="pizza-style-card ${!isNeapolitan ? 'active' : ''}" role="radio" aria-checked="${!isNeapolitan}" data-style="tonda_romana">
             <div class="style-card-header">
-              <span class="style-icon">🫓</span>
+              <span class="style-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"/></svg>
+              </span>
               <span class="style-title" data-i18n="styleTondaRomana">Tonda Romana</span>
             </div>
             <span class="style-desc" data-i18n="styleTondaRomanaDesc">Fina y crujiente (Bola 180g • 57% Hidr.)</span>

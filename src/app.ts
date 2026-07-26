@@ -349,14 +349,14 @@ function renderPrepGuide(
   if (!targetEl) return;
   const t = translations[currentLang] || translations.en || translations.es;
 
-  const step1Title = t.prepStep1Title || '🥣 1. Amasado y Mezcla';
+  const step1Title = t.prepStep1Title || '1. Amasado y Mezcla';
   const step1Body = (t.prepStep1Body || '')
     .replace('{yeast}', data.yeastGrams.toFixed(2))
     .replace('{water}', data.waterGrams.toFixed(1))
     .replace('{flour}', data.flourGrams.toFixed(1))
     .replace('{salt}', data.saltGrams.toFixed(1));
 
-  const step2Title = t.prepStep2Title || '⏱️ 2. Fermentación y Control de Tiempo';
+  const step2Title = t.prepStep2Title || '2. Fermentación y Control de Tiempo';
   let step2Body = '';
   if (data.hoursFridge === 0) {
     step2Body = (t.prepStep2AmbientOnly || '')
@@ -374,7 +374,7 @@ function renderPrepGuide(
       .replace('{tempFridge}', data.tempFridge.toString());
   }
 
-  const step3Title = t.prepStep3Title || '🍕 3. Boleado, Formado y Horneado';
+  const step3Title = t.prepStep3Title || '3. Boleado, Formado y Horneado';
   const rawStep3 =
     currentPizzaStyle === 'tonda_romana'
       ? t.prepStep3BodyTondaRomana || t.prepStep3Body
@@ -468,9 +468,9 @@ function calculateSimple(): void {
   if (elements.simpleYeastRes) elements.simpleYeastRes.textContent = results.yeastGrams.toFixed(2);
 
   if (currentMode === 'simple') {
-    if (elements.quickFlour) elements.quickFlour.textContent = `🌾 ${results.flourGrams.toFixed(1)}g`;
-    if (elements.quickWater) elements.quickWater.textContent = `💧 ${results.waterGrams.toFixed(1)}g`;
-    if (elements.quickYeast) elements.quickYeast.textContent = `🧫 ${results.yeastGrams.toFixed(2)}g`;
+    if (elements.quickFlour) elements.quickFlour.textContent = `${results.flourGrams.toFixed(1)}g`;
+    if (elements.quickWater) elements.quickWater.textContent = `${results.waterGrams.toFixed(1)}g`;
+    if (elements.quickYeast) elements.quickYeast.textContent = `${results.yeastGrams.toFixed(2)}g`;
   }
 
   // Update simple yeast label title
@@ -498,16 +498,16 @@ function calculateSimple(): void {
   if (elements.simpleTimeSplitDisplay) {
     let splitText = '';
     if (results.hoursFridge === 0) {
-      const template = t.simpleTimeSplitAmbient || '⚡ {rt}h a Temperatura Ambiente ({tempRt}°C)';
+      const template = t.simpleTimeSplitAmbient || '{rt}h a Temperatura Ambiente ({tempRt}°C)';
       splitText = template.replace('{rt}', results.hoursRt.toString()).replace('{tempRt}', tempRt.toString());
     } else if (results.hoursRt === 0) {
-      const template = t.simpleTimeSplitFridge || '❄️ {fridge}h en Nevera ({tempFridge}°C)';
+      const template = t.simpleTimeSplitFridge || '{fridge}h en Nevera ({tempFridge}°C)';
       splitText = template
         .replace('{fridge}', results.hoursFridge.toString())
         .replace('{tempFridge}', tempFridge.toString());
     } else {
       const template =
-        t.simpleTimeSplitCombined || '⚡ {rt}h a Temp. Ambiente ({tempRt}°C) + ❄️ {fridge}h en Nevera ({tempFridge}°C)';
+        t.simpleTimeSplitCombined || '{rt}h a Temp. Ambiente ({tempRt}°C) + {fridge}h en Nevera ({tempFridge}°C)';
       splitText = template
         .replace('{rt}', results.hoursRt.toString())
         .replace('{tempRt}', tempRt.toString())
@@ -589,9 +589,9 @@ function calculate(): CalculationResults {
   if (elements.yeastRes) elements.yeastRes.textContent = results.yeastGrams.toFixed(2);
 
   if (currentMode === 'advanced') {
-    if (elements.quickFlour) elements.quickFlour.textContent = `🌾 ${results.flourGrams.toFixed(1)}g`;
-    if (elements.quickWater) elements.quickWater.textContent = `💧 ${results.waterGrams.toFixed(1)}g`;
-    if (elements.quickYeast) elements.quickYeast.textContent = `🧫 ${results.yeastGrams.toFixed(2)}g`;
+    if (elements.quickFlour) elements.quickFlour.textContent = `${results.flourGrams.toFixed(1)}g`;
+    if (elements.quickWater) elements.quickWater.textContent = `${results.waterGrams.toFixed(1)}g`;
+    if (elements.quickYeast) elements.quickYeast.textContent = `${results.yeastGrams.toFixed(2)}g`;
   }
 
   // Percentage Badges
@@ -744,10 +744,10 @@ function loadState(): void {
 /**
  * Manage Light/Dark Theme & Color Palette Theme Switching
  */
-const THEME_EMOJIS: Record<ColorTheme, string> = {
-  amber: '🍕',
-  chic: '💅',
-  basil: '🌿',
+const THEME_ICONS: Record<ColorTheme, string> = {
+  amber: `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16Z"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>`,
+  chic: `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>`,
+  basil: `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.12 2 9 0 4.97-4.03 9-9 9z"/><path d="M11 20v-5"/></svg>`,
 };
 
 export function setColorTheme(colorTheme: ColorTheme): void {
@@ -755,7 +755,7 @@ export function setColorTheme(colorTheme: ColorTheme): void {
   document.body.setAttribute('data-color-theme', validTheme);
 
   if (elements.currentColorThemeBadge) {
-    elements.currentColorThemeBadge.textContent = THEME_EMOJIS[validTheme] || '🍕';
+    elements.currentColorThemeBadge.innerHTML = THEME_ICONS[validTheme] || THEME_ICONS.amber;
   }
 
   // Update active state in popover menu
@@ -928,7 +928,7 @@ function copyRecipeToClipboard(): void {
     const timeSplit = elements.simpleTimeSplitDisplay?.textContent || '';
 
     text =
-      `🍕 Pizza Calculator (${t.modeSimple})\n` +
+      `Pizza Calculator (${t.modeSimple})\n` +
       `-------------------------\n` +
       `• ${t.numberOfBalls}: ${balls}\n` +
       `• ${t.flour}: ${flour}g\n` +
@@ -951,7 +951,7 @@ function copyRecipeToClipboard(): void {
     const yeastPct = elements.yeastPctDisplay?.textContent || '0';
 
     text =
-      `🍕 Pizza Calculator (${t.modeAdvanced})\n` +
+      `Pizza Calculator (${t.modeAdvanced})\n` +
       `-------------------------\n` +
       `• ${t.numberOfBalls}: ${balls} (${weight}g/c.u.)\n` +
       `• ${t.flour}: ${flour}g (100%)\n` +
@@ -1021,7 +1021,7 @@ function shareRecipeToClipboard(): void {
     navigator
       .share({
         title: 'PizzaCalc | Recipe',
-        text: '¡Mira mi receta de masa de pizza en PizzaCalc! 🍕',
+        text: '¡Mira mi receta de masa de pizza en PizzaCalc!',
         url: shareUrl,
       })
       .catch(() => {

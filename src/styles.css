@@ -1716,6 +1716,22 @@ pizza-style-selector {
 .style-icon {
   font-size: 1.15rem;
   line-height: 1;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.style-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  stroke: currentColor;
+}
+
+.pizza-style-card.active .style-icon,
+.pizza-style-card.active .style-icon svg {
+  color: var(--color-primary);
 }
 
 .style-title {
@@ -1733,4 +1749,144 @@ pizza-style-selector {
   font-size: 0.76rem;
   color: var(--text-subtle);
   line-height: 1.35;
+}
+
+/* SVG Icon Alignment & Dynamic Theme Styling */
+svg {
+  stroke: currentColor;
+}
+
+.pizza-icon-lucide {
+  width: 28px;
+  height: 28px;
+  color: var(--color-primary);
+  stroke: currentColor;
+  transition: color var(--transition-normal);
+}
+
+.lang-globe-icon,
+.color-palette-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-muted);
+  stroke: currentColor;
+  transition: color var(--transition-fast);
+}
+
+.lang-menu-btn:hover .lang-globe-icon,
+.color-theme-menu-btn:hover .color-palette-icon {
+  color: var(--color-primary);
+}
+
+.current-color-theme-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.current-color-theme-badge svg,
+.current-color-theme-badge .badge-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--color-primary);
+  stroke: currentColor;
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  stroke: currentColor;
+  transition: color var(--transition-normal);
+}
+
+.block-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.block-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-primary);
+  stroke: currentColor;
+  transition: color var(--transition-normal);
+}
+
+.phase-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.phase-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-primary);
+  stroke: currentColor;
+  transition: color var(--transition-normal);
+}
+
+.simple-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  transition: color var(--transition-normal);
+}
+
+.simple-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  vertical-align: middle;
+  stroke: currentColor;
+}
+
+.toast-icon-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-primary);
+  stroke: currentColor;
+  flex-shrink: 0;
+  transition: color var(--transition-normal);
+}
+
+.btn-icon-svg {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-right: 4px;
+  color: currentColor;
+  stroke: currentColor;
+}
+
+.inline-icon-svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-right: 4px;
+  color: var(--color-primary);
+  stroke: currentColor;
+  transition: color var(--transition-normal);
+}
+
+.warning-icon-svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-accent);
+  stroke: currentColor;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-right: 6px;
 }
