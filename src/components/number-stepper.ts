@@ -49,7 +49,8 @@ export class NumberStepper extends HTMLElement {
   }
 
   private step(delta: number) {
-    const next = Math.min(this.max, Math.max(this.min, this.value + delta));
+    const rawNext = this.value + delta;
+    const next = Math.min(this.max, Math.max(this.min, Math.round(rawNext * 100) / 100));
     this.value = next;
     const inputEl = this.querySelector<HTMLInputElement>('input');
     if (inputEl) {
