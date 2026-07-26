@@ -781,3 +781,11 @@ export function setSavedLanguage(lang: LanguageCode): void {
     localStorage.setItem(LANG_STORAGE_KEY, lang);
   }
 }
+
+export const LANGUAGE_FLAGS: Record<LanguageCode, string> = {
+  es: '🇪🇸',
+  en: '🇬🇧',
+  it: '🇮🇹',
+  fr: '🇫🇷',
+  de: '🇩🇪',
+};
