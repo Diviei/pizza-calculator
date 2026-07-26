@@ -267,32 +267,17 @@ import { Icon } from 'astro-icon/components';
       </div>
     </div>
 
-    <!-- FAQ & Fermentation Guide Section for Search & Rich Snippets -->
-    <section class="faq-card" aria-labelledby="faqHeader">
-      <h2 id="faqHeader" class="faq-title" data-i18n="faqSectionTitle">Preguntas Frecuentes y Guía de Fermentación</h2>
-      
-      <div class="faq-accordion">
-        <details class="faq-item" open>
-          <summary class="faq-question"><span data-i18n="faqQ1">¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?</span></summary>
-          <p class="faq-answer" data-i18n="faqA1">Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question"><span data-i18n="faqQ2">¿Qué es el porcentaje de panadero (Baker's Percentage)?</span></summary>
-          <p class="faq-answer" data-i18n="faqA2">Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question"><span data-i18n="faqQ3">¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?</span></summary>
-          <p class="faq-answer" data-i18n="faqA3">La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.</p>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question"><span data-i18n="faqQ4">¿Puedo usar esta calculadora sin conexión a internet?</span></summary>
-          <p class="faq-answer" data-i18n="faqA4">¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.</p>
-        </details>
+    <!-- FAQ Banner Link to dedicated FAQ page -->
+    <div class="faq-link-banner">
+      <div class="faq-banner-text">
+        <Icon name="lucide:help-circle" class="inline-icon-svg" />
+        <span data-i18n="faqBannerText">¿Tienes dudas sobre la fermentación o las proporciones?</span>
       </div>
-    </section>
+      <a href="/faq" class="btn-faq-link">
+        <Icon name="lucide:book-open" class="btn-icon-svg" />
+        <span data-i18n="navFaq">Preguntas Frecuentes</span>
+      </a>
+    </div>
   </main>
 
   <!-- Mobile Floating Quick Summary Bar -->

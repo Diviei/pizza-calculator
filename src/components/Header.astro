@@ -2,15 +2,28 @@
 import { Icon } from 'astro-icon/components';
 ---
 <header class="app-header">
-  <div class="brand">
-    <div class="brand-icon">
-      <Icon name="lucide:pizza" class="pizza-icon-lucide" />
+  <a href="/" class="brand-link">
+    <div class="brand">
+      <div class="brand-icon">
+        <Icon name="lucide:pizza" class="pizza-icon-lucide" />
+      </div>
+      <div>
+        <h1 class="app-title" data-i18n="appTitle">Pizza Calculator</h1>
+        <span class="app-badge" data-i18n="appBadge">Fermentación Mixta</span>
+      </div>
     </div>
-    <div>
-      <h1 class="app-title" data-i18n="appTitle">Pizza Calculator</h1>
-      <span class="app-badge" data-i18n="appBadge">Fermentación Mixta</span>
-    </div>
-  </div>
+  </a>
+
+  <nav class="app-nav">
+    <a href="/" class="nav-link">
+      <Icon name="lucide:calculator" class="btn-icon-svg" />
+      <span data-i18n="navCalculator">Calculadora</span>
+    </a>
+    <a href="/faq" class="nav-link">
+      <Icon name="lucide:help-circle" class="btn-icon-svg" />
+      <span data-i18n="navFaq">FAQ</span>
+    </a>
+  </nav>
 
   <div class="header-actions">
     <!-- Language Switcher Custom Popover -->
