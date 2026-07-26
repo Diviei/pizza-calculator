@@ -16,6 +16,6 @@
     }
   },
   "files": {
-    "includes": ["src/**", "*.js", "*.json"]
+    "includes": ["src/**/*.ts", "src/**/*.js", "*.js", "*.json", "!node_modules", "!dist", "!.astro", "!coverage"]
   }
 }

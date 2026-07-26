@@ -1,0 +1,107 @@
+---
+---
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 512 512" class="pizza-icon">
+        <path d="M 128,140 C 200,90 312,90 384,140 L 370,165 C 300,120 212,120 142,165 Z" fill="currentColor" opacity="0.9"/>
+        <path d="M 142,165 C 212,120 300,120 370,165 L 256,420 Z" fill="var(--color-primary)"/>
+        <path d="M 155,185 C 215,145 297,145 357,185 L 256,390 Z" fill="var(--color-accent)"/>
+        <circle cx="230" cy="220" r="14" fill="var(--color-danger)"/>
+        <circle cx="282" cy="245" r="12" fill="var(--color-danger)"/>
+        <circle cx="245" cy="300" r="11" fill="var(--color-danger)"/>
+      </svg>
+    </div>
+    <div>
+      <h1 class="app-title" data-i18n="appTitle">Pizza Calculator</h1>
+      <span class="app-badge" data-i18n="appBadge">Fermentación Mixta</span>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <!-- Language Switcher Custom Popover -->
+    <div class="lang-dropdown-container">
+      <button id="langMenuBtn" class="lang-menu-btn" title="Seleccionar idioma" data-i18n-title="langSelectTitle" aria-expanded="false" aria-haspopup="true">
+        <span class="lang-globe-icon">🌐</span>
+        <span id="currentLangBadge" class="current-lang-badge">ES</span>
+      </button>
+
+      <div id="langPopover" class="lang-popover hidden" role="menu">
+        <div class="lang-popover-header" data-i18n="langSelectTitle">Seleccionar idioma</div>
+        <div class="lang-options-list" role="none">
+          <button type="button" class="lang-option-item" data-lang="es" role="menuitem">
+            <span class="lang-flag">🇪🇸</span>
+            <span class="lang-name">Español</span>
+            <span class="lang-check">✓</span>
+          </button>
+          <button type="button" class="lang-option-item" data-lang="en" role="menuitem">
+            <span class="lang-flag">🇬🇧</span>
+            <span class="lang-name">English</span>
+            <span class="lang-check"></span>
+          </button>
+          <button type="button" class="lang-option-item" data-lang="it" role="menuitem">
+            <span class="lang-flag">🇮🇹</span>
+            <span class="lang-name">Italiano</span>
+            <span class="lang-check"></span>
+          </button>
+          <button type="button" class="lang-option-item" data-lang="fr" role="menuitem">
+            <span class="lang-flag">🇫🇷</span>
+            <span class="lang-name">Français</span>
+            <span class="lang-check"></span>
+          </button>
+          <button type="button" class="lang-option-item" data-lang="de" role="menuitem">
+            <span class="lang-flag">🇩🇪</span>
+            <span class="lang-name">Deutsch</span>
+            <span class="lang-check"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Theme Palette Popover -->
+    <div class="color-theme-dropdown-container">
+      <button id="colorThemeMenuBtn" class="color-theme-menu-btn" title="Paleta de Color" data-i18n-title="colorThemeTitle" aria-expanded="false" aria-haspopup="true">
+        <span class="color-palette-icon">🎨</span>
+        <span id="currentColorThemeBadge" class="current-color-theme-badge">🍕</span>
+      </button>
+
+      <div id="colorThemePopover" class="color-theme-popover hidden" role="menu">
+        <div class="color-theme-popover-header" data-i18n="colorThemeTitle">Paleta de Color</div>
+        <div class="color-theme-options-list" role="none">
+          <button type="button" class="color-theme-option-item active" data-color-theme="amber" role="menuitem">
+            <span class="theme-swatch swatch-amber"></span>
+            <span class="theme-name" data-i18n="colorThemeAmber">Clásico (Ámbar)</span>
+            <span class="theme-check">✓</span>
+          </button>
+          <button type="button" class="color-theme-option-item" data-color-theme="chic" role="menuitem">
+            <span class="theme-swatch swatch-chic"></span>
+            <span class="theme-name" data-i18n="colorThemeChic">Chic (Rosa)</span>
+            <span class="theme-check"></span>
+          </button>
+          <button type="button" class="color-theme-option-item" data-color-theme="basil" role="menuitem">
+            <span class="theme-swatch swatch-basil"></span>
+            <span class="theme-name" data-i18n="colorThemeBasil">Basílico (Verde)</span>
+            <span class="theme-check"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button id="themeToggleBtn" class="icon-button" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema" data-i18n-title="themeTitle">
+      <svg id="sunIcon" class="theme-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg id="moonIcon" class="theme-icon hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+</header>

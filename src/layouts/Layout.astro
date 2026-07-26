@@ -1,0 +1,110 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Calculadora de Masa de Pizza | Fermentación Mixta',
+  description = 'Calcula los ingredientes exactos para tu masa de pizza napolitana, romana o casera según tiempo a temperatura ambiente y nevera.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title data-i18n="metaTitle">{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#ec4899">
+  
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+
+  <!-- Open Graph Meta Tags for Social Media Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="PizzaCalc">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="/og-image.png">
+
+  <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Pizza Dough Calculator",
+        "url": "https://pizzacalc.app/",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript & HTML5 support",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Calculadora de ingredientes para masa de pizza basada en Porcentajes de Panadero y Modelo Cinético de Fermentación Mixta."
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="dark-theme">
+  <div id="app" class="app-container">
+    <Header />
+
+    <slot />
+
+    <Footer />
+  </div>
+
+  <!-- PWA Toasts & Banner Notifications -->
+  <div id="pwaToastContainer" class="pwa-toast-container">
+    <!-- Copy Recipe Notification Toast -->
+    <div id="copyToast" class="pwa-toast hidden" role="alert">
+      <div class="toast-content">
+        <span class="toast-icon">📋</span>
+        <span id="copyToastMsg" data-i18n="recipeCopiedToast">¡Receta copiada al portapapeles!</span>
+      </div>
+    </div>
+
+    <!-- PWA Update Available Toast -->
+    <div id="pwaUpdateToast" class="pwa-toast hidden" role="alert">
+      <div class="toast-content">
+        <span class="toast-icon">✨</span>
+        <span data-i18n="pwaUpdateNotice">Nueva versión disponible con mejoras</span>
+      </div>
+      <div class="toast-actions">
+        <button id="pwaUpdateBtn" class="btn-toast-action" data-i18n="pwaUpdateBtn">Actualizar</button>
+        <button id="pwaUpdateCloseBtn" class="btn-toast-dismiss" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+
+    <!-- PWA Install Banner Toast -->
+    <div id="pwaInstallToast" class="pwa-toast hidden" role="alert">
+      <div class="toast-content">
+        <span class="toast-icon">📱</span>
+        <span data-i18n="pwaInstallNotice">Instala la app para usarla 100% offline</span>
+      </div>
+      <div class="toast-actions">
+        <button id="pwaInstallBtn" class="btn-toast-action" data-i18n="pwaInstallBtn">Instalar</button>
+        <button id="pwaInstallCloseBtn" class="btn-toast-dismiss" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
