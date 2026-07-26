@@ -204,9 +204,6 @@
                 <h2 data-i18n="simpleSectionTitle">Configuración Rápida</h2>
               </div>
 
-              <!-- Pizza Style Selector Component in Simple Mode -->
-              <pizza-style-selector id="simpleStyleSelector" active-style="neapolitan"></pizza-style-selector>
-
               <div class="grid-2cols">
                 <div class="input-group">
                   <label for="simpleBalls" data-i18n="numberOfBalls">Número de bolas</label>
@@ -216,33 +213,36 @@
                 <range-slider label-key="simpleHoursLabel" unit="h" target-id="simpleHours" val-id="simpleHoursVal" min="2" max="72" value="8" step="1"></range-slider>
               </div>
 
-              <!-- Preset Buttons Component -->
-              <preset-buttons value="8"></preset-buttons>
-
               <!-- Yeast Type Selector in Simple Mode -->
-              <div class="input-group" style="margin-top: 16px;">
+              <div class="input-group" style="margin-top: 14px;">
                 <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
                 <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
                   <input type="radio" id="simpleYeastFresh" name="simpleYeastType" value="Fresh" checked>
                   <label for="simpleYeastFresh" class="segment-label">
-                    <span data-i18n="yeastFresh">🌾 Fresca</span>
+                    <span data-i18n="yeastFresh">Fresca</span>
                   </label>
 
                   <input type="radio" id="simpleYeastDry" name="simpleYeastType" value="Instant Dry">
                   <label for="simpleYeastDry" class="segment-label">
-                    <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+                    <span data-i18n="yeastDry">Seca Instantánea</span>
                   </label>
                 </div>
               </div>
 
-              <!-- Temperatures in Simple Mode -->
-              <div class="grid-2cols" style="margin-top: 16px;">
-                <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
-                <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+              <!-- Fridge Access Checkbox in Simple Mode -->
+              <div class="input-group" style="margin-top: 14px;">
+                <label class="checkbox-label" for="simpleHasFridge">
+                  <input type="checkbox" id="simpleHasFridge" class="custom-checkbox" checked />
+                  <span data-i18n="simpleHasFridgeLabel">Usar fermentación en nevera</span>
+                </label>
               </div>
 
-              <div class="info-badge highlight-badge">
-                <span id="simpleTimeSplitDisplay">⚡ 4h a Temp. Ambiente (22°C) + ❄️ 4h en Nevera (4°C)</span>
+              <!-- Temperatures in Simple Mode -->
+              <div class="grid-2cols" style="margin-top: 14px;">
+                <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+                <div id="simpleTempFridgeWrapper">
+                  <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+                </div>
               </div>
 
               <div class="defaults-notice" data-i18n="simpleDefaultsInfo">

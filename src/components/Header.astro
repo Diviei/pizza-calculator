@@ -1,5 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
+
+const pathname = Astro.url.pathname;
+const isFaq = pathname.startsWith('/faq');
+const isHome = !isFaq;
 ---
 <header class="app-header">
   <a href="/" class="brand-link">
@@ -15,11 +19,11 @@ import { Icon } from 'astro-icon/components';
   </a>
 
   <nav class="app-nav">
-    <a href="/" class="nav-link">
+    <a href="/" class={`nav-link ${isHome ? 'active' : ''}`}>
       <Icon name="lucide:calculator" class="btn-icon-svg" />
       <span data-i18n="navCalculator">Calculadora</span>
     </a>
-    <a href="/faq" class="nav-link">
+    <a href="/faq" class={`nav-link ${isFaq ? 'active' : ''}`}>
       <Icon name="lucide:help-circle" class="btn-icon-svg" />
       <span data-i18n="navFaq">FAQ</span>
     </a>

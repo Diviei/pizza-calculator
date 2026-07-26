@@ -152,21 +152,25 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(localStorage.getItem('pizza_calculator_color_theme')).toBe('basil');
   });
 
-  it('handles preset buttons correctly', () => {
-    const tabSimple = document.getElementById('tabSimple') as HTMLButtonElement;
-    const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
-    tabAdvanced.click();
-    tabSimple.click();
+  it('handles fridge access checkbox (simpleHasFridge) toggle in Simple Mode', () => {
+    const hasFridgeCheckbox = document.getElementById('simpleHasFridge') as HTMLInputElement;
+    expect(hasFridgeCheckbox).not.toBeNull();
+    expect(hasFridgeCheckbox.checked).toBe(true);
 
-    const btn24 = document.querySelector('.preset-btn[data-hours="24"]') as HTMLButtonElement;
-    btn24.click();
+    const fridgeWrapper = document.getElementById('simpleTempFridgeWrapper');
+    expect(fridgeWrapper?.style.display).not.toBe('none');
 
-    const simpleHours = document.getElementById('simpleHours') as HTMLInputElement;
-    expect(simpleHours.value).toBe('24');
+    // Uncheck fridge access
+    hasFridgeCheckbox.checked = false;
+    hasFridgeCheckbox.dispatchEvent(new Event('change'));
 
-    const btn4 = document.querySelector('.preset-btn[data-hours="4"]') as HTMLButtonElement;
-    btn4.click();
-    expect(simpleHours.value).toBe('4');
+    expect(fridgeWrapper?.style.display).toBe('none');
+
+    // Check fridge access again
+    hasFridgeCheckbox.checked = true;
+    hasFridgeCheckbox.dispatchEvent(new Event('change'));
+
+    expect(fridgeWrapper?.style.display).toBe('');
   });
 
   it('handles stepper buttons (+ / -) in both modes', () => {
@@ -479,33 +483,20 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(copyToast?.classList.contains('hidden')).toBe(false);
   });
 
-  it('updates calculations and defaults when switching to Tonda Romana pizza style', () => {
-    // 1. Simple mode initial state (Neapolitan 4 balls @ 280g = 1120g)
+  it('updates calculations and defaults when switching to Tonda Romana pizza style in Advanced mode', () => {
+    // 1. Simple mode is fixed to Neapolitan (4 balls @ 280g = 1120g)
     const summaryDisplay = document.getElementById('simpleDoughSummaryDisplay');
     expect(summaryDisplay?.textContent).toContain('280g');
-
-    // Select Tonda Romana style card in Simple mode
-    const styleSelector = document.getElementById('simpleStyleSelector');
-    const tondaBtn = styleSelector?.querySelector('#styleTondaRomanaBtn') as HTMLButtonElement;
-    expect(tondaBtn).not.toBeNull();
-    tondaBtn.click();
-
-    // Summary display should now show 180g balls (4 * 180 = 720g total)
-    expect(summaryDisplay?.textContent).toContain('720');
-    expect(summaryDisplay?.textContent).toContain('180g');
-
-    // Flour should be updated to ~451.4g for 720g total at 57% hyd, 2.5% salt
-    const flourRes = document.getElementById('simpleFlourRes');
-    expect(flourRes?.textContent).toBe('451.4');
-
-    // Prep guide should mention Tonda Romana stretching (rodillo/fina/mattarello/sottile) and 2-3h rest
-    const simplePrepSteps = document.getElementById('simplePrepSteps');
-    expect(simplePrepSteps?.textContent).toMatch(/rodillo|fina|mattarello|sottile/i);
-    expect(simplePrepSteps?.textContent).toMatch(/2 a 3|2-3/i);
 
     // 2. Switch to Advanced mode
     const tabAdvanced = document.getElementById('tabAdvanced') as HTMLButtonElement;
     tabAdvanced.click();
+
+    // Select Tonda Romana style card in Advanced mode
+    const styleSelector = document.getElementById('advancedStyleSelector');
+    const tondaBtn = styleSelector?.querySelector('#styleTondaRomanaBtn') as HTMLButtonElement;
+    expect(tondaBtn).not.toBeNull();
+    tondaBtn.click();
 
     const ballWeightInput = document.getElementById('ballWeight') as HTMLInputElement;
     const hydrationSlider = document.getElementById('hydrationSlider') as HTMLInputElement;

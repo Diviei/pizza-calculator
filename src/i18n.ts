@@ -86,6 +86,7 @@ export interface TranslationDictionary {
   modeAdvanced: string;
   simpleSectionTitle: string;
   simpleHoursLabel: string;
+  simpleHasFridgeLabel: string;
   presetLabel: string;
   preset4h: string;
   preset8h: string;
@@ -211,6 +212,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     modeAdvanced: 'Modo Avanzado',
     simpleSectionTitle: 'Configuración Rápida',
     simpleHoursLabel: 'Tiempo de Fermentación (horas)',
+    simpleHasFridgeLabel: 'Usar fermentación en nevera',
     presetLabel: 'Accesos rápidos:',
     preset4h: '4h (Rápida)',
     preset8h: '8h (Mismo día)',
@@ -333,6 +335,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     modeAdvanced: 'Advanced Mode',
     simpleSectionTitle: 'Quick Setup',
     simpleHoursLabel: 'Fermentation Time (hours)',
+    simpleHasFridgeLabel: 'Use fridge fermentation',
     presetLabel: 'Quick presets:',
     preset4h: '4h (Fast)',
     preset8h: '8h (Same Day)',
@@ -456,6 +459,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     modeAdvanced: 'Modalità Avanzata',
     simpleSectionTitle: 'Configurazione Rapida',
     simpleHoursLabel: 'Tempo di Lievitazione (ore)',
+    simpleHasFridgeLabel: 'Usa lievitazione in frigorifero',
     presetLabel: 'Scelte rapide:',
     preset4h: '4h (Veloce)',
     preset8h: '8h (Stesso giorno)',
@@ -579,6 +583,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     modeAdvanced: 'Mode Avancé',
     simpleSectionTitle: 'Configuration Rapide',
     simpleHoursLabel: 'Temps de Fermentation (heures)',
+    simpleHasFridgeLabel: 'Utiliser la fermentation au réfrigérateur',
     presetLabel: 'Accès rapides :',
     preset4h: '4h (Rapide)',
     preset8h: '8h (Même jour)',
@@ -700,6 +705,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     modeAdvanced: 'Erweiterter Modus',
     simpleSectionTitle: 'Schnellkonfiguration',
     simpleHoursLabel: 'Gärzeit (Stunden)',
+    simpleHasFridgeLabel: 'Kühlschrankgärung verwenden',
     presetLabel: 'Schnellauswahl:',
     preset4h: '4 Std. (Schnell)',
     preset8h: '8 Std. (Gleicher Tag)',

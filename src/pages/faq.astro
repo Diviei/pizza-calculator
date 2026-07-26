@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -8,63 +7,45 @@ import Layout from '../layouts/Layout.astro';
   title="Preguntas Frecuentes y Guía de Fermentación | PizzaCalc" 
   description="Respuestas a las preguntas más frecuentes sobre la fermentación mixta de masa de pizza, porcentaje de panadero y equivalencias de levadura."
 >
-  <div id="app" class="app-container">
-    <Header />
-
-    <main class="faq-page-content" style="margin-top: 20px;">
-      <div class="faq-page-header">
-        <a href="/" class="back-link">
-          <Icon name="lucide:arrow-left" class="btn-icon-svg" />
-          <span data-i18n="backToCalculator">Volver a la Calculadora</span>
-        </a>
+  <main class="faq-page-content">
+    <!-- FAQ & Fermentation Guide Section -->
+    <section class="faq-card" aria-labelledby="faqHeader">
+      <div class="faq-card-header">
+        <Icon name="lucide:book-open" class="inline-icon-svg" style="width: 1.5rem; height: 1.5rem;" />
+        <h2 id="faqHeader" class="faq-title" data-i18n="faqSectionTitle">Preguntas Frecuentes y Guía de Fermentación</h2>
       </div>
+      
+      <div class="faq-accordion">
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span data-i18n="faqQ1">¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?</span>
+          </summary>
+          <p class="faq-answer" data-i18n="faqA1">Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.</p>
+        </details>
 
-      <!-- FAQ & Fermentation Guide Section -->
-      <section class="faq-card" aria-labelledby="faqHeader">
-        <div class="faq-card-header">
-          <Icon name="lucide:book-open" class="inline-icon-svg" style="width: 1.5rem; height: 1.5rem;" />
-          <h2 id="faqHeader" class="faq-title" data-i18n="faqSectionTitle">Preguntas Frecuentes y Guía de Fermentación</h2>
-        </div>
-        
-        <div class="faq-accordion">
-          <details class="faq-item" open>
-            <summary class="faq-question">
-              <span data-i18n="faqQ1">¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?</span>
-            </summary>
-            <p class="faq-answer" data-i18n="faqA1">Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.</p>
-          </details>
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span data-i18n="faqQ2">¿Qué es el porcentaje de panadero (Baker's Percentage)?</span>
+          </summary>
+          <p class="faq-answer" data-i18n="faqA2">Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.</p>
+        </details>
 
-          <details class="faq-item" open>
-            <summary class="faq-question">
-              <span data-i18n="faqQ2">¿Qué es el porcentaje de panadero (Baker's Percentage)?</span>
-            </summary>
-            <p class="faq-answer" data-i18n="faqA2">Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.</p>
-          </details>
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span data-i18n="faqQ3">¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?</span>
+          </summary>
+          <p class="faq-answer" data-i18n="faqA3">La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.</p>
+        </details>
 
-          <details class="faq-item" open>
-            <summary class="faq-question">
-              <span data-i18n="faqQ3">¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?</span>
-            </summary>
-            <p class="faq-answer" data-i18n="faqA3">La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.</p>
-          </details>
-
-          <details class="faq-item" open>
-            <summary class="faq-question">
-              <span data-i18n="faqQ4">¿Puedo usar esta calculadora sin conexión a internet?</span>
-            </summary>
-            <p class="faq-answer" data-i18n="faqA4">¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.</p>
-          </details>
-        </div>
-
-        <div style="margin-top: 24px; text-align: center;">
-          <a href="/" class="btn-faq-link">
-            <Icon name="lucide:calculator" class="btn-icon-svg" />
-            <span data-i18n="navCalculator">Calculadora</span>
-          </a>
-        </div>
-      </section>
-    </main>
-  </div>
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            <span data-i18n="faqQ4">¿Puedo usar esta calculadora sin conexión a internet?</span>
+          </summary>
+          <p class="faq-answer" data-i18n="faqA4">¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.</p>
+        </details>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <script>
