@@ -13,7 +13,7 @@ import {
   type YeastType,
 } from './calculator.ts';
 import { registerCustomElements } from './components/index.ts';
-import { getInitialLanguage, type LanguageCode, setSavedLanguage, translations } from './i18n.ts';
+import { getInitialLanguage, LANGUAGE_FLAGS, type LanguageCode, setSavedLanguage, translations } from './i18n.ts';
 
 // Register Native Custom Elements
 registerCustomElements();
@@ -195,6 +195,10 @@ const elements = {
   get langMenuBtn() {
     return document.getElementById('langMenuBtn') as HTMLButtonElement | null;
   },
+  get currentLangFlag() {
+    return (document.getElementById('currentLangFlag') ||
+      document.getElementById('currentLangBadge')) as HTMLElement | null;
+  },
   get currentLangBadge() {
     return document.getElementById('currentLangBadge') as HTMLElement | null;
   },
@@ -278,9 +282,9 @@ function applyLanguage(lang: LanguageCode): void {
     if (val) el.title = val;
   });
 
-  // Update header button badge text
-  if (elements.currentLangBadge) {
-    elements.currentLangBadge.textContent = lang.toUpperCase();
+  // Update header button flag / badge text
+  if (elements.currentLangFlag) {
+    elements.currentLangFlag.textContent = LANGUAGE_FLAGS[lang] || '🇪🇸';
   }
 
   // Update active state in popover menu
@@ -573,7 +577,20 @@ function calculateSimple(): void {
 /**
  * Perform calculation and update DOM elements for Advanced Mode
  */
-function calculate(): CalculationResults {
+function calculate(): CalculationResults | null {
+  if (
+    !elements.numberOfBalls ||
+    !elements.ballWeight ||
+    !elements.hydrationSlider ||
+    !elements.saltSlider ||
+    !elements.hoursRt ||
+    !elements.tempRtSlider ||
+    !elements.hoursFridge ||
+    !elements.tempFridgeSlider
+  ) {
+    return null;
+  }
+
   const t = translations[currentLang] || translations.en || translations.es;
 
   // Extract inputs safely
@@ -583,9 +600,11 @@ function calculate(): CalculationResults {
   const saltPercentage = parseFloat(elements.saltSlider.value) || 2.5;
 
   let yeastType: YeastType = 'Fresh';
-  elements.yeastInputs.forEach((input) => {
-    if (input.checked) yeastType = input.value as YeastType;
-  });
+  if (elements.yeastInputs) {
+    elements.yeastInputs.forEach((input) => {
+      if (input.checked) yeastType = input.value as YeastType;
+    });
+  }
 
   const hoursRt = Math.max(0, parseFloat(elements.hoursRt.value) || 0);
   const tempRt = parseFloat(elements.tempRtSlider.value) || 22;
@@ -815,7 +834,8 @@ function initTheme(): void {
   const savedColorTheme = (localStorage.getItem(COLOR_THEME_KEY) as ColorTheme) || 'amber';
   setColorTheme(savedColorTheme);
 
-  if (elements.themeToggleBtn) {
+  if (elements.themeToggleBtn && !elements.themeToggleBtn.dataset.bound) {
+    elements.themeToggleBtn.dataset.bound = 'true';
     elements.themeToggleBtn.addEventListener('click', () => {
       const currentTheme: ThemeMode = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
       const nextTheme: ThemeMode = currentTheme === 'dark' ? 'light' : 'dark';
@@ -1018,7 +1038,8 @@ function copyRecipeToClipboard(): void {
  * Build shareable URL containing recipe parameters
  */
 export function buildShareableUrl(): string {
-  const url = new URL(window.location.origin + window.location.pathname);
+  const basePath = window.location.pathname === '/' ? '/calculator' : window.location.pathname;
+  const url = new URL(window.location.origin + basePath);
   url.searchParams.set('mode', currentMode);
   url.searchParams.set('style', currentPizzaStyle);
   url.searchParams.set('lang', currentLang);
@@ -1201,10 +1222,13 @@ function updateNavActiveState(): void {
   if (typeof window === 'undefined') return;
   const pathname = window.location.pathname;
   const isFaq = pathname.startsWith('/faq');
+  const isCalculator = pathname.startsWith('/calculator');
+  const isHome = !isFaq && !isCalculator;
+
   const navLinks = document.querySelectorAll('.app-nav .nav-link');
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');
-    if ((href === '/' && !isFaq) || (href === '/faq' && isFaq)) {
+    if ((href === '/' && isHome) || (href === '/calculator' && isCalculator) || (href === '/faq' && isFaq)) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
@@ -1333,14 +1357,19 @@ function initEventListeners(): void {
     });
   });
 
-  // Language Popover Menu Listeners
-  if (elements.langMenuBtn && elements.langPopover) {
+  // Language and Color Theme Popover Menu Listeners
+  if (elements.langMenuBtn && elements.langPopover && !elements.langMenuBtn.dataset.bound) {
+    elements.langMenuBtn.dataset.bound = 'true';
     elements.langMenuBtn.addEventListener('click', (e: MouseEvent) => {
       e.stopPropagation();
       const isHidden = elements.langPopover?.classList.contains('hidden');
       if (isHidden) {
         elements.langPopover?.classList.remove('hidden');
         elements.langMenuBtn?.setAttribute('aria-expanded', 'true');
+        if (elements.colorThemePopover) {
+          elements.colorThemePopover.classList.add('hidden');
+          if (elements.colorThemeMenuBtn) elements.colorThemeMenuBtn.setAttribute('aria-expanded', 'false');
+        }
       } else {
         elements.langPopover?.classList.add('hidden');
         elements.langMenuBtn?.setAttribute('aria-expanded', 'false');
@@ -1379,15 +1408,14 @@ function initEventListeners(): void {
     });
   }
 
-  // Color Theme Palette Popover Menu Listeners
-  if (elements.colorThemeMenuBtn && elements.colorThemePopover) {
+  if (elements.colorThemeMenuBtn && elements.colorThemePopover && !elements.colorThemeMenuBtn.dataset.bound) {
+    elements.colorThemeMenuBtn.dataset.bound = 'true';
     elements.colorThemeMenuBtn.addEventListener('click', (e: MouseEvent) => {
       e.stopPropagation();
       const isHidden = elements.colorThemePopover?.classList.contains('hidden');
       if (isHidden) {
         elements.colorThemePopover?.classList.remove('hidden');
         elements.colorThemeMenuBtn?.setAttribute('aria-expanded', 'true');
-        // Close language popover if open
         if (elements.langPopover) {
           elements.langPopover.classList.add('hidden');
           if (elements.langMenuBtn) elements.langMenuBtn.setAttribute('aria-expanded', 'false');
@@ -1513,16 +1541,23 @@ function initEventListeners(): void {
 
 // Initial Bootstrapping
 if (typeof document !== 'undefined') {
+  let isInitialBootstrapped = false;
+
+  const runInitialBoot = () => {
+    if (!isInitialBootstrapped) {
+      isInitialBootstrapped = true;
+      initApp();
+    }
+  };
+
   document.addEventListener('astro:page-load', () => {
     initApp();
   });
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initApp();
-    });
-  } else if (document.getElementById('app')) {
-    initApp();
+    document.addEventListener('DOMContentLoaded', runInitialBoot);
+  } else {
+    runInitialBoot();
   }
 }
 

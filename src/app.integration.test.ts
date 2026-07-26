@@ -122,6 +122,33 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     expect(document.body.classList.contains('dark-theme')).toBe(true);
   });
 
+  it('handles header buttons (theme toggle, lang menu, color theme) correctly after multiple page navigations (initApp calls)', () => {
+    // Simulate multiple Astro page navigations where initApp() is called repeatedly on persisted header
+    initApp();
+    initApp();
+
+    const themeBtn = document.getElementById('themeToggleBtn') as HTMLButtonElement;
+    const langBtn = document.getElementById('langMenuBtn') as HTMLButtonElement;
+    const langPopover = document.getElementById('langPopover') as HTMLElement;
+    const colorThemeBtn = document.getElementById('colorThemeMenuBtn') as HTMLButtonElement;
+    const colorThemePopover = document.getElementById('colorThemePopover') as HTMLElement;
+
+    // 1. Theme toggle must work reliably without double-toggling
+    const initialIsDark = document.body.classList.contains('dark-theme');
+    themeBtn.click();
+    expect(document.body.classList.contains('dark-theme')).toBe(!initialIsDark);
+
+    // 2. Language menu must open reliably without double-toggling closed
+    expect(langPopover.classList.contains('hidden')).toBe(true);
+    langBtn.click();
+    expect(langPopover.classList.contains('hidden')).toBe(false);
+
+    // 3. Color theme menu must open reliably without double-toggling closed
+    expect(colorThemePopover.classList.contains('hidden')).toBe(true);
+    colorThemeBtn.click();
+    expect(colorThemePopover.classList.contains('hidden')).toBe(false);
+  });
+
   it('handles color theme palette selection and persistence correctly', () => {
     const colorThemeBtn = document.getElementById('colorThemeMenuBtn') as HTMLButtonElement;
     expect(colorThemeBtn).not.toBeNull();
@@ -234,19 +261,26 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     expect(popover?.classList.contains('hidden')).toBe(true);
 
-    // Open and select language
+    // Open and select language (English)
     langBtn.click();
     const enOption = document.querySelector('.lang-option-item[data-lang="en"]') as HTMLButtonElement;
     enOption.click();
 
+    const currentLangFlag = document.getElementById('currentLangFlag') || document.getElementById('currentLangBadge');
+    const resultsTitleEl = document.querySelector('[data-i18n="resultsTitle"]');
+
     expect(document.documentElement.lang).toBe('en');
+    expect(currentLangFlag?.textContent).toBe('🇬🇧');
+    expect(resultsTitleEl?.textContent).toBe('Required Ingredients');
     expect(popover?.classList.contains('hidden')).toBe(true);
 
-    // Test other languages
+    // Test other languages (Italian)
     langBtn.click();
     const itOption = document.querySelector('.lang-option-item[data-lang="it"]') as HTMLButtonElement;
     itOption.click();
     expect(document.documentElement.lang).toBe('it');
+    expect(currentLangFlag?.textContent).toBe('🇮🇹');
+    expect(resultsTitleEl?.textContent).toBe('Ingredienti Necessari');
   });
 
   it('handles simple mode controls and radio buttons', () => {
@@ -535,7 +569,7 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
   it('parses URL query parameters correctly on initialization', () => {
     delete (window as any).location;
     (window as any).location = new URL(
-      'https://pizzacalc.app/?mode=advanced&style=tonda_romana&balls=6&weight=200&hydration=60&salt=3&hoursRt=6&tempRt=24&hoursFridge=12&tempFridge=4&lang=en',
+      'https://pizzacalc.app/calculator?mode=advanced&style=tonda_romana&balls=6&weight=200&hydration=60&salt=3&hoursRt=6&tempRt=24&hoursFridge=12&tempFridge=4&lang=en',
     );
 
     initApp();
@@ -547,7 +581,7 @@ describe('App Integration Tests - Bug Reproduction & Fix Verification', () => {
 
     // Simple mode URL params test
     (window as any).location = new URL(
-      'https://pizzacalc.app/?mode=simple&style=neapolitan&balls=8&hours=12&tempRt=25&tempFridge=5&yeast=Instant%20Dry&lang=es',
+      'https://pizzacalc.app/calculator?mode=simple&style=neapolitan&balls=8&hours=12&tempRt=25&tempFridge=5&yeast=Instant%20Dry&lang=es',
     );
     initApp();
 
