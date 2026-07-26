@@ -1673,7 +1673,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pwa-toast.hidden {
@@ -1730,7 +1730,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
   justify-content: center;
 }
 
-@keyframes slideUp {
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpCenter {
   from {
     opacity: 0;
     transform: translate(-50%, 20px);
@@ -1757,7 +1768,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-radius: var(--radius-md);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   padding: 10px 16px;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideUpCenter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-quick-bar.hidden {
