@@ -890,7 +890,7 @@ function initPwaToasts(): void {
     (event) => {
       const target = event.target as HTMLElement | null;
       const isScriptError = target && target.tagName === 'SCRIPT';
-      const isStyleError = target && target.tagName === 'LINK';
+      const isStyleError = target && target.tagName === 'LINK' && (target as HTMLLinkElement).rel === 'stylesheet';
 
       if (isScriptError || isStyleError) {
         console.warn(
