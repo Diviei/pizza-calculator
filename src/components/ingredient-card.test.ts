@@ -11,7 +11,7 @@ describe('<ingredient-card>', () => {
   it('renders simple card format with icon and title-key', () => {
     const el = document.createElement('ingredient-card') as IngredientCard;
     el.setAttribute('simple', '');
-    el.setAttribute('icon', '🌾');
+    el.setAttribute('icon', 'flour');
     el.setAttribute('title-key', 'flour');
     el.setAttribute('value', '650.0');
     el.setAttribute('unit', 'g');
@@ -21,11 +21,11 @@ describe('<ingredient-card>', () => {
 
     document.body.appendChild(el);
 
-    const icon = el.querySelector('.simple-card-icon');
+    const icon = el.querySelector('.simple-card-icon svg');
     const title = el.querySelector('#simpleFlourTitle');
     const val = el.querySelector('#simpleFlourRes');
 
-    expect(icon?.textContent).toBe('🌾');
+    expect(icon).not.toBeNull();
     expect(title?.getAttribute('data-i18n')).toBe('flour');
     expect(val?.textContent).toBe('650.0');
   });
@@ -73,7 +73,7 @@ describe('<ingredient-card>', () => {
   it('updates DOM in-place on setAttribute when value, baker-pct, or icon changes', () => {
     const el = document.createElement('ingredient-card') as IngredientCard;
     el.setAttribute('simple', '');
-    el.setAttribute('icon', '🌾');
+    el.setAttribute('icon', 'flour');
     el.setAttribute('value', '10.0');
     document.body.appendChild(el);
 
@@ -81,9 +81,9 @@ describe('<ingredient-card>', () => {
     const val = el.querySelector('.simple-card-value span');
     expect(val?.textContent).toBe('50.0');
 
-    el.setAttribute('icon', '💧');
-    const icon = el.querySelector('.simple-card-icon');
-    expect(icon?.textContent).toBe('💧');
+    el.setAttribute('icon', 'water');
+    const iconSvg = el.querySelector('.simple-card-icon svg');
+    expect(iconSvg).not.toBeNull();
 
     const advEl = document.createElement('ingredient-card') as IngredientCard;
     advEl.setAttribute('baker-pct', '65%');

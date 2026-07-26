@@ -28,6 +28,30 @@ export class IngredientCard extends HTMLElement {
     }
   }
 
+  private getSvgIcon(iconAttr: string): string {
+    if (!iconAttr) return '';
+    if (iconAttr.startsWith('<svg')) return iconAttr;
+
+    // Lucide SVG mappings for ingredients
+    switch (iconAttr) {
+      case 'flour':
+      case '🌾':
+        return `<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 12 2l10 20"/><path d="M12 2v20"/><path d="M6.5 13h11"/></svg>`;
+      case 'water':
+      case '💧':
+        return `<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>`;
+      case 'salt':
+      case '🧂':
+        return `<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`;
+      case 'yeast':
+      case '🧫':
+      case '🌱':
+        return `<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/></svg>`;
+      default:
+        return `<span class="simple-card-icon-text">${iconAttr}</span>`;
+    }
+  }
+
   private updateDOM(name: string, newValue: string) {
     const resId = this.getAttribute('res-id') || '';
     const pctId = this.getAttribute('pct-id') || '';
@@ -50,7 +74,7 @@ export class IngredientCard extends HTMLElement {
       }
     } else if (name === 'icon') {
       const iconEl = this.querySelector('.simple-card-icon');
-      if (iconEl) iconEl.textContent = newValue;
+      if (iconEl) iconEl.innerHTML = this.getSvgIcon(newValue);
     }
   }
 
@@ -67,6 +91,7 @@ export class IngredientCard extends HTMLElement {
 
     const isSimple = this.hasAttribute('simple');
     const existingTitleText = this.querySelector('[data-i18n]')?.textContent || '';
+    const svgIconHtml = this.getSvgIcon(icon);
 
     if (isSimple) {
       const widthVal = cardClass.includes('flour')
@@ -79,7 +104,7 @@ export class IngredientCard extends HTMLElement {
       this.innerHTML = `
         <div class="simple-card ${cardClass}">
           <div class="simple-card-header">
-            ${icon ? `<span class="simple-card-icon">${icon}</span>` : ''}
+            ${svgIconHtml ? `<span class="simple-card-icon">${svgIconHtml}</span>` : ''}
             <span ${titleId ? `id="${titleId}"` : ''} class="simple-card-title" ${titleKey ? `data-i18n="${titleKey}"` : ''}>${existingTitleText}</span>
           </div>
           <div class="simple-card-value">

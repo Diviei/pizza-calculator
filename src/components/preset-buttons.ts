@@ -54,10 +54,10 @@ export class PresetButtons extends HTMLElement {
       <div class="preset-section">
         <span class="preset-label" data-i18n="presetLabel">Accesos rápidos:</span>
         <div class="preset-buttons">
-          <button type="button" class="preset-btn ${activeHours === 4 ? 'active' : ''}" data-hours="4" data-i18n="preset4h">⚡ 4h (Rápida)</button>
-          <button type="button" class="preset-btn ${activeHours === 8 ? 'active' : ''}" data-hours="8" data-i18n="preset8h">☀️ 8h (Mismo día)</button>
-          <button type="button" class="preset-btn ${activeHours === 24 ? 'active' : ''}" data-hours="24" data-i18n="preset24h">🌙 24h (1 día nevera)</button>
-          <button type="button" class="preset-btn ${activeHours === 48 ? 'active' : ''}" data-hours="48" data-i18n="preset48h">❄️ 48h (2 días nevera)</button>
+          <button type="button" class="preset-btn ${activeHours === 4 ? 'active' : ''}" data-hours="4" data-i18n="preset4h">4h (Rápida)</button>
+          <button type="button" class="preset-btn ${activeHours === 8 ? 'active' : ''}" data-hours="8" data-i18n="preset8h">8h (Mismo día)</button>
+          <button type="button" class="preset-btn ${activeHours === 24 ? 'active' : ''}" data-hours="24" data-i18n="preset24h">24h (1 día nevera)</button>
+          <button type="button" class="preset-btn ${activeHours === 48 ? 'active' : ''}" data-hours="48" data-i18n="preset48h">48h (2 días nevera)</button>
         </div>
       </div>
     `;
