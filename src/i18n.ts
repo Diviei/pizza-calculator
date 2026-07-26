@@ -27,6 +27,8 @@ export interface TranslationDictionary {
   navCalculator: string;
   navGuides: string;
   navFaq: string;
+  faqBannerText: string;
+  backToCalculator: string;
 
   // Block 1: Dimensions
   block1Title: string;
@@ -152,6 +154,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navCalculator: 'Calculadora',
     navGuides: 'Guías',
     navFaq: 'FAQ',
+    faqBannerText: '¿Tienes dudas sobre la fermentación o las proporciones?',
+    backToCalculator: 'Volver a la Calculadora',
 
     block1Title: 'Dimensiones de la Masa',
     numberOfBalls: 'Número de bolas',
@@ -273,6 +277,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navCalculator: 'Calculator',
     navGuides: 'Guides',
     navFaq: 'FAQ',
+    faqBannerText: 'Have questions about fermentation or ratios?',
+    backToCalculator: 'Back to Calculator',
 
     block1Title: 'Dough Dimensions',
     numberOfBalls: 'Number of dough balls',
@@ -394,6 +400,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navCalculator: 'Calcolatore',
     navGuides: 'Guide',
     navFaq: 'FAQ',
+    faqBannerText: 'Hai domande sulla fermentazione o sulle dosi?',
+    backToCalculator: 'Torna al Calcolatore',
 
     block1Title: "Dimensioni dell'Impasto",
     numberOfBalls: 'Numero di panetti',
@@ -515,6 +523,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navCalculator: 'Calculateur',
     navGuides: 'Guides',
     navFaq: 'FAQ',
+    faqBannerText: 'Des questions sur la fermentation ou les proportions ?',
+    backToCalculator: 'Retour au Calculateur',
 
     block1Title: 'Dimensions de la Pâte',
     numberOfBalls: 'Nombre de pâtons',
@@ -635,6 +645,8 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navCalculator: 'Rechner',
     navGuides: 'Anleitungen',
     navFaq: 'FAQ',
+    faqBannerText: 'Fragen zur Gärung oder den Verhältnissen?',
+    backToCalculator: 'Zurück zum Rechner',
 
     block1Title: 'Teig-Dimensionen',
     numberOfBalls: 'Anzahl Teiglinge',
