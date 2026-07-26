@@ -22,9 +22,6 @@ import { Icon } from 'astro-icon/components';
               <h2 data-i18n="simpleSectionTitle">Configuración Rápida</h2>
             </div>
 
-            <!-- Pizza Style Selector Component in Simple Mode -->
-            <pizza-style-selector id="simpleStyleSelector" active-style="neapolitan"></pizza-style-selector>
-
             <div class="grid-2cols">
               <div class="input-group">
                 <label for="simpleBalls" data-i18n="numberOfBalls">Número de bolas</label>
@@ -34,11 +31,8 @@ import { Icon } from 'astro-icon/components';
               <range-slider label-key="simpleHoursLabel" unit="h" target-id="simpleHours" val-id="simpleHoursVal" min="2" max="72" value="8" step="1"></range-slider>
             </div>
 
-            <!-- Preset Buttons Component -->
-            <preset-buttons value="8"></preset-buttons>
-
             <!-- Yeast Type Selector in Simple Mode -->
-            <div class="input-group" style="margin-top: 16px;">
+            <div class="input-group" style="margin-top: 14px;">
               <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
               <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
                 <input type="radio" id="simpleYeastFresh" name="simpleYeastType" value="Fresh" checked>
@@ -55,14 +49,21 @@ import { Icon } from 'astro-icon/components';
               </div>
             </div>
 
-            <!-- Temperatures in Simple Mode -->
-            <div class="grid-2cols" style="margin-top: 16px;">
-              <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
-              <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+            <!-- Fridge Access Checkbox in Simple Mode -->
+            <div class="input-group" style="margin-top: 14px;">
+              <label class="checkbox-label" for="simpleHasFridge">
+                <input type="checkbox" id="simpleHasFridge" class="custom-checkbox" checked />
+                <Icon name="lucide:snowflake" class="inline-icon-svg" />
+                <span data-i18n="simpleHasFridgeLabel">Usar fermentación en nevera</span>
+              </label>
             </div>
 
-            <div class="info-badge highlight-badge">
-              <span id="simpleTimeSplitDisplay">4h a Temp. Ambiente (22°C) + 4h en Nevera (4°C)</span>
+            <!-- Temperatures in Simple Mode -->
+            <div class="grid-2cols" style="margin-top: 14px;">
+              <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+              <div id="simpleTempFridgeWrapper">
+                <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+              </div>
             </div>
 
             <div class="defaults-notice" data-i18n="simpleDefaultsInfo">
@@ -267,17 +268,6 @@ import { Icon } from 'astro-icon/components';
       </div>
     </div>
 
-    <!-- FAQ Banner Link to dedicated FAQ page -->
-    <div class="faq-link-banner">
-      <div class="faq-banner-text">
-        <Icon name="lucide:help-circle" class="inline-icon-svg" />
-        <span data-i18n="faqBannerText">¿Tienes dudas sobre la fermentación o las proporciones?</span>
-      </div>
-      <a href="/faq" class="btn-faq-link">
-        <Icon name="lucide:book-open" class="btn-icon-svg" />
-        <span data-i18n="navFaq">Preguntas Frecuentes</span>
-      </a>
-    </div>
   </main>
 
   <!-- Mobile Floating Quick Summary Bar -->

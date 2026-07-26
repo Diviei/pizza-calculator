@@ -76,6 +76,12 @@ const elements = {
   get simpleTempFridgeVal() {
     return document.getElementById('simpleTempFridgeVal') as HTMLElement;
   },
+  get simpleHasFridge() {
+    return document.getElementById('simpleHasFridge') as HTMLInputElement | null;
+  },
+  get simpleTempFridgeWrapper() {
+    return document.getElementById('simpleTempFridgeWrapper') as HTMLElement | null;
+  },
   get simpleTimeSplitDisplay() {
     return document.getElementById('simpleTimeSplitDisplay') as HTMLElement;
   },
@@ -444,6 +450,11 @@ function calculateSimple(): void {
 
   const numberOfBalls = Math.max(1, parseInt(elements.simpleBalls.value, 10) || 1);
   const hoursTotal = Math.max(0, parseFloat(elements.simpleHours.value) || 0);
+  const hasFridge = elements.simpleHasFridge ? elements.simpleHasFridge.checked : true;
+
+  if (elements.simpleTempFridgeWrapper) {
+    elements.simpleTempFridgeWrapper.style.display = hasFridge ? '' : 'none';
+  }
 
   let yeastType: YeastType = 'Fresh';
   if (elements.simpleYeastInputs) {
@@ -459,7 +470,15 @@ function calculateSimple(): void {
   if (elements.simpleTempRtVal) elements.simpleTempRtVal.textContent = tempRt.toString();
   if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = tempFridge.toString();
 
-  const results = calculateSimpleDough(numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge, currentPizzaStyle);
+  const results = calculateSimpleDough(
+    numberOfBalls,
+    hoursTotal,
+    yeastType,
+    tempRt,
+    tempFridge,
+    'neapolitan',
+    hasFridge,
+  );
 
   // Update ingredient displays
   if (elements.simpleFlourRes) elements.simpleFlourRes.textContent = results.flourGrams.toFixed(1);
@@ -488,10 +507,9 @@ function calculateSimple(): void {
       .replace('{weight}', results.ballWeight.toString());
   }
 
-  // Update defaults notice depending on active pizza style
+  // Update defaults notice for simple mode (always Neapolitan)
   if (elements.simpleDefaultsNotice) {
-    elements.simpleDefaultsNotice.textContent =
-      currentPizzaStyle === 'tonda_romana' ? t.simpleDefaultsInfoTondaRomana : t.simpleDefaultsInfoNeapolitan;
+    elements.simpleDefaultsNotice.textContent = t.simpleDefaultsInfoNeapolitan || t.simpleDefaultsInfo;
   }
 
   // Time split display text
@@ -541,7 +559,15 @@ function calculateSimple(): void {
     ballWeight: results.ballWeight,
   });
 
-  saveSimpleState({ numberOfBalls, hoursTotal, yeastType, tempRt, tempFridge, pizzaStyle: currentPizzaStyle });
+  saveSimpleState({
+    numberOfBalls,
+    hoursTotal,
+    yeastType,
+    tempRt,
+    tempFridge,
+    hasFridge,
+    pizzaStyle: currentPizzaStyle,
+  });
 }
 
 /**
@@ -648,6 +674,7 @@ function saveSimpleState(state: {
   yeastType: YeastType;
   tempRt: number;
   tempFridge: number;
+  hasFridge?: boolean;
   pizzaStyle?: PizzaStyle;
 }): void {
   try {
@@ -691,6 +718,9 @@ function loadState(): void {
       if (simpleData.tempFridge !== undefined && elements.simpleTempFridgeSlider) {
         elements.simpleTempFridgeSlider.value = simpleData.tempFridge.toString();
         if (elements.simpleTempFridgeVal) elements.simpleTempFridgeVal.textContent = simpleData.tempFridge.toString();
+      }
+      if (simpleData.hasFridge !== undefined && elements.simpleHasFridge) {
+        elements.simpleHasFridge.checked = Boolean(simpleData.hasFridge);
       }
       if (simpleData.pizzaStyle === 'neapolitan' || simpleData.pizzaStyle === 'tonda_romana') {
         currentPizzaStyle = simpleData.pizzaStyle;
@@ -925,7 +955,13 @@ function copyRecipeToClipboard(): void {
     const salt = elements.simpleSaltRes?.textContent || '0';
     const yeast = elements.simpleYeastRes?.textContent || '0';
     const yeastTitle = elements.simpleYeastTitle?.textContent || 'Levadura';
-    const timeSplit = elements.simpleTimeSplitDisplay?.textContent || '';
+    const hours = elements.simpleHours?.value || '8';
+    const tempRt = elements.simpleTempRtVal?.textContent || '22';
+    const hasFridge = elements.simpleHasFridge ? elements.simpleHasFridge.checked : true;
+    const tempFridge = elements.simpleTempFridgeVal?.textContent || '4';
+    const timeSplit = hasFridge
+      ? `${t.simpleHoursLabel}: ${hours}h (${tempRt}°C TA / ${tempFridge}°C Nevera)`
+      : `${t.simpleHoursLabel}: ${hours}h (${tempRt}°C TA)`;
 
     text =
       `Pizza Calculator (${t.modeSimple})\n` +
@@ -937,7 +973,7 @@ function copyRecipeToClipboard(): void {
       `• ${yeastTitle}: ${yeast}g\n` +
       `• ${timeSplit}\n` +
       `-------------------------\n` +
-      `${currentPizzaStyle === 'tonda_romana' ? t.simpleDefaultsInfoTondaRomana : t.simpleDefaultsInfoNeapolitan}`;
+      `${t.simpleDefaultsInfoNeapolitan || t.simpleDefaultsInfo}`;
   } else {
     const balls = elements.numberOfBalls?.value || '1';
     const weight = elements.ballWeight?.value || '280';
@@ -1161,9 +1197,25 @@ export function parseUrlParameters(): boolean {
  * Attach Event Listeners
  */
 
+function updateNavActiveState(): void {
+  if (typeof window === 'undefined') return;
+  const pathname = window.location.pathname;
+  const isFaq = pathname.startsWith('/faq');
+  const navLinks = document.querySelectorAll('.app-nav .nav-link');
+  navLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+    if ((href === '/' && !isFaq) || (href === '/faq' && isFaq)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
 export function initApp(): void {
   isRefreshing = false;
   initTheme();
+  updateNavActiveState();
   const hasUrlParams = parseUrlParameters();
   if (!hasUrlParams) {
     loadState();
@@ -1212,6 +1264,10 @@ function initEventListeners(): void {
   if (elements.simpleHours) {
     elements.simpleHours.addEventListener('input', calculateSimple);
     elements.simpleHours.addEventListener('change', calculateSimple);
+  }
+
+  if (elements.simpleHasFridge) {
+    elements.simpleHasFridge.addEventListener('change', calculateSimple);
   }
 
   // Simple Yeast Radio buttons
@@ -1457,6 +1513,10 @@ function initEventListeners(): void {
 
 // Initial Bootstrapping
 if (typeof document !== 'undefined') {
+  document.addEventListener('astro:page-load', () => {
+    initApp();
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       initApp();

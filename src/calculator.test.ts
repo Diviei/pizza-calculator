@@ -101,12 +101,19 @@ describe('Calculator Engine - Simple Mode Helper', () => {
     expect(res.yeastGrams).toBeGreaterThan(0);
   });
 
-  it('allocates 4h room temp and remaining time in fridge when hoursTotal > 8', () => {
+  it('allocates 4h room temp and remaining time in fridge when hoursTotal > 8 and hasFridge is true', () => {
     const res = calculateSimpleDough(4, 24);
     expect(res.hoursRt).toBe(4);
     expect(res.hoursFridge).toBe(20);
     expect(res.totalDoughWeight).toBe(4 * 280);
     expect(res.yeastGrams).toBeGreaterThan(0);
+  });
+
+  it('allocates 100% room temp time when hasFridge is false regardless of total hours', () => {
+    const res = calculateSimpleDough(4, 24, 'Fresh', 22, 4, 'neapolitan', false);
+    expect(res.hoursRt).toBe(24);
+    expect(res.hoursFridge).toBe(0);
+    expect(res.totalDoughWeight).toBe(4 * 280);
   });
 
   it('supports custom yeastType and temperatures in Simple Mode', () => {

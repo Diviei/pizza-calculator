@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Icon } from 'astro-icon/components';
+import { ClientRouter } from 'astro:transitions';
 import '../styles.css';
 
 interface Props {
@@ -26,6 +27,44 @@ const {
   
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
   <link rel="apple-touch-icon" href="/icon.svg">
+
+  <script is:inline>
+    (function () {
+      function applyThemeToDocument(doc) {
+        const theme = localStorage.getItem('pizza_calculator_theme') || 'dark';
+        const colorTheme = localStorage.getItem('pizza_calculator_color_theme') || 'amber';
+
+        if (theme === 'light') {
+          doc.documentElement.classList.remove('dark-theme');
+          doc.documentElement.classList.add('light-theme');
+          if (doc.body) {
+            doc.body.classList.remove('dark-theme');
+            doc.body.classList.add('light-theme');
+          }
+        } else {
+          doc.documentElement.classList.remove('light-theme');
+          doc.documentElement.classList.add('dark-theme');
+          if (doc.body) {
+            doc.body.classList.remove('light-theme');
+            doc.body.classList.add('dark-theme');
+          }
+        }
+
+        doc.documentElement.setAttribute('data-color-theme', colorTheme);
+        if (doc.body) {
+          doc.body.setAttribute('data-color-theme', colorTheme);
+        }
+      }
+
+      applyThemeToDocument(document);
+
+      document.addEventListener('astro:before-swap', function (e) {
+        applyThemeToDocument(e.newDocument);
+      });
+    })();
+  </script>
+
+  <ClientRouter />
 
   <!-- Open Graph Meta Tags for Social Media Sharing -->
   <meta property="og:type" content="website">
@@ -66,11 +105,11 @@ const {
 </head>
 <body class="dark-theme">
   <div id="app" class="app-container">
-    <Header />
+    <Header transition:persist />
 
     <slot />
 
-    <Footer />
+    <Footer transition:persist />
   </div>
 
   <!-- PWA Toasts & Banner Notifications -->

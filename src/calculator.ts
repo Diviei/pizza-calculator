@@ -147,13 +147,19 @@ export function calculateSimpleDough(
   tempRt: number = 22,
   tempFridge: number = 4,
   pizzaStyle: PizzaStyle = 'neapolitan',
+  hasFridge: boolean = true,
 ): CalculationResults & { hoursRt: number; hoursFridge: number; ballWeight: number } {
   const safeBalls = Math.max(1, numberOfBalls || 1);
   const safeHours = Math.max(0, hoursTotal || 0);
   const styleConfig = PIZZA_STYLES[pizzaStyle] || PIZZA_STYLES.neapolitan;
 
-  const hoursRt = safeHours <= 8 ? safeHours : 4;
-  const hoursFridge = safeHours <= 8 ? 0 : safeHours - 4;
+  let hoursRt = safeHours;
+  let hoursFridge = 0;
+
+  if (hasFridge) {
+    hoursRt = safeHours <= 8 ? safeHours : 4;
+    hoursFridge = safeHours <= 8 ? 0 : safeHours - 4;
+  }
 
   const results = calculateDough({
     numberOfBalls: safeBalls,
