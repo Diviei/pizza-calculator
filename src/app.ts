@@ -1456,9 +1456,15 @@ function initEventListeners(): void {
 }
 
 // Initial Bootstrapping
-document.addEventListener('DOMContentLoaded', () => {
-  initApp();
-});
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initApp();
+    });
+  } else if (document.getElementById('app')) {
+    initApp();
+  }
+}
 
 // Register Service Worker for PWA Offline Capabilities & Cache Versioning
 if ('serviceWorker' in navigator) {

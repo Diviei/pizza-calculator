@@ -1,0 +1,289 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Calculadora de Masa de Pizza | Fermentación Mixta"
+  description="Calcula los ingredientes exactos para tu masa de pizza napolitana o casera según tiempo a temperatura ambiente y nevera."
+>
+  <main class="main-card">
+    <!-- Mode Switcher Tabs Component -->
+    <pizza-mode-tabs active-mode="simple"></pizza-mode-tabs>
+
+    <!-- Container: Modo Simple -->
+    <div id="simpleModeContainer" class="mode-content">
+      <div class="mode-layout">
+        <!-- Form Column -->
+        <div class="mode-form-col">
+          <section class="form-block">
+            <div class="block-header">
+              <span class="block-icon">⚡</span>
+              <h2 data-i18n="simpleSectionTitle">Configuración Rápida</h2>
+            </div>
+
+            <!-- Pizza Style Selector Component in Simple Mode -->
+            <pizza-style-selector id="simpleStyleSelector" active-style="neapolitan"></pizza-style-selector>
+
+            <div class="grid-2cols">
+              <div class="input-group">
+                <label for="simpleBalls" data-i18n="numberOfBalls">Número de bolas</label>
+                <number-stepper target-id="simpleBalls" min="1" max="100" value="4" step="1" action-step="1"></number-stepper>
+              </div>
+
+              <range-slider label-key="simpleHoursLabel" unit="h" target-id="simpleHours" val-id="simpleHoursVal" min="2" max="72" value="8" step="1"></range-slider>
+            </div>
+
+            <!-- Preset Buttons Component -->
+            <preset-buttons value="8"></preset-buttons>
+
+            <!-- Yeast Type Selector in Simple Mode -->
+            <div class="input-group" style="margin-top: 16px;">
+              <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
+              <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
+                <input type="radio" id="simpleYeastFresh" name="simpleYeastType" value="Fresh" checked>
+                <label for="simpleYeastFresh" class="segment-label">
+                  <span data-i18n="yeastFresh">🌾 Fresca</span>
+                </label>
+
+                <input type="radio" id="simpleYeastDry" name="simpleYeastType" value="Instant Dry">
+                <label for="simpleYeastDry" class="segment-label">
+                  <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Temperatures in Simple Mode -->
+            <div class="grid-2cols" style="margin-top: 16px;">
+              <range-slider label-key="tempRt" unit="°C" target-id="simpleTempRtSlider" val-id="simpleTempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+              <range-slider label-key="tempFridge" unit="°C" target-id="simpleTempFridgeSlider" val-id="simpleTempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+            </div>
+
+            <div class="info-badge highlight-badge">
+              <span id="simpleTimeSplitDisplay">⚡ 4h a Temp. Ambiente (22°C) + ❄️ 4h en Nevera (4°C)</span>
+            </div>
+
+            <div class="defaults-notice" data-i18n="simpleDefaultsInfo">
+              Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal
+            </div>
+          </section>
+        </div>
+
+        <!-- Results Column -->
+        <div class="mode-results-col">
+          <section class="results-section simple-results-card" aria-live="polite">
+            <div class="results-header">
+              <div>
+                <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
+                <span id="simpleDoughSummaryDisplay" class="results-subtitle">Masa total: 1120.0 g (4 bolas de 280g)</span>
+              </div>
+              <div class="header-action-buttons">
+                <button id="simpleShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
+                <button id="simpleCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+              </div>
+            </div>
+
+            <div class="simple-ingredients-grid">
+              <ingredient-card simple icon="🌾" title-key="flour" res-id="simpleFlourRes" value="668.7" card-class="ingredient-flour"></ingredient-card>
+              <ingredient-card simple icon="💧" title-key="water" res-id="simpleWaterRes" value="434.6" card-class="ingredient-water"></ingredient-card>
+              <ingredient-card simple icon="🧂" title-key="saltIngredient" res-id="simpleSaltRes" value="16.7" card-class="ingredient-salt"></ingredient-card>
+              <ingredient-card simple title-id="simpleYeastTitle" title-key="yeastFreshLabel" res-id="simpleYeastRes" value="2.08" card-class="ingredient-yeast"></ingredient-card>
+            </div>
+
+            <div class="prep-guide-card">
+              <div class="prep-guide-header">
+                <span class="prep-guide-title" data-i18n="simpleTipTitle">💡 Guía Rápida de Preparación</span>
+              </div>
+              <div id="simplePrepSteps" class="prep-steps-list"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container: Modo Avanzado -->
+    <div id="advancedModeContainer" class="mode-content hidden">
+      <div class="mode-layout">
+        <!-- Form Column -->
+        <div class="mode-form-col">
+          <!-- Section 1: Dough Dimensions -->
+          <section class="form-block">
+            <div class="block-header">
+              <span class="block-icon">🍕</span>
+              <h2 data-i18n="block1Title">Dimensiones de la Masa</h2>
+            </div>
+
+            <!-- Pizza Style Selector Component in Advanced Mode -->
+            <pizza-style-selector id="advancedStyleSelector" active-style="neapolitan"></pizza-style-selector>
+
+            <div class="grid-2cols">
+              <div class="input-group">
+                <label for="numberOfBalls" data-i18n="numberOfBalls">Número de bolas</label>
+                <number-stepper target-id="numberOfBalls" min="1" max="100" value="1" step="1" action-step="1"></number-stepper>
+              </div>
+
+              <div class="input-group">
+                <label for="ballWeight" data-i18n="ballWeight">Peso por bola (g)</label>
+                <number-stepper target-id="ballWeight" min="50" max="1000" value="280" step="5" action-step="10"></number-stepper>
+              </div>
+            </div>
+
+            <div class="info-badge">
+              <span data-i18n="totalDoughWeightLabel">Peso total de masa:</span>
+              <strong id="totalDoughWeightDisplay">280.0 g</strong>
+            </div>
+          </section>
+
+          <!-- Section 2: Core Parameters -->
+          <section class="form-block">
+            <div class="block-header">
+              <span class="block-icon">⚖️</span>
+              <h2 data-i18n="block2Title">Parámetros Clave</h2>
+            </div>
+
+            <!-- Hydration -->
+            <range-slider label-key="hydration" unit="%" target-id="hydrationSlider" val-id="hydrationVal" min="50" max="80" value="65" step="1"></range-slider>
+
+            <!-- Salt -->
+            <range-slider label-key="salt" unit="%" target-id="saltSlider" val-id="saltVal" min="1.0" max="4.0" value="2.5" step="0.1"></range-slider>
+
+            <!-- Yeast Type Selector -->
+            <div class="input-group" style="margin-top: 16px;">
+              <label data-i18n="yeastTypeLabel">Tipo de Levadura</label>
+              <div class="segmented-control" role="radiogroup" aria-label="Tipo de Levadura">
+                <input type="radio" id="yeastFresh" name="yeastType" value="Fresh" checked>
+                <label for="yeastFresh" class="segment-label">
+                  <span data-i18n="yeastFresh">🌾 Fresca</span>
+                </label>
+
+                <input type="radio" id="yeastDry" name="yeastType" value="Instant Dry">
+                <label for="yeastDry" class="segment-label">
+                  <span data-i18n="yeastDry">🌱 Seca Instantánea</span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: Fermentation Times & Temps -->
+          <section class="form-block">
+            <div class="block-header">
+              <span class="block-icon">⏱️</span>
+              <h2 data-i18n="block3Title">Tiempos y Temperaturas</h2>
+            </div>
+
+            <!-- Room Temperature Phase -->
+            <div class="phase-card phase-rt-card">
+              <div class="phase-title">
+                <span class="phase-icon">🔥</span>
+                <span data-i18n="phaseRt">Fase Temperatura Ambiente (TA)</span>
+              </div>
+              
+              <div class="grid-2cols">
+                <div class="input-group">
+                  <label for="hoursRt" data-i18n="hoursRt">Tiempo TA (horas)</label>
+                  <input type="number" id="hoursRt" min="0" max="72" value="4" step="0.5">
+                </div>
+
+                <range-slider label-key="tempRt" unit="°C" target-id="tempRtSlider" val-id="tempRtVal" min="10" max="35" value="22" step="1"></range-slider>
+              </div>
+            </div>
+
+            <!-- Fridge Phase -->
+            <div class="phase-card phase-fridge-card">
+              <div class="phase-title">
+                <span class="phase-icon">❄️</span>
+                <span data-i18n="phaseFridge">Fase Nevera / Frío (TC)</span>
+              </div>
+
+              <div class="grid-2cols">
+                <div class="input-group">
+                  <label for="hoursFridge" data-i18n="hoursFridge">Tiempo Nevera (horas)</label>
+                  <input type="number" id="hoursFridge" min="0" max="120" value="0" step="1">
+                </div>
+
+                <range-slider label-key="tempFridge" unit="°C" target-id="tempFridgeSlider" val-id="tempFridgeVal" min="2" max="10" value="4" step="1"></range-slider>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Results Column -->
+        <div class="mode-results-col">
+          <!-- Section 4: Results Display -->
+          <section class="results-section" aria-live="polite">
+            <div class="results-header">
+              <div>
+                <h2 data-i18n="resultsTitle">Ingredientes Necesarios</h2>
+                <span class="results-subtitle" data-i18n="resultsSubtitle">Cálculo exacto para tus dosis de masa</span>
+              </div>
+              <div class="header-action-buttons">
+                <button id="advancedShareBtn" type="button" class="btn-copy-recipe btn-share-recipe" title="Compartir enlace de receta" data-i18n="shareRecipeBtn">🔗 Compartir Receta</button>
+                <button id="advancedCopyBtn" type="button" class="btn-copy-recipe" title="Copiar receta al portapapeles" data-i18n="copyRecipeBtn">📋 Copiar Receta</button>
+              </div>
+            </div>
+
+            <div id="warningNotice" class="warning-notice hidden">
+              <span data-i18n="warningNotice">⚠️ Los tiempos de fermentación suman 0h. Añade horas a temp. ambiente o nevera para calcular la levadura.</span>
+            </div>
+
+            <div class="results-grid">
+              <ingredient-card title-key="flour" res-id="flourRes" value="0.0" baker-pct="100%" card-class="primary"></ingredient-card>
+              <ingredient-card title-key="water" res-id="waterRes" value="0.0" pct-id="waterPctDisplay" baker-pct="65%"></ingredient-card>
+              <ingredient-card title-key="saltIngredient" res-id="saltRes" value="0.0" pct-id="saltPctDisplay" baker-pct="2.5%"></ingredient-card>
+              <ingredient-card title-id="yeastLabel" title-key="yeastFreshLabel" res-id="yeastRes" value="0.00" pct-id="yeastPctDisplay" baker-pct="0.00%" card-class="highlight"></ingredient-card>
+            </div>
+
+            <div class="prep-guide-card" style="margin-top: 14px;">
+              <div class="prep-guide-header">
+                <span class="prep-guide-title" data-i18n="simpleTipTitle">💡 Guía Rápida de Preparación</span>
+              </div>
+              <div id="advancedPrepSteps" class="prep-steps-list"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ & Fermentation Guide Section for Search & Rich Snippets -->
+    <section class="faq-card" aria-labelledby="faqHeader">
+      <h2 id="faqHeader" class="faq-title" data-i18n="faqSectionTitle">Preguntas Frecuentes y Guía de Fermentación</h2>
+      
+      <div class="faq-accordion">
+        <details class="faq-item" open>
+          <summary class="faq-question"><span data-i18n="faqQ1">¿Cómo funciona el cálculo de fermentación mixta (Nevera + Ambiente)?</span></summary>
+          <p class="faq-answer" data-i18n="faqA1">Nuestra calculadora utiliza un algoritmo cinético exponencial que modela la actividad de las levaduras a diferentes temperaturas. La actividad es cercana a cero a 3.5°C (nevera) y aumenta exponencialmente a temperatura ambiente, acumulando la maduración requerida.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span data-i18n="faqQ2">¿Qué es el porcentaje de panadero (Baker's Percentage)?</span></summary>
+          <p class="faq-answer" data-i18n="faqA2">Es la fórmula estándar usada por pizzaiolos donde el peso de la harina representa el 100%. Todos los demás ingredientes (agua, sal, levadura) se calculan como un porcentaje relativo a la harina.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span data-i18n="faqQ3">¿Cuál es la proporción entre levadura fresca y levadura seca instantánea?</span></summary>
+          <p class="faq-answer" data-i18n="faqA3">La proporción estándar es 3 a 1. 3 gramos de levadura fresca de panadería equivalen a 1 gramo de levadura seca instantánea en polvo.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question"><span data-i18n="faqQ4">¿Puedo usar esta calculadora sin conexión a internet?</span></summary>
+          <p class="faq-answer" data-i18n="faqA4">¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile Floating Quick Summary Bar -->
+  <div id="mobileQuickBar" class="mobile-quick-bar">
+    <div class="quick-bar-content">
+      <span class="quick-bar-title" data-i18n="quickSummaryTitle">Resumen en Tiempo Real</span>
+      <div class="quick-bar-items">
+        <span id="quickFlour">🌾 0g</span>
+        <span id="quickWater">💧 0g</span>
+        <span id="quickYeast">🧫 0g</span>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import '../app.ts';
+</script>

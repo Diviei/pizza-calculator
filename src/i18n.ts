@@ -23,6 +23,11 @@ export interface TranslationDictionary {
   colorThemeChic: string;
   colorThemeBasil: string;
 
+  navHome: string;
+  navCalculator: string;
+  navGuides: string;
+  navFaq: string;
+
   // Block 1: Dimensions
   block1Title: string;
   numberOfBalls: string;
@@ -143,6 +148,11 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     colorThemeChic: 'Chic (Rosa)',
     colorThemeBasil: 'Basílico (Verde)',
 
+    navHome: 'Inicio',
+    navCalculator: 'Calculadora',
+    navGuides: 'Guías',
+    navFaq: 'FAQ',
+
     block1Title: 'Dimensiones de la Masa',
     numberOfBalls: 'Número de bolas',
     ballWeight: 'Peso por bola (g)',
@@ -258,6 +268,11 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     colorThemeAmber: 'Classic (Amber)',
     colorThemeChic: 'Chic (Pink)',
     colorThemeBasil: 'Basil (Green)',
+
+    navHome: 'Home',
+    navCalculator: 'Calculator',
+    navGuides: 'Guides',
+    navFaq: 'FAQ',
 
     block1Title: 'Dough Dimensions',
     numberOfBalls: 'Number of dough balls',
@@ -375,6 +390,11 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     colorThemeChic: 'Chic (Rosa)',
     colorThemeBasil: 'Basilico (Verde)',
 
+    navHome: 'Home',
+    navCalculator: 'Calcolatore',
+    navGuides: 'Guide',
+    navFaq: 'FAQ',
+
     block1Title: "Dimensioni dell'Impasto",
     numberOfBalls: 'Numero di panetti',
     ballWeight: 'Peso per panetto (g)',
@@ -491,6 +511,11 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     colorThemeChic: 'Chic (Rose)',
     colorThemeBasil: 'Basilic (Vert)',
 
+    navHome: 'Accueil',
+    navCalculator: 'Calculateur',
+    navGuides: 'Guides',
+    navFaq: 'FAQ',
+
     block1Title: 'Dimensions de la Pâte',
     numberOfBalls: 'Nombre de pâtons',
     ballWeight: 'Poids par pâton (g)',
@@ -605,6 +630,11 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     colorThemeAmber: 'Klassisch (Bernstein)',
     colorThemeChic: 'Chic (Rosa)',
     colorThemeBasil: 'Basilikum (Grün)',
+
+    navHome: 'Startseite',
+    navCalculator: 'Rechner',
+    navGuides: 'Anleitungen',
+    navFaq: 'FAQ',
 
     block1Title: 'Teig-Dimensionen',
     numberOfBalls: 'Anzahl Teiglinge',
