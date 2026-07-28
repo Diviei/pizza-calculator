@@ -754,35 +754,43 @@ function loadState(): void {
     if (saved) {
       const state: Partial<DoughInputs> = JSON.parse(saved);
 
-      if (state.numberOfBalls !== undefined) elements.numberOfBalls.value = state.numberOfBalls.toString();
-      if (state.ballWeight !== undefined) elements.ballWeight.value = state.ballWeight.toString();
+      if (state.numberOfBalls !== undefined && elements.numberOfBalls) {
+        elements.numberOfBalls.value = state.numberOfBalls.toString();
+      }
+      if (state.ballWeight !== undefined && elements.ballWeight) {
+        elements.ballWeight.value = state.ballWeight.toString();
+      }
 
       if (state.hydrationPercentage !== undefined) {
-        elements.hydrationSlider.value = state.hydrationPercentage.toString();
-        elements.hydrationVal.textContent = state.hydrationPercentage.toString();
+        if (elements.hydrationSlider) elements.hydrationSlider.value = state.hydrationPercentage.toString();
+        if (elements.hydrationVal) elements.hydrationVal.textContent = state.hydrationPercentage.toString();
       }
 
       if (state.saltPercentage !== undefined) {
-        elements.saltSlider.value = state.saltPercentage.toString();
-        elements.saltVal.textContent = state.saltPercentage.toString();
+        if (elements.saltSlider) elements.saltSlider.value = state.saltPercentage.toString();
+        if (elements.saltVal) elements.saltVal.textContent = state.saltPercentage.toString();
       }
 
-      if (state.yeastType) {
+      if (state.yeastType && elements.yeastInputs) {
         elements.yeastInputs.forEach((input) => {
           input.checked = String(input.value) === String(state.yeastType);
         });
       }
 
-      if (state.hoursRt !== undefined) elements.hoursRt.value = state.hoursRt.toString();
+      if (state.hoursRt !== undefined && elements.hoursRt) {
+        elements.hoursRt.value = state.hoursRt.toString();
+      }
       if (state.tempRt !== undefined) {
-        elements.tempRtSlider.value = state.tempRt.toString();
-        elements.tempRtVal.textContent = state.tempRt.toString();
+        if (elements.tempRtSlider) elements.tempRtSlider.value = state.tempRt.toString();
+        if (elements.tempRtVal) elements.tempRtVal.textContent = state.tempRt.toString();
       }
 
-      if (state.hoursFridge !== undefined) elements.hoursFridge.value = state.hoursFridge.toString();
+      if (state.hoursFridge !== undefined && elements.hoursFridge) {
+        elements.hoursFridge.value = state.hoursFridge.toString();
+      }
       if (state.tempFridge !== undefined) {
-        elements.tempFridgeSlider.value = state.tempFridge.toString();
-        elements.tempFridgeVal.textContent = state.tempFridge.toString();
+        if (elements.tempFridgeSlider) elements.tempFridgeSlider.value = state.tempFridge.toString();
+        if (elements.tempFridgeVal) elements.tempFridgeVal.textContent = state.tempFridge.toString();
       }
     }
   } catch (e) {
