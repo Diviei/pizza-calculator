@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title?: string;
+  titleI18n?: string;
+  description?: string;
+  descI18n?: string;
+  icon?: string;
+  badge?: string;
+  badgeI18n?: string;
+  variant?: 'default' | 'bento' | 'specimen';
+  class?: string;
+}
+
+const {
+  title,
+  titleI18n,
+  description,
+  descI18n,
+  icon,
+  badge,
+  badgeI18n,
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+
+const cardClasses = [
+  'feature-card',
+  variant === 'specimen' ? 'style-preview-card' : '',
+  className,
+].filter(Boolean).join(' ');
+---
+
+<div class={cardClasses}>
+  {(icon || badge) && (
+    <div class="card-top-row">
+      {icon && (
+        <div class="feature-icon">
+          <Icon name={icon} />
+        </div>
+      )}
+      {badge && (
+        <span class="bento-badge" data-i18n={badgeI18n}>{badge}</span>
+      )}
+    </div>
+  )}
+
+  {title && (
+    <h3 data-i18n={titleI18n}>{title}</h3>
+  )}
+
+  {description && (
+    <p data-i18n={descI18n}>{description}</p>
+  )}
+
+  <slot />
+</div>

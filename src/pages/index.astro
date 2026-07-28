@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 import { Icon } from 'astro-icon/components';
 ---
 
@@ -54,61 +55,64 @@ import { Icon } from 'astro-icon/components';
 
       <div class="bento-features-grid">
         <!-- Feature 1: Large Bento (Baker's % Spec Sheet) -->
-        <div class="feature-card bento-card-large">
-          <div class="card-top-row">
-            <div class="feature-icon">
-              <Icon name="lucide:scale" />
-            </div>
-            <span class="bento-badge">Fórmula Profesional</span>
-          </div>
-          <h3 data-i18n="homeFeature1Title">Porcentaje de Panadero</h3>
-          <p data-i18n="homeFeature1Desc">Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional.</p>
+        <Card
+          class="bento-card-large"
+          icon="lucide:scale"
+          badge="Fórmula Profesional"
+          title="Porcentaje de Panadero"
+          titleI18n="homeFeature1Title"
+          description="Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional."
+          descI18n="homeFeature1Desc"
+        >
           <div class="bento-formula-preview">
             <div class="formula-row"><span>Harina (Base)</span><strong>100.0%</strong></div>
             <div class="formula-row"><span>Agua (Hidratación)</span><strong>65.0%</strong></div>
             <div class="formula-row"><span>Sal Marina</span><strong>2.5%</strong></div>
           </div>
-        </div>
+        </Card>
 
         <!-- Feature 2: Kinetic Fermentation -->
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:snowflake" />
-          </div>
-          <h3 data-i18n="homeFeature2Title">Fermentación Mixta</h3>
-          <p data-i18n="homeFeature2Desc">Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA).</p>
+        <Card
+          icon="lucide:snowflake"
+          title="Fermentación Mixta"
+          titleI18n="homeFeature2Title"
+          description="Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA)."
+          descI18n="homeFeature2Desc"
+        >
           <div class="ferment-timeline-badge">
             <span class="temp-chip rt">TA (22°C)</span>
             <span class="timeline-arrow">➔</span>
             <span class="temp-chip tc">Nevera (4°C)</span>
           </div>
-        </div>
+        </Card>
 
         <!-- Feature 3: Modes -->
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:zap" />
-          </div>
-          <h3 data-i18n="homeFeature3Title">Modos Simple y Avanzado</h3>
-          <p data-i18n="homeFeature3Desc">Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal.</p>
+        <Card
+          icon="lucide:zap"
+          title="Modos Simple y Avanzado"
+          titleI18n="homeFeature3Title"
+          description="Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal."
+          descI18n="homeFeature3Desc"
+        >
           <div class="mode-toggle-preview">
             <span class="mode-pill active">Simple</span>
             <span class="mode-pill">Avanzado</span>
           </div>
-        </div>
+        </Card>
 
         <!-- Feature 4: Offline PWA -->
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:wifi-off" />
-          </div>
-          <h3 data-i18n="homeFeature4Title">100% Offline (PWA)</h3>
-          <p data-i18n="homeFeature4Desc">Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa.</p>
+        <Card
+          icon="lucide:wifi-off"
+          title="100% Offline (PWA)"
+          titleI18n="homeFeature4Title"
+          description="Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa."
+          descI18n="homeFeature4Desc"
+        >
           <div class="pwa-status-pill">
             <span class="status-dot"></span>
             <span>App Lista Sin Cobertura</span>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
 
@@ -120,7 +124,7 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <div class="styles-preview-grid">
-        <div class="style-preview-card">
+        <Card variant="specimen">
           <div class="style-card-header">
             <Icon name="lucide:flame" class="style-card-icon" />
             <div>
@@ -134,9 +138,9 @@ import { Icon } from 'astro-icon/components';
             <div class="spec-cell"><span>Hidratación:</span> <strong>65 %</strong></div>
             <div class="spec-cell"><span>Maduración:</span> <strong>24h–48h</strong></div>
           </div>
-        </div>
+        </Card>
 
-        <div class="style-preview-card">
+        <Card variant="specimen">
           <div class="style-card-header">
             <Icon name="lucide:wheat" class="style-card-icon" />
             <div>
@@ -150,7 +154,7 @@ import { Icon } from 'astro-icon/components';
             <div class="spec-cell"><span>Hidratación:</span> <strong>57 %</strong></div>
             <div class="spec-cell"><span>Maduración:</span> <strong>12h–24h</strong></div>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
 
