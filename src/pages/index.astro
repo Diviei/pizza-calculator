@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import StyleCard from '../components/StyleCard.astro';
 import { Icon } from 'astro-icon/components';
@@ -10,40 +11,42 @@ import { Icon } from 'astro-icon/components';
   description="Calcula los ingredientes exactos para tu masa de pizza napolitana, romana o casera según tiempo a temperatura ambiente y nevera."
 >
   <main class="home-landing-container">
-    <!-- Hero Section: Hallmark Stat-Led Editorial Hero -->
-    <section class="home-hero-section">
-      <div class="hero-bg-texture"></div>
-      <div class="hero-content">
-        <div class="hero-badge">
-          <Icon name="lucide:sparkles" class="hero-badge-icon" />
-          <span data-i18n="homeHeroBadge">Calculadora de Masa PWA 100% Offline</span>
+    <!-- Hero Section: Hallmark Stat-Led Editorial Hero using Card Primitive -->
+    <section>
+      <Card class="home-hero-section">
+        <div class="hero-bg-texture"></div>
+        <div class="hero-content">
+          <div class="hero-badge">
+            <Icon name="lucide:sparkles" class="hero-badge-icon" />
+            <span data-i18n="homeHeroBadge">Calculadora de Masa PWA 100% Offline</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="homeHeroTitle">
+            Calcula la Masa de Pizza Perfecta
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="homeHeroSubtitle">
+            Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.
+          </p>
+
+          <!-- Hallmark Live Formula Spec Strip -->
+          <div class="hero-formula-strip">
+            <span class="strip-label">Fórmula Base:</span>
+            <code class="strip-code">Harina 100% • Agua 65% • Sal 2.5% • Levadura 0.3% • TA + TC</code>
+          </div>
+
+          <div class="hero-actions">
+            <a href="/calculator" class="btn-hero-primary">
+              <Icon name="lucide:calculator" class="btn-icon-svg" />
+              <span data-i18n="homeCtaBtn">Abrir Calculadora</span>
+            </a>
+            <a href="/faq" class="btn-hero-secondary">
+              <Icon name="lucide:book-open" class="btn-icon-svg" />
+              <span data-i18n="navFaq">Guía de Fermentación</span>
+            </a>
+          </div>
         </div>
-
-        <h1 class="hero-title" data-i18n="homeHeroTitle">
-          Calcula la Masa de Pizza Perfecta
-        </h1>
-
-        <p class="hero-subtitle" data-i18n="homeHeroSubtitle">
-          Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.
-        </p>
-
-        <!-- Hallmark Live Formula Spec Strip -->
-        <div class="hero-formula-strip">
-          <span class="strip-label">Fórmula Base:</span>
-          <code class="strip-code">Harina 100% • Agua 65% • Sal 2.5% • Levadura 0.3% • TA + TC</code>
-        </div>
-
-        <div class="hero-actions">
-          <a href="/calculator" class="btn-hero-primary">
-            <Icon name="lucide:calculator" class="btn-icon-svg" />
-            <span data-i18n="homeCtaBtn">Abrir Calculadora</span>
-          </a>
-          <a href="/faq" class="btn-hero-secondary">
-            <Icon name="lucide:book-open" class="btn-icon-svg" />
-            <span data-i18n="navFaq">Guía de Fermentación</span>
-          </a>
-        </div>
-      </div>
+      </Card>
     </section>
 
     <!-- Key Features Section: Hallmark Bento Spec Grid -->
@@ -147,17 +150,19 @@ import { Icon } from 'astro-icon/components';
       </div>
     </section>
 
-    <!-- Bottom Launch Banner -->
-    <section class="home-cta-banner">
-      <div class="cta-banner-content">
-        <Icon name="lucide:pizza" class="cta-banner-icon" />
-        <h2 data-i18n="homeCtaTitle">¿Listo para amasar tu próxima pizza?</h2>
-        <p data-i18n="homeCtaSubtitle">Obtén la receta con las cantidades exactas de ingredientes en segundos.</p>
-        <a href="/calculator" class="btn-hero-primary">
-          <Icon name="lucide:calculator" class="btn-icon-svg" />
-          <span data-i18n="homeCtaBtn">Ir a la Calculadora</span>
-        </a>
-      </div>
+    <!-- Bottom Launch Banner using Card Primitive -->
+    <section>
+      <Card class="home-cta-banner">
+        <div class="cta-banner-content">
+          <Icon name="lucide:pizza" class="cta-banner-icon" />
+          <h2 data-i18n="homeCtaTitle">¿Listo para amasar tu próxima pizza?</h2>
+          <p data-i18n="homeCtaSubtitle">Obtén la receta con las cantidades exactas de ingredientes en segundos.</p>
+          <a href="/calculator" class="btn-hero-primary">
+            <Icon name="lucide:calculator" class="btn-icon-svg" />
+            <span data-i18n="homeCtaBtn">Ir a la Calculadora</span>
+          </a>
+        </div>
+      </Card>
     </section>
   </main>
 </Layout>
