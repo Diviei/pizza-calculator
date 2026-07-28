@@ -2272,8 +2272,8 @@ svg {
 }
 
 .section-header {
-  text-align: left;
-  margin-bottom: 24px;
+  text-align: center;
+  margin-bottom: 32px;
 }
 
 .section-chapter-tag {
@@ -2283,6 +2283,8 @@ svg {
   color: var(--color-primary);
   letter-spacing: 0.08em;
   margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
 }
 
 .section-title {
@@ -2298,6 +2300,8 @@ svg {
   color: var(--text-muted);
   margin-top: 6px;
   max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Hallmark Bento Spec Grid */
@@ -2307,9 +2311,26 @@ svg {
   gap: 20px;
 }
 
+.bento-card-large {
+  grid-column: span 2;
+}
+
+@media (min-width: 841px) {
+  .bento-card-large .card-body-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+}
+
 @media (max-width: 840px) {
   .bento-features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .bento-card-large {
+    grid-column: span 1;
   }
 }
 
