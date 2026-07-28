@@ -9,8 +9,9 @@ interface Props {
   icon?: string;
   badge?: string;
   badgeI18n?: string;
-  variant?: 'default' | 'bento' | 'specimen';
+  variant?: 'default' | 'bento' | 'specimen' | 'bordered' | 'interactive';
   class?: string;
+  [key: string]: unknown;
 }
 
 const {
@@ -23,36 +24,51 @@ const {
   badgeI18n,
   variant = 'default',
   class: className = '',
+  ...rest
 } = Astro.props;
 
 const cardClasses = [
-  'feature-card',
-  variant === 'specimen' ? 'style-preview-card' : '',
+  'card',
+  variant !== 'default' ? `card-${variant}` : '',
   className,
 ].filter(Boolean).join(' ');
 ---
 
-<div class={cardClasses}>
-  {(icon || badge) && (
-    <div class="card-top-row">
-      {icon && (
-        <div class="feature-icon">
-          <Icon name={icon} />
-        </div>
-      )}
-      {badge && (
-        <span class="bento-badge" data-i18n={badgeI18n}>{badge}</span>
-      )}
-    </div>
-  )}
+<div class={cardClasses} {...rest}>
+  <slot name="header">
+    {(icon || badge || title || description) && (
+      <header class="card-header">
+        {(icon || badge) && (
+          <div class="card-meta">
+            {icon && (
+              <div class="card-icon">
+                <Icon name={icon} />
+              </div>
+            )}
+            {badge && (
+              <span class="card-badge" data-i18n={badgeI18n}>{badge}</span>
+            )}
+          </div>
+        )}
 
-  {title && (
-    <h3 data-i18n={titleI18n}>{title}</h3>
-  )}
+        {title && (
+          <h3 class="card-title" data-i18n={titleI18n}>{title}</h3>
+        )}
 
-  {description && (
-    <p data-i18n={descI18n}>{description}</p>
-  )}
+        {description && (
+          <p class="card-description" data-i18n={descI18n}>{description}</p>
+        )}
+      </header>
+    )}
+  </slot>
 
-  <slot />
+  <div class="card-body">
+    <slot />
+  </div>
+
+  {Astro.slots.has('footer') && (
+    <footer class="card-footer">
+      <slot name="footer" />
+    </footer>
+  )}
 </div>
