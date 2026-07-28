@@ -1,5 +1,8 @@
+/* Hallmark · pre-emit critique: P5 H5 E5 S4 R5 V5 · genre: editorial (artisan baker) */
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/outfit";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/jetbrains-mono";
 
 /* ==========================================================================
    Pizza Dough Calculator - Custom Design System (Vanilla CSS)
@@ -7,7 +10,7 @@
 
 /* 1. Theme Color Tokens & CSS Variables */
 :root {
-  /* Default Palette (Amber) */
+  /* Default Palette (Amber / Terracotta Baker) */
   --color-primary: #d97706;
   --color-primary-hover: #b45309;
   --color-primary-light: rgba(217, 119, 6, 0.14);
@@ -16,8 +19,10 @@
   --color-success: #10b981;
 
   /* Typography */
+  --font-serif: "Newsreader Variable", "Newsreader", Georgia, serif;
   --font-heading: "Outfit Variable", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", monospace;
 
   /* Layout Tokens */
   --radius-sm: 8px;
@@ -1630,36 +1635,49 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .faq-title {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
   color: var(--text-main);
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+.faq-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .faq-accordion {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 6px;
 }
 
 .faq-item {
-  background: var(--bg-input);
+  background: var(--bg-block);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.faq-item:hover {
+  border-color: var(--color-primary);
 }
 
 .faq-item[open] {
-  border-color: var(--border-focus);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .faq-question {
-  padding: 12px 16px;
+  padding: 16px 18px;
+  font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   color: var(--text-main);
   cursor: pointer;
   user-select: none;
@@ -2086,20 +2104,20 @@ svg {
   margin-right: 6px;
 }
 
-/* 11. Home Landing Page Styles */
+/* 11. Home Landing Page Styles (Hallmark Anti-AI-Slop Architecture) */
 .home-landing-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1040px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 10px 0;
+  gap: 48px;
+  padding: 10px 0 30px 0;
 }
 
 .home-hero-section {
   text-align: center;
-  padding: 40px 20px;
+  padding: 56px 24px 44px 24px;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -2108,26 +2126,39 @@ svg {
   overflow: hidden;
 }
 
+.hero-bg-texture {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, var(--color-primary-light), transparent 70%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .hero-content {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--color-primary-light);
+  background: var(--bg-block);
   color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--border-color);
   padding: 6px 16px;
   border-radius: var(--radius-pill);
-  font-size: 0.85rem;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-badge-icon {
@@ -2137,19 +2168,52 @@ svg {
 }
 
 .hero-title {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
-  line-height: 1.15;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.1;
   color: var(--text-main);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
   color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 620px;
+  line-height: 1.65;
+  max-width: 660px;
+}
+
+.hero-formula-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  margin-top: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.strip-label {
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
+
+.strip-code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .hero-actions {
@@ -2158,7 +2222,7 @@ svg {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .btn-hero-primary {
@@ -2166,20 +2230,24 @@ svg {
   align-items: center;
   gap: 8px;
   background: var(--color-primary);
-  color: #121212;
+  color: #ffffff;
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 800;
   padding: 14px 28px;
   border-radius: var(--radius-pill);
   text-decoration: none;
-  box-shadow: 0 8px 24px var(--color-primary-light);
+  box-shadow: 0 8px 20px var(--color-primary-light);
   transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
 .btn-hero-primary:hover {
   background: var(--color-primary-hover);
   transform: translateY(-2px);
+}
+
+.btn-hero-primary:active {
+  transform: translateY(0);
 }
 
 .btn-hero-secondary {
@@ -2205,49 +2273,120 @@ svg {
 
 .section-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+.section-chapter-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
 }
 
 .section-title {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
   color: var(--text-main);
 }
 
 .section-subtitle {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--text-muted);
   margin-top: 6px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.features-grid {
+/* Hallmark Bento Spec Grid */
+.bento-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
+.bento-card-large {
+  grid-column: span 2;
+}
+
+@media (min-width: 841px) {
+  .bento-card-large .card-body-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 840px) {
+  .bento-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-card-large {
+    grid-column: span 1;
+  }
+}
+
+/* Generic Design System Card Component */
+.card,
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 26px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  gap: 14px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+.card:hover,
 .feature-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-focus);
+  transform: translateY(-3px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
 }
 
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-meta,
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-badge,
+.bento-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card-icon,
 .feature-icon {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--color-primary-light);
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
   color: var(--color-primary);
   display: flex;
   align-items: center;
@@ -2255,22 +2394,136 @@ svg {
   font-size: 1.3rem;
 }
 
+.card-title,
 .feature-card h3 {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
   font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.card-description,
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.bento-formula-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+
+.formula-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.formula-row strong {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  font-size: 0.88rem;
+}
+
+.ferment-timeline-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.temp-chip {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.temp-chip.rt {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.temp-chip.tc {
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
   color: var(--text-main);
 }
 
-.feature-card p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.55;
+.timeline-arrow {
+  color: var(--text-subtle);
+  font-size: 0.8rem;
 }
 
+.mode-toggle-preview {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.mode-pill {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.mode-pill.active {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pwa-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-success);
+  margin-top: auto;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+}
+
+/* Hallmark Specimen Diptych */
 .styles-preview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
@@ -2278,10 +2531,15 @@ svg {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 26px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.style-preview-card:hover {
+  border-color: var(--color-primary);
 }
 
 .style-card-header {
@@ -2291,45 +2549,82 @@ svg {
 }
 
 .style-card-icon {
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   color: var(--color-primary);
 }
 
 .style-card-header h3 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
   color: var(--text-main);
 }
 
 .style-tag {
   display: inline-block;
-  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--color-primary);
   background: var(--color-primary-light);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
+  text-transform: uppercase;
 }
 
 .style-preview-card p {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+.style-spec-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin-top: 4px;
+}
+
+.spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+}
+
+.spec-cell strong {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-main);
 }
 
 .home-cta-banner {
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-block) 100%);
-  border: 1px solid var(--color-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 40px 24px;
+  padding: 44px 24px;
   text-align: center;
   box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-cta-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 3px solid var(--color-primary);
+  pointer-events: none;
 }
 
 .cta-banner-content {
-  max-width: 600px;
+  max-width: 620px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -2338,19 +2633,81 @@ svg {
 }
 
 .cta-banner-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 3.2rem;
+  height: 3.2rem;
   color: var(--color-primary);
 }
 
 .cta-banner-content h2 {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
   color: var(--text-main);
 }
 
 .cta-banner-content p {
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--text-muted);
 }
+
+/* Hallmark Ft4 Dense Colophon Footer */
+.app-footer {
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-colophon-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.colophon-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.colophon-mark {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+}
+
+.colophon-tagline {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
+
+.colophon-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.colophon-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  letter-spacing: 0.05em;
+}
+
+.meta-val {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+

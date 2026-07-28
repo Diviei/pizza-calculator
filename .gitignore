@@ -16,6 +16,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lighthouse-report.json
+.lighthouseci/
 *.log
 
 # System & Editor files

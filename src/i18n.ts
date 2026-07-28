@@ -30,6 +30,35 @@ export interface TranslationDictionary {
   faqBannerText: string;
   backToCalculator: string;
 
+  // Home Page Section Keys
+  homeHeroBadge: string;
+  homeHeroTitle: string;
+  homeHeroSubtitle: string;
+  homeFormulaBase: string;
+  homeFeaturesTitle: string;
+  homeFeaturesSubtitle: string;
+  homeFeature1Badge: string;
+  homeFeature1Title: string;
+  homeFeature1Desc: string;
+  homeFeature2Title: string;
+  homeFeature2Desc: string;
+  homeFeature3Title: string;
+  homeFeature3Desc: string;
+  homeFeature4Title: string;
+  homeFeature4Desc: string;
+  homeFeature4PwaStatus: string;
+  homeStylesTitle: string;
+  homeCtaTitle: string;
+  homeCtaSubtitle: string;
+  homeCtaBtn: string;
+  styleTagTraditional: string;
+  styleTagCrispy: string;
+  styleBallWeightLabel: string;
+  styleHydrationLabel: string;
+  styleMaturationLabel: string;
+  styleNeapolitanHomeDesc: string;
+  styleTondaRomanaHomeDesc: string;
+
   // Block 1: Dimensions
   block1Title: string;
   numberOfBalls: string;
@@ -158,6 +187,42 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqBannerText: '¿Tienes dudas sobre la fermentación o las proporciones?',
     backToCalculator: 'Volver a la Calculadora',
 
+    homeHeroBadge: 'Calculadora de Masa PWA 100% Offline',
+    homeHeroTitle: 'Calcula la Masa de Pizza Perfecta',
+    homeHeroSubtitle:
+      'Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.',
+    homeFormulaBase: 'Fórmula Base:',
+    homeFeaturesTitle: 'Todo lo que Necesitas para Amasar',
+    homeFeaturesSubtitle:
+      'Herramientas precisas para conseguir bordes alveolados, masas digeribles y resultados de pizzería.',
+    homeFeature1Badge: 'Fórmula Profesional',
+    homeFeature1Title: 'Porcentaje de Panadero',
+    homeFeature1Desc:
+      'Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional.',
+    homeFeature2Title: 'Fermentación Mixta',
+    homeFeature2Desc:
+      'Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA).',
+    homeFeature3Title: 'Modos Simple y Avanzado',
+    homeFeature3Desc:
+      'Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal.',
+    homeFeature4Title: '100% Offline (PWA)',
+    homeFeature4Desc:
+      'Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa.',
+    homeFeature4PwaStatus: 'App Lista Sin Cobertura',
+    homeStylesTitle: 'Estilos de Pizza Soportados',
+    homeCtaTitle: '¿Listo para amasar tu próxima pizza?',
+    homeCtaSubtitle: 'Obtén la receta con las cantidades exactas de ingredientes en segundos.',
+    homeCtaBtn: 'Abrir Calculadora',
+    styleTagTraditional: 'Tradicional',
+    styleTagCrispy: 'Crujiente',
+    styleBallWeightLabel: 'Bola:',
+    styleHydrationLabel: 'Hidratación:',
+    styleMaturationLabel: 'Maduración:',
+    styleNeapolitanHomeDesc:
+      'Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta.',
+    styleTondaRomanaHomeDesc:
+      'Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico.',
+
     block1Title: 'Dimensiones de la Masa',
     numberOfBalls: 'Número de bolas',
     ballWeight: 'Peso por bola (g)',
@@ -202,9 +267,9 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqA4:
       '¡Sí! Es una Progressive Web App (PWA) 100% offline. Una vez cargada en tu navegador o añadida a la pantalla de inicio de tu móvil, funciona sin cobertura ni datos.',
 
-    pwaUpdateNotice: 'Nueva versión disponible con mejoras',
+    pwaUpdateNotice: 'Nueva versión disponible',
     pwaUpdateBtn: 'Actualizar',
-    pwaInstallNotice: 'Instala la app para usarla 100% offline',
+    pwaInstallNotice: 'Instala la app para usarla offline',
     pwaInstallBtn: 'Instalar',
     dismiss: 'Cerrar',
 
@@ -218,20 +283,20 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     preset8h: '8h (Mismo día)',
     preset24h: '24h (1 día nevera)',
     preset48h: '48h (2 días nevera)',
-    simpleTimeSplitAmbient: '{rt}h a Temperatura Ambiente (22°C)',
+    simpleTimeSplitAmbient: '{rt}h a Temp. Ambiente (22°C)',
     simpleTimeSplitFridge: '{fridge}h en Nevera (4°C)',
-    simpleTimeSplitCombined: '{rt}h a Temp. Ambiente (22°C) + {fridge}h en Nevera (4°C)',
+    simpleTimeSplitCombined: '{rt}h Temp. Ambiente (22°C) + {fridge}h Nevera (4°C)',
     simpleTipTitle: 'Guía Rápida de Preparación',
     simpleTipBody:
-      'Disuelve la levadura en el agua. Agrega la harina, amasa 5 min, añade la sal y amasa hasta obtener una masa lisa. Haz las bolas y déjalas reposar de 2 a 3 horas. En el caso de la tonda romana, el estirado es completo, sin borde y se puede usar un rodillo.',
+      'Disuelve la levadura en el agua. Añade la harina, amasa 5 min, agrega la sal y amasa hasta obtener una masa lisa. Forma las bolas y deja reposar de 2 a 3 horas. En la tonda romana el estirado es completo, sin borde y se puede usar un rodillo.',
     simpleDoughSummary: 'Masa total: {total}g ({balls} bolas de {weight}g)',
-    simpleDefaultsInfo: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal • Levadura fresca',
+    simpleDefaultsInfo: 'Estándar Napolitano: Bola 280g • 65% Hidratación • 2.5% Sal • Levadura fresca',
     simpleDefaultsInfoNeapolitan: 'Fórmula Napolitana: Bola 280g • 65% Hidratación • 2.5% Sal',
     simpleDefaultsInfoTondaRomana: 'Fórmula Tonda Romana: Bola 180g • 57% Hidratación • 2.5% Sal',
 
     pizzaStyleLabel: 'Estilo de Pizza',
     styleNeapolitan: 'Napolitana',
-    styleNeapolitanDesc: 'Masa esponjosa (Bola 280g • 65% Hidr.)',
+    styleNeapolitanDesc: 'Borde alveolado (Bola 280g • 65% Hidr.)',
     styleTondaRomana: 'Tonda Romana',
     styleTondaRomanaDesc: 'Fina y crujiente (Bola 180g • 57% Hidr.)',
 
@@ -243,10 +308,10 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
     prepStep1Title: '1. Amasado y Mezcla',
     prepStep1Body:
-      'Disuelve {yeast}g de levadura en {water}g de agua. Añade {flour}g de harina y {salt}g de sal. Amasa 10 min hasta obtener una masa lisa y elástica.',
-    prepStep2Title: '2. Fermentación y Control de Tiempo',
+      'Disuelve {yeast}g de levadura en {water}g de agua. Añade {flour}g de harina y {salt}g de sal. Amasa 10 minutos hasta obtener una masa lisa.',
+    prepStep2Title: '2. Fermentación y Tiempos',
     prepStep2AmbientOnly:
-      'Deja fermentar en un bol tapado a temperatura ambiente ({tempRt}°C) durante {hoursRt} horas. Divide la masa en bolas y déjalas reposar de 2 a 3 horas antes de estirar.',
+      'Deja reposar a temperatura ambiente ({tempRt}°C) durante {hoursRt} horas. Forma las bolas y deja reposar de 2 a 3 horas antes de estirar.',
     prepStep2FridgeOnly:
       'Deja reposar 1 hora a temp. ambiente, guarda en nevera ({tempFridge}°C) durante {hoursFridge} horas. Saca las bolas de 2 a 3 horas antes para atemperar y reposar.',
     prepStep2Combined:
@@ -282,6 +347,40 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqBannerText: 'Have questions about fermentation or ratios?',
     backToCalculator: 'Back to Calculator',
 
+    homeHeroBadge: '100% Offline PWA Dough Calculator',
+    homeHeroTitle: 'Calculate the Perfect Pizza Dough',
+    homeHeroSubtitle:
+      'Professional baker percentages and kinetic mixed fermentation algorithm (Room Temp + Fridge). Designed for home pizzaiolos and passionate bakers.',
+    homeFormulaBase: 'Base Formula:',
+    homeFeaturesTitle: 'Everything You Need to Knead',
+    homeFeaturesSubtitle: 'Precise tools to achieve airy crusts, digestible doughs, and pizzeria-quality results.',
+    homeFeature1Badge: 'Professional Formula',
+    homeFeature1Title: "Baker's Percentage",
+    homeFeature1Desc:
+      'Exact calculation of flour (100%), hydration, salt, and yeast according to classic professional baking ratios.',
+    homeFeature2Title: 'Mixed Fermentation',
+    homeFeature2Desc:
+      'Kinetic algorithm simulating fermentation combining cold fridge hours (TC) and room temperature proofing (TA).',
+    homeFeature3Title: 'Simple & Advanced Modes',
+    homeFeature3Desc: 'Fast mode with Neapolitan presets or absolute control over ball weight, hydration, and salt.',
+    homeFeature4Title: '100% Offline (PWA)',
+    homeFeature4Desc:
+      'Works without internet coverage in any kitchen or wood-fired oven. Add it to your phone home screen as a native app.',
+    homeFeature4PwaStatus: 'App Ready Offline',
+    homeStylesTitle: 'Supported Pizza Styles',
+    homeCtaTitle: 'Ready to knead your next pizza?',
+    homeCtaSubtitle: 'Get your recipe with exact ingredient quantities in seconds.',
+    homeCtaBtn: 'Open Calculator',
+    styleTagTraditional: 'Traditional',
+    styleTagCrispy: 'Crispy',
+    styleBallWeightLabel: 'Ball:',
+    styleHydrationLabel: 'Hydration:',
+    styleMaturationLabel: 'Proofing:',
+    styleNeapolitanHomeDesc:
+      '280g ball • 65% Hydration • 2.5% Salt. High puffy crust, soft, digestible with slow proofing.',
+    styleTondaRomanaHomeDesc:
+      '180g ball • 57% Hydration • 2.5% Salt. Thin, crispy (scrocchiarella) with characteristic golden bake.',
+
     block1Title: 'Dough Dimensions',
     numberOfBalls: 'Number of dough balls',
     ballWeight: 'Weight per ball (g)',
@@ -298,13 +397,13 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     phaseRt: 'Room Temperature Phase (RT)',
     hoursRt: 'RT Time (hours)',
     tempRt: 'RT Temperature',
-    phaseFridge: 'Fridge Phase (CT)',
+    phaseFridge: 'Fridge Phase (TC)',
     hoursFridge: 'Fridge Time (hours)',
-    tempFridge: 'Fridge Temp',
+    tempFridge: 'Fridge Temp.',
 
     resultsTitle: 'Required Ingredients',
-    resultsSubtitle: 'Exact formula breakdown for your dough balls',
-    warningNotice: 'Total fermentation time is 0h. Add room temperature or fridge hours to calculate yeast.',
+    resultsSubtitle: 'Exact quantities for your dough balls',
+    warningNotice: 'Total fermentation time is 0h. Add hours for room temp or fridge to calculate yeast.',
     flour: 'Flour',
     water: 'Water',
     saltIngredient: 'Salt',
@@ -312,22 +411,21 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     yeastDryLabel: 'Instant Dry Yeast',
 
     faqSectionTitle: 'Frequently Asked Questions & Fermentation Guide',
-    faqQ1: 'How does mixed fermentation (Fridge + Room Temp) calculation work?',
+    faqQ1: 'How does mixed fermentation calculation (Fridge + Room Temp) work?',
     faqA1:
-      'Our calculator uses an exponential kinetic algorithm that models yeast metabolic activity across temperatures. Yeast activity drops near zero at 3.5°C (fridge) and increases exponentially at room temperature to reach target maturation.',
+      'Our calculator uses an exponential kinetic algorithm modeling yeast activity across temperatures. Yeast activity is near zero at 3.5°C (fridge) and increases exponentially at room temperature.',
     faqQ2: "What is Baker's Percentage?",
     faqA2:
-      "Baker's percentage is the professional baking standard where total flour weight equals 100%. All other ingredients (water, salt, yeast) are calculated as a percentage relative to flour mass.",
+      'It is the standard formula used by professional bakers where flour weight equals 100%. All other ingredients (water, salt, yeast) are calculated as a percentage relative to flour.',
     faqQ3: 'What is the ratio between fresh yeast and instant dry yeast?',
-    faqA3:
-      'The standard conversion ratio is 3:1. 3 grams of fresh cake yeast equals 1 gram of active/instant dry yeast powder.',
+    faqA3: 'The standard ratio is 3 to 1. 3 grams of fresh baker yeast equal 1 gram of instant dry yeast powder.',
     faqQ4: 'Can I use this calculator offline?',
     faqA4:
       'Yes! It is a 100% offline Progressive Web App (PWA). Once opened in your browser or installed on your mobile home screen, it works completely offline without network coverage.',
 
-    pwaUpdateNotice: 'New version available with updates',
+    pwaUpdateNotice: 'New version available',
     pwaUpdateBtn: 'Update',
-    pwaInstallNotice: 'Install app for 100% offline use',
+    pwaInstallNotice: 'Install app for 100% offline usage',
     pwaInstallBtn: 'Install',
     dismiss: 'Dismiss',
 
@@ -336,25 +434,25 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     simpleSectionTitle: 'Quick Setup',
     simpleHoursLabel: 'Fermentation Time (hours)',
     simpleHasFridgeLabel: 'Use fridge fermentation',
-    presetLabel: 'Quick presets:',
+    presetLabel: 'Presets:',
     preset4h: '4h (Fast)',
-    preset8h: '8h (Same Day)',
-    preset24h: '24h (1 Day Fridge)',
-    preset48h: '48h (2 Days Fridge)',
+    preset8h: '8h (Same day)',
+    preset24h: '24h (1 day fridge)',
+    preset48h: '48h (2 days fridge)',
     simpleTimeSplitAmbient: '{rt}h at Room Temp (22°C)',
     simpleTimeSplitFridge: '{fridge}h in Fridge (4°C)',
     simpleTimeSplitCombined: '{rt}h Room Temp (22°C) + {fridge}h Fridge (4°C)',
     simpleTipTitle: 'Quick Preparation Guide',
     simpleTipBody:
-      'Dissolve yeast in water. Add flour, knead 5 min, add salt and knead until smooth. Shape into dough balls and let rest for 2 to 3 hours. For Tonda Romana, stretching is complete, with no rim, and a rolling pin can be used.',
+      'Dissolve yeast in water. Add flour, knead 5 min, add salt and knead until smooth. Shape dough balls and let rest 2 to 3 hours. For Tonda Romana, stretching is thin across without rim (rolling pin allowed).',
     simpleDoughSummary: 'Total dough: {total}g ({balls} balls of {weight}g)',
-    simpleDefaultsInfo: 'Neapolitan Standard: 280g ball • 65% Hydration • 2.5% Salt • Fresh yeast',
+    simpleDefaultsInfo: 'Neapolitan Preset: 280g ball • 65% Hydration • 2.5% Salt • Fresh yeast',
     simpleDefaultsInfoNeapolitan: 'Neapolitan Formula: 280g ball • 65% Hydration • 2.5% Salt',
     simpleDefaultsInfoTondaRomana: 'Tonda Romana Formula: 180g ball • 57% Hydration • 2.5% Salt',
 
     pizzaStyleLabel: 'Pizza Style',
     styleNeapolitan: 'Neapolitan',
-    styleNeapolitanDesc: 'Airy crust (280g ball • 65% Hydr.)',
+    styleNeapolitanDesc: 'Puffy crust (280g ball • 65% Hydr.)',
     styleTondaRomana: 'Tonda Romana',
     styleTondaRomanaDesc: 'Thin & crispy (180g ball • 57% Hydr.)',
 
@@ -362,21 +460,21 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     recipeCopiedToast: 'Recipe copied to clipboard!',
     shareRecipeBtn: 'Share Recipe',
     linkCopiedToast: 'Recipe link copied to clipboard!',
-    quickSummaryTitle: 'Real-time Summary',
+    quickSummaryTitle: 'Real-Time Summary',
 
     prepStep1Title: '1. Mixing & Kneading',
     prepStep1Body:
-      'Dissolve {yeast}g of yeast in {water}g of water. Add {flour}g of flour and {salt}g of salt. Knead 10 minutes until smooth and elastic.',
+      'Dissolve {yeast}g yeast in {water}g water. Add {flour}g flour and {salt}g salt. Knead 10 min until smooth.',
     prepStep2Title: '2. Fermentation & Timing',
     prepStep2AmbientOnly:
-      'Let ferment in a covered bowl at room temp ({tempRt}°C) for {hoursRt} hours. Divide into dough balls and let rest for 2 to 3 hours before stretching.',
+      'Let rest at room temp ({tempRt}°C) for {hoursRt} hours. Shape balls and let rest 2 to 3 hours before stretching.',
     prepStep2FridgeOnly:
-      'Rest 1 hour at room temp, then chill in fridge ({tempFridge}°C) for {hoursFridge} hours. Remove dough balls 2 to 3 hours before stretching to warm up and rest.',
+      'Rest 1 hour at room temp, store in fridge ({tempFridge}°C) for {hoursFridge} hours. Take balls out 2 to 3 hours before stretching.',
     prepStep2Combined:
-      'Mixed Fermentation: Keep dough for {hoursRt} hours at room temp ({tempRt}°C) and {hoursFridge} hours in fridge ({tempFridge}°C). Shape into balls and let rest 2 to 3 hours before stretching.',
-    prepStep3Title: '3. Balling, Stretching & Baking',
+      'Mixed Fermentation: Keep dough {hoursRt} hours at room temp ({tempRt}°C) and {hoursFridge} hours in fridge ({tempFridge}°C). Shape balls and let rest 2 to 3 hours.',
+    prepStep3Title: '3. Shaping & Baking',
     prepStep3Body:
-      'Shape into {balls} balls of {weight}g. After resting 2-3h, stretch carefully and bake at maximum temperature.',
+      'Shape {balls} dough balls of {weight}g. After 2-3h rest, stretch carefully and bake at max temperature.',
     prepStep3BodyNeapolitan:
       'Shape {balls} dough balls of {weight}g and let rest 2 to 3 hours. Stretch by hand gently pushing air from the center towards the edges to build the cornicione (puffy crust). Bake at maximum temperature.',
     prepStep3BodyTondaRomana:
@@ -405,6 +503,42 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navFaq: 'FAQ',
     faqBannerText: 'Hai domande sulla fermentazione o sulle dosi?',
     backToCalculator: 'Torna al Calcolatore',
+
+    homeHeroBadge: 'Calcolatore per Impasto PWA 100% Offline',
+    homeHeroTitle: "Calcola l'Impasto per Pizza Perfetto",
+    homeHeroSubtitle:
+      'Percentuali del pizzaiolo professionista e algoritmo cinetico di fermentazione mista (Temperatura Ambiente + Frigo). Progettato per pizzaioli casalinghi e appassionati.',
+    homeFormulaBase: 'Formula Base:',
+    homeFeaturesTitle: 'Tutto ciò di cui hai bisogno per impastare',
+    homeFeaturesSubtitle:
+      'Strumenti precisi per ottenere cornicioni alveolati, impasti digeribili e risultati da pizzeria.',
+    homeFeature1Badge: 'Formula Professionale',
+    homeFeature1Title: 'Percentuale del Pizzaiolo',
+    homeFeature1Desc:
+      'Calcolo esatto di farina (100%), idratazione, sale e lievito secondo le proporzioni classiche della panificazione professionale.',
+    homeFeature2Title: 'Fermentazione Mista',
+    homeFeature2Desc:
+      'Algoritmo cinetico che simula la fermentazione combinando ore in frigo (TC) e lievitazione a temperatura ambiente (TA).',
+    homeFeature3Title: 'Modalità Semplice e Avanzata',
+    homeFeature3Desc:
+      'Modalità rapida con impostazioni predefinite napoletane o controllo assoluto su peso panetto, idratazione e sale.',
+    homeFeature4Title: '100% Offline (PWA)',
+    homeFeature4Desc:
+      'Funziona senza connessione in qualsiasi cucina o forno a legna. Aggiungila alla schermata home del tuo telefono come app nativa.',
+    homeFeature4PwaStatus: 'App Pronta Senza Connessione',
+    homeStylesTitle: 'Stili di Pizza Supportati',
+    homeCtaTitle: 'Pronto per impastare la tua prossima pizza?',
+    homeCtaSubtitle: 'Ottieni la ricetta con le quantità esatte degli ingredienti in pochi secondi.',
+    homeCtaBtn: 'Apri Calcolatore',
+    styleTagTraditional: 'Tradizionale',
+    styleTagCrispy: 'Scrocchiarella',
+    styleBallWeightLabel: 'Panetto:',
+    styleHydrationLabel: 'Idratazione:',
+    styleMaturationLabel: 'Maturazione:',
+    styleNeapolitanHomeDesc:
+      'Panetto da 280g • 65% Idratazione • 2.5% Sale. Cornicione alto, soffice, leggero e digeribile.',
+    styleTondaRomanaHomeDesc:
+      'Panetto da 180g • 57% Idratazione • 2.5% Sale. Sottile, croccante (scrocchiarella) e ben cotta.',
 
     block1Title: "Dimensioni dell'Impasto",
     numberOfBalls: 'Numero di panetti',
@@ -502,7 +636,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     prepStep3Body:
       'Forma {balls} panetti da {weight}g. Dopo 2-3 ore di riposo, stendi con cura e cuoci alla massima temperatura.',
     prepStep3BodyNeapolitan:
-      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi a mano spingendo l aria dal centro verso i bordi per formare il cornicione. Cuoci alla massima temperatura.',
+      'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Stendi a mano spingendo l air dal centro verso i bordi per formare il cornicione. Cuoci alla massima temperatura.',
     prepStep3BodyTondaRomana:
       'Forma {balls} panetti da {weight}g e lascia riposare da 2 a 3 ore. Nel caso della tonda romana, la stesura è completa, senza cornicione e si può usare un mattarello. Cuoci alla massima temperatura.',
 
@@ -529,6 +663,42 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     navFaq: 'FAQ',
     faqBannerText: 'Des questions sur la fermentation ou les proportions ?',
     backToCalculator: 'Retour au Calculateur',
+
+    homeHeroBadge: 'Calculateur de Pâte PWA 100% Hors Ligne',
+    homeHeroTitle: 'Calculez la Pâte à Pizza Parfaite',
+    homeHeroSubtitle:
+      'Pourcentages du boulanger professionnel et algorithme cinétique de fermentation mixte (Température Ambiante + Frigo). Conçu pour les pizzaiolos maison passionnés.',
+    homeFormulaBase: 'Formule de Base :',
+    homeFeaturesTitle: 'Tout ce dont vous avez besoin pour pétrir',
+    homeFeaturesSubtitle:
+      'Des outils précis pour obtenir des trottoirs alvéolés, des pâtes digestes et des résultats de pizzeria.',
+    homeFeature1Badge: 'Formule Professionnelle',
+    homeFeature1Title: 'Pourcentage du Boulanger',
+    homeFeature1Desc:
+      'Calcul exact de la farine (100%), de l’hydratation, du sel et de la levure selon les proportions classiques de la boulangerie.',
+    homeFeature2Title: 'Fermentation Mixte',
+    homeFeature2Desc:
+      'Algorithme cinétique simulant la fermentation combinant heures au réfrigérateur (TC) et levée à température ambiante (TA).',
+    homeFeature3Title: 'Modes Simple et Avancé',
+    homeFeature3Desc:
+      'Mode rapide avec préréglages napolitains ou contrôle absolu du poids du pâton, de l’hydratation et du sel.',
+    homeFeature4Title: '100% Hors Ligne (PWA)',
+    homeFeature4Desc:
+      'Fonctionne sans réseau dans n’importe quelle cuisine ou four à bois. Ajoutez-la à l’écran d’accueil de votre smartphone comme une application native.',
+    homeFeature4PwaStatus: 'App Prête Hors Ligne',
+    homeStylesTitle: 'Styles de Pizza Pris en Charge',
+    homeCtaTitle: 'Prêt à pétrir votre prochaine pizza ?',
+    homeCtaSubtitle: 'Obtenez votre recette avec les quantités exactes d’ingrédients en quelques secondes.',
+    homeCtaBtn: 'Ouvrir le Calculateur',
+    styleTagTraditional: 'Traditionnelle',
+    styleTagCrispy: 'Croustillante',
+    styleBallWeightLabel: 'Pâton :',
+    styleHydrationLabel: 'Hydratation :',
+    styleMaturationLabel: 'Maturation :',
+    styleNeapolitanHomeDesc:
+      'Pâton de 280g • 65% Hydratation • 2.5% Sel. Bords élevés, moelleux, légers et très digestes.',
+    styleTondaRomanaHomeDesc:
+      'Pâton de 180g • 57% Hydratation • 2.5% Sel. Fine, croustillante (scrocchiarella) et bien dorée.',
 
     block1Title: 'Dimensions de la Pâte',
     numberOfBalls: 'Nombre de pâtons',
@@ -653,6 +823,42 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     faqBannerText: 'Fragen zur Gärung oder den Verhältnissen?',
     backToCalculator: 'Zurück zum Rechner',
 
+    homeHeroBadge: '100% Offline PWA Teigrechner',
+    homeHeroTitle: 'Berechne den Perfekten Pizzateig',
+    homeHeroSubtitle:
+      'Professionelle Bäckerprozente und kinetischer Mischfermentations-Algorithmus (Raumtemperatur + Kühlschrank). Entwickelt für leidenschaftliche Hobby-Pizzabäcker.',
+    homeFormulaBase: 'Basisformel:',
+    homeFeaturesTitle: 'Alles, was du zum Kneten brauchst',
+    homeFeaturesSubtitle:
+      'Präzise Werkzeuge für luftige Ränder, bekömmliche Teige und Ergebnisse in Pizzeria-Qualität.',
+    homeFeature1Badge: 'Profiformel',
+    homeFeature1Title: 'Bäckerprozente',
+    homeFeature1Desc:
+      'Exakte Berechnung von Mehl (100%), Hydratation, Salz und Hefe nach den klassischen Proportionen des Profi-Bäckers.',
+    homeFeature2Title: 'Mischfermentation',
+    homeFeature2Desc:
+      'Kinetischer Algorithmus zur Simulation der Fermentation aus Stunden im Kühlschrank (TC) und Raumtemperatur (TA).',
+    homeFeature3Title: 'Einfacher & Fortgeschrittener Modus',
+    homeFeature3Desc:
+      'Schnellmodus mit neapolitanischen Voreinstellungen oder absolute Kontrolle über Teigling-Gewicht, Hydratation und Salz.',
+    homeFeature4Title: '100% Offline (PWA)',
+    homeFeature4Desc:
+      'Funktioniert ohne Internet in jeder Küche oder am Holzofen. Füge die App einfach zum Startbildschirm deines Smartphones hinzu.',
+    homeFeature4PwaStatus: 'App Offline Bereit',
+    homeStylesTitle: 'Unterstützte Pizzastile',
+    homeCtaTitle: 'Bereit für deinen nächsten Pizzateig?',
+    homeCtaSubtitle: 'Erhalte deine Rezeptur mit exakten Zutatenmengen in Sekundenschnelle.',
+    homeCtaBtn: 'Rechner Öffnen',
+    styleTagTraditional: 'Traditionell',
+    styleTagCrispy: 'Knusprig',
+    styleBallWeightLabel: 'Teigling:',
+    styleHydrationLabel: 'Hydratation:',
+    styleMaturationLabel: 'Reifezeit:',
+    styleNeapolitanHomeDesc:
+      '280g Teigling • 65% Hydratisierung • 2.5% Salz. Luftiger Rand, weich und bekömmlich bei langsamer Reifung.',
+    styleTondaRomanaHomeDesc:
+      '180g Teigling • 57% Hydratisierung • 2.5% Salz. Dünn, knusprig (scrocchiarella) mit charakteristischer Bräunung.',
+
     block1Title: 'Teig-Dimensionen',
     numberOfBalls: 'Anzahl Teiglinge',
     ballWeight: 'Gewicht pro Teigling (g)',
@@ -671,7 +877,7 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
     tempRt: 'Raumtemperatur',
     phaseFridge: 'Kühlschrank-Phase (KT)',
     hoursFridge: 'Kühlschrank Zeit (Stunden)',
-    tempFridge: 'Kühlschrank Temp.',
+    tempFridge: 'Temp. Kühlschrank',
 
     resultsTitle: 'Benötigte Zutaten',
     resultsSubtitle: 'Genaue Mengen für deine Teiglinge',
@@ -758,9 +964,6 @@ export const translations: Record<LanguageCode, TranslationDictionary> = {
 
 const LANG_STORAGE_KEY = 'pizza_calculator_language';
 
-/**
- * Determine initial language from localStorage or navigator
- */
 export function getInitialLanguage(): LanguageCode {
   const saved = localStorage.getItem(LANG_STORAGE_KEY) as LanguageCode | null;
   if (saved && translations[saved]) {
@@ -773,9 +976,6 @@ export function getInitialLanguage(): LanguageCode {
   return translations[browserLang] ? browserLang : 'en';
 }
 
-/**
- * Save language preference
- */
 export function setSavedLanguage(lang: LanguageCode): void {
   if (translations[lang]) {
     localStorage.setItem(LANG_STORAGE_KEY, lang);

@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'default' | 'bento' | 'specimen' | 'bordered' | 'interactive';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'default',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const cardClasses = [
+  'card',
+  variant !== 'default' ? `card-${variant}` : '',
+  className,
+].filter(Boolean).join(' ');
+---
+
+<div class={cardClasses} {...rest}>
+  <slot />
+</div>

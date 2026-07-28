@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import StyleCard from '../components/StyleCard.astro';
 import { Icon } from 'astro-icon/components';
 ---
 
@@ -8,119 +11,167 @@ import { Icon } from 'astro-icon/components';
   description="Calcula los ingredientes exactos para tu masa de pizza napolitana, romana o casera según tiempo a temperatura ambiente y nevera."
 >
   <main class="home-landing-container">
-    <!-- Hero Section -->
-    <section class="home-hero-section">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <Icon name="lucide:sparkles" class="hero-badge-icon" />
-          <span data-i18n="homeHeroBadge">Calculadora de Masa PWA 100% Offline</span>
+    <!-- Hero Section: Hallmark Stat-Led Editorial Hero using Card Primitive -->
+    <section>
+      <Card class="home-hero-section">
+        <div class="hero-bg-texture"></div>
+        <div class="hero-content">
+          <div class="hero-badge">
+            <Icon name="lucide:sparkles" class="hero-badge-icon" />
+            <span data-i18n="homeHeroBadge">Calculadora de Masa PWA 100% Offline</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="homeHeroTitle">
+            Calcula la Masa de Pizza Perfecta
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="homeHeroSubtitle">
+            Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.
+          </p>
+
+          <!-- Hallmark Live Formula Spec Strip -->
+          <div class="hero-formula-strip">
+            <span class="strip-label" data-i18n="homeFormulaBase">Fórmula Base:</span>
+            <code class="strip-code">Harina 100% • Agua 65% • Sal 2.5% • Levadura 0.3% • TA + TC</code>
+          </div>
+
+          <div class="hero-actions">
+            <a href="/calculator" class="btn-hero-primary">
+              <Icon name="lucide:calculator" class="btn-icon-svg" />
+              <span data-i18n="homeCtaBtn">Abrir Calculadora</span>
+            </a>
+            <a href="/faq" class="btn-hero-secondary">
+              <Icon name="lucide:book-open" class="btn-icon-svg" />
+              <span data-i18n="navFaq">Guía de Fermentación</span>
+            </a>
+          </div>
         </div>
-
-        <h1 class="hero-title" data-i18n="homeHeroTitle">
-          Calcula la Masa de Pizza Perfecta
-        </h1>
-
-        <p class="hero-subtitle" data-i18n="homeHeroSubtitle">
-          Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.
-        </p>
-
-        <div class="hero-actions">
-          <a href="/calculator" class="btn-hero-primary">
-            <Icon name="lucide:calculator" class="btn-icon-svg" />
-            <span data-i18n="homeCtaBtn">Abrir Calculadora</span>
-          </a>
-          <a href="/faq" class="btn-hero-secondary">
-            <Icon name="lucide:book-open" class="btn-icon-svg" />
-            <span data-i18n="navFaq">Guía de Fermentación</span>
-          </a>
-        </div>
-      </div>
+      </Card>
     </section>
 
-    <!-- Key Features Section -->
+    <!-- Key Features Section: Hallmark Bento Spec Grid -->
     <section class="home-features-section">
       <div class="section-header">
+        <div class="section-chapter-tag">01 / CAPACIDADES</div>
         <h2 class="section-title" data-i18n="homeFeaturesTitle">Todo lo que Necesitas para Amasar</h2>
         <p class="section-subtitle" data-i18n="homeFeaturesSubtitle">Herramientas precisas para conseguir bordes alveolados, masas digeribles y resultados de pizzería.</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:scale" />
+      <div class="bento-features-grid">
+        <!-- Feature 1: Large Bento (Baker's % Spec Sheet) -->
+        <FeatureCard
+          class="bento-card-large"
+          icon="lucide:scale"
+          badge="Fórmula Profesional"
+          badgeI18n="homeFeature1Badge"
+          title="Porcentaje de Panadero"
+          titleI18n="homeFeature1Title"
+          description="Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional."
+          descI18n="homeFeature1Desc"
+        >
+          <div class="bento-formula-preview">
+            <div class="formula-row"><span data-i18n="flour">Harina</span><strong>100.0%</strong></div>
+            <div class="formula-row"><span data-i18n="water">Agua</span><strong>65.0%</strong></div>
+            <div class="formula-row"><span data-i18n="saltIngredient">Sal Marina</span><strong>2.5%</strong></div>
+            <div class="formula-row"><span data-i18n="yeastFreshLabel">Levadura Fresca</span><strong>0.3%</strong></div>
           </div>
-          <h3 data-i18n="homeFeature1Title">Porcentaje de Panadero</h3>
-          <p data-i18n="homeFeature1Desc">Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional.</p>
-        </div>
+        </FeatureCard>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:snowflake" />
+        <!-- Feature 2: Kinetic Fermentation -->
+        <FeatureCard
+          icon="lucide:snowflake"
+          title="Fermentación Mixta"
+          titleI18n="homeFeature2Title"
+          description="Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA)."
+          descI18n="homeFeature2Desc"
+        >
+          <div class="ferment-timeline-badge">
+            <span class="temp-chip rt">TA (22°C)</span>
+            <span class="timeline-arrow">➔</span>
+            <span class="temp-chip tc">Nevera (4°C)</span>
           </div>
-          <h3 data-i18n="homeFeature2Title">Fermentación Mixta</h3>
-          <p data-i18n="homeFeature2Desc">Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA).</p>
-        </div>
+        </FeatureCard>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:zap" />
+        <!-- Feature 3: Modes -->
+        <FeatureCard
+          icon="lucide:zap"
+          title="Modos Simple y Avanzado"
+          titleI18n="homeFeature3Title"
+          description="Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal."
+          descI18n="homeFeature3Desc"
+        >
+          <div class="mode-toggle-preview">
+            <span class="mode-pill active" data-i18n="modeSimple">Simple</span>
+            <span class="mode-pill" data-i18n="modeAdvanced">Avanzado</span>
           </div>
-          <h3 data-i18n="homeFeature3Title">Modos Simple y Avanzado</h3>
-          <p data-i18n="homeFeature3Desc">Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal.</p>
-        </div>
+        </FeatureCard>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:wifi-off" />
+        <!-- Feature 4: Offline PWA -->
+        <FeatureCard
+          class="bento-card-large"
+          icon="lucide:wifi-off"
+          title="100% Offline (PWA)"
+          titleI18n="homeFeature4Title"
+          description="Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa."
+          descI18n="homeFeature4Desc"
+        >
+          <div class="pwa-status-pill">
+            <span class="status-dot"></span>
+            <span data-i18n="homeFeature4PwaStatus">App Lista Sin Cobertura</span>
           </div>
-          <h3 data-i18n="homeFeature4Title">100% Offline (PWA)</h3>
-          <p data-i18n="homeFeature4Desc">Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa.</p>
-        </div>
+        </FeatureCard>
       </div>
     </section>
 
-    <!-- Pizza Styles Preview Section -->
+    <!-- Pizza Styles Preview Section: Hallmark Specimen Diptych -->
     <section class="home-styles-section">
       <div class="section-header">
+        <div class="section-chapter-tag">02 / ESTILOS</div>
         <h2 class="section-title" data-i18n="homeStylesTitle">Estilos de Pizza Soportados</h2>
       </div>
 
       <div class="styles-preview-grid">
-        <div class="style-preview-card">
-          <div class="style-card-header">
-            <Icon name="lucide:flame" class="style-card-icon" />
-            <div>
-              <h3>Pizza Napolitana</h3>
-              <span class="style-tag">Tradicional</span>
-            </div>
-          </div>
-          <p>Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta.</p>
-        </div>
+        <StyleCard
+          icon="lucide:flame"
+          title="Pizza Napolitana"
+          titleI18n="styleNeapolitan"
+          tag="Tradicional"
+          tagI18n="styleTagTraditional"
+          description="Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta."
+          descI18n="styleNeapolitanHomeDesc"
+          ballWeight="280 g"
+          hydration="65 %"
+          maturation="24h–48h"
+        />
 
-        <div class="style-preview-card">
-          <div class="style-card-header">
-            <Icon name="lucide:wheat" class="style-card-icon" />
-            <div>
-              <h3>Tonda Romana</h3>
-              <span class="style-tag">Crujiente</span>
-            </div>
-          </div>
-          <p>Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico.</p>
-        </div>
+        <StyleCard
+          icon="lucide:wheat"
+          title="Tonda Romana"
+          titleI18n="styleTondaRomana"
+          tag="Crujiente"
+          tagI18n="styleTagCrispy"
+          description="Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico."
+          descI18n="styleTondaRomanaHomeDesc"
+          ballWeight="180 g"
+          hydration="57 %"
+          maturation="12h–24h"
+        />
       </div>
     </section>
 
-    <!-- Bottom Launch Banner -->
-    <section class="home-cta-banner">
-      <div class="cta-banner-content">
-        <Icon name="lucide:pizza" class="cta-banner-icon" />
-        <h2 data-i18n="homeCtaTitle">¿Listo para amasar tu próxima pizza?</h2>
-        <p data-i18n="homeCtaSubtitle">Obtén la receta con las cantidades exactas de ingredientes en segundos.</p>
-        <a href="/calculator" class="btn-hero-primary">
-          <Icon name="lucide:calculator" class="btn-icon-svg" />
-          <span data-i18n="homeCtaBtn">Ir a la Calculadora</span>
-        </a>
-      </div>
+    <!-- Bottom Launch Banner using Card Primitive -->
+    <section>
+      <Card class="home-cta-banner">
+        <div class="cta-banner-content">
+          <Icon name="lucide:pizza" class="cta-banner-icon" />
+          <h2 data-i18n="homeCtaTitle">¿Listo para amasar tu próxima pizza?</h2>
+          <p data-i18n="homeCtaSubtitle">Obtén la receta con las cantidades exactas de ingredientes en segundos.</p>
+          <a href="/calculator" class="btn-hero-primary">
+            <Icon name="lucide:calculator" class="btn-icon-svg" />
+            <span data-i18n="homeCtaBtn">Ir a la Calculadora</span>
+          </a>
+        </div>
+      </Card>
     </section>
   </main>
 </Layout>

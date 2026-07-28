@@ -42,3 +42,6 @@ jobs:
 
       - name: Build Production Bundle
         run: npm run build
+
+      - name: Audit Performance & Accessibility (Lighthouse CI)
+        run: npm run lhci
