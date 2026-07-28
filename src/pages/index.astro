@@ -8,8 +8,9 @@ import { Icon } from 'astro-icon/components';
   description="Calcula los ingredientes exactos para tu masa de pizza napolitana, romana o casera según tiempo a temperatura ambiente y nevera."
 >
   <main class="home-landing-container">
-    <!-- Hero Section -->
+    <!-- Hero Section: Hallmark Stat-Led Editorial Hero -->
     <section class="home-hero-section">
+      <div class="hero-bg-texture"></div>
       <div class="hero-content">
         <div class="hero-badge">
           <Icon name="lucide:sparkles" class="hero-badge-icon" />
@@ -24,6 +25,12 @@ import { Icon } from 'astro-icon/components';
           Porcentajes de panadero profesionales y algoritmo cinético de fermentación mixta (Temperatura Ambiente + Nevera). Diseñada para pizzaiolos caseros y apasionados.
         </p>
 
+        <!-- Hallmark Live Formula Spec Strip -->
+        <div class="hero-formula-strip">
+          <span class="strip-label">Fórmula Base:</span>
+          <code class="strip-code">Harina 100% • Agua 65% • Sal 2.5% • Levadura 0.3% • TA + TC</code>
+        </div>
+
         <div class="hero-actions">
           <a href="/calculator" class="btn-hero-primary">
             <Icon name="lucide:calculator" class="btn-icon-svg" />
@@ -37,51 +44,78 @@ import { Icon } from 'astro-icon/components';
       </div>
     </section>
 
-    <!-- Key Features Section -->
+    <!-- Key Features Section: Hallmark Bento Spec Grid -->
     <section class="home-features-section">
       <div class="section-header">
+        <div class="section-chapter-tag">01 / CAPACIDADES</div>
         <h2 class="section-title" data-i18n="homeFeaturesTitle">Todo lo que Necesitas para Amasar</h2>
         <p class="section-subtitle" data-i18n="homeFeaturesSubtitle">Herramientas precisas para conseguir bordes alveolados, masas digeribles y resultados de pizzería.</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <Icon name="lucide:scale" />
+      <div class="bento-features-grid">
+        <!-- Feature 1: Large Bento (Baker's % Spec Sheet) -->
+        <div class="feature-card bento-card-large">
+          <div class="card-top-row">
+            <div class="feature-icon">
+              <Icon name="lucide:scale" />
+            </div>
+            <span class="bento-badge">Fórmula Profesional</span>
           </div>
           <h3 data-i18n="homeFeature1Title">Porcentaje de Panadero</h3>
           <p data-i18n="homeFeature1Desc">Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional.</p>
+          <div class="bento-formula-preview">
+            <div class="formula-row"><span>Harina (Base)</span><strong>100.0%</strong></div>
+            <div class="formula-row"><span>Agua (Hidratación)</span><strong>65.0%</strong></div>
+            <div class="formula-row"><span>Sal Marina</span><strong>2.5%</strong></div>
+          </div>
         </div>
 
+        <!-- Feature 2: Kinetic Fermentation -->
         <div class="feature-card">
           <div class="feature-icon">
             <Icon name="lucide:snowflake" />
           </div>
           <h3 data-i18n="homeFeature2Title">Fermentación Mixta</h3>
           <p data-i18n="homeFeature2Desc">Algoritmo cinético que simula la fermentación combinando horas en nevera (TC) y leudado a temperatura ambiente (TA).</p>
+          <div class="ferment-timeline-badge">
+            <span class="temp-chip rt">TA (22°C)</span>
+            <span class="timeline-arrow">➔</span>
+            <span class="temp-chip tc">Nevera (4°C)</span>
+          </div>
         </div>
 
+        <!-- Feature 3: Modes -->
         <div class="feature-card">
           <div class="feature-icon">
             <Icon name="lucide:zap" />
           </div>
           <h3 data-i18n="homeFeature3Title">Modos Simple y Avanzado</h3>
           <p data-i18n="homeFeature3Desc">Modo rápido con ajustes predeterminados napolitanos o control absoluto de peso de bola, hidratación y sal.</p>
+          <div class="mode-toggle-preview">
+            <span class="mode-pill active">Simple</span>
+            <span class="mode-pill">Avanzado</span>
+          </div>
         </div>
 
+        <!-- Feature 4: Offline PWA -->
         <div class="feature-card">
           <div class="feature-icon">
             <Icon name="lucide:wifi-off" />
           </div>
           <h3 data-i18n="homeFeature4Title">100% Offline (PWA)</h3>
           <p data-i18n="homeFeature4Desc">Funciona sin cobertura en cualquier cocina u horno de leña. Añádela a la pantalla de inicio de tu móvil como app nativa.</p>
+          <div class="pwa-status-pill">
+            <span class="status-dot"></span>
+            <span>App Lista Sin Cobertura</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Pizza Styles Preview Section -->
+    <!-- Pizza Styles Preview Section: Hallmark Specimen Diptych -->
     <section class="home-styles-section">
       <div class="section-header">
+        <div class="section-chapter-tag">02 / ESTILOS</div>
         <h2 class="section-title" data-i18n="homeStylesTitle">Estilos de Pizza Soportados</h2>
       </div>
 
@@ -95,6 +129,11 @@ import { Icon } from 'astro-icon/components';
             </div>
           </div>
           <p>Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta.</p>
+          <div class="style-spec-table">
+            <div class="spec-cell"><span>Bola:</span> <strong>280 g</strong></div>
+            <div class="spec-cell"><span>Hidratación:</span> <strong>65 %</strong></div>
+            <div class="spec-cell"><span>Maduración:</span> <strong>24h–48h</strong></div>
+          </div>
         </div>
 
         <div class="style-preview-card">
@@ -106,6 +145,11 @@ import { Icon } from 'astro-icon/components';
             </div>
           </div>
           <p>Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico.</p>
+          <div class="style-spec-table">
+            <div class="spec-cell"><span>Bola:</span> <strong>180 g</strong></div>
+            <div class="spec-cell"><span>Hidratación:</span> <strong>57 %</strong></div>
+            <div class="spec-cell"><span>Maduración:</span> <strong>12h–24h</strong></div>
+          </div>
         </div>
       </div>
     </section>
