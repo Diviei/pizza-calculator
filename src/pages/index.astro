@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import StyleCard from '../components/StyleCard.astro';
 import { Icon } from 'astro-icon/components';
 ---
 
@@ -55,7 +56,7 @@ import { Icon } from 'astro-icon/components';
 
       <div class="bento-features-grid">
         <!-- Feature 1: Large Bento (Baker's % Spec Sheet) -->
-        <Card
+        <FeatureCard
           class="bento-card-large"
           icon="lucide:scale"
           badge="Fórmula Profesional"
@@ -69,10 +70,10 @@ import { Icon } from 'astro-icon/components';
             <div class="formula-row"><span>Agua (Hidratación)</span><strong>65.0%</strong></div>
             <div class="formula-row"><span>Sal Marina</span><strong>2.5%</strong></div>
           </div>
-        </Card>
+        </FeatureCard>
 
         <!-- Feature 2: Kinetic Fermentation -->
-        <Card
+        <FeatureCard
           icon="lucide:snowflake"
           title="Fermentación Mixta"
           titleI18n="homeFeature2Title"
@@ -84,10 +85,10 @@ import { Icon } from 'astro-icon/components';
             <span class="timeline-arrow">➔</span>
             <span class="temp-chip tc">Nevera (4°C)</span>
           </div>
-        </Card>
+        </FeatureCard>
 
         <!-- Feature 3: Modes -->
-        <Card
+        <FeatureCard
           icon="lucide:zap"
           title="Modos Simple y Avanzado"
           titleI18n="homeFeature3Title"
@@ -98,10 +99,10 @@ import { Icon } from 'astro-icon/components';
             <span class="mode-pill active">Simple</span>
             <span class="mode-pill">Avanzado</span>
           </div>
-        </Card>
+        </FeatureCard>
 
         <!-- Feature 4: Offline PWA -->
-        <Card
+        <FeatureCard
           icon="lucide:wifi-off"
           title="100% Offline (PWA)"
           titleI18n="homeFeature4Title"
@@ -112,7 +113,7 @@ import { Icon } from 'astro-icon/components';
             <span class="status-dot"></span>
             <span>App Lista Sin Cobertura</span>
           </div>
-        </Card>
+        </FeatureCard>
       </div>
     </section>
 
@@ -124,37 +125,25 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <div class="styles-preview-grid">
-        <Card variant="specimen">
-          <div class="style-card-header">
-            <Icon name="lucide:flame" class="style-card-icon" />
-            <div>
-              <h3>Pizza Napolitana</h3>
-              <span class="style-tag">Tradicional</span>
-            </div>
-          </div>
-          <p>Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta.</p>
-          <div class="style-spec-table">
-            <div class="spec-cell"><span>Bola:</span> <strong>280 g</strong></div>
-            <div class="spec-cell"><span>Hidratación:</span> <strong>65 %</strong></div>
-            <div class="spec-cell"><span>Maduración:</span> <strong>24h–48h</strong></div>
-          </div>
-        </Card>
+        <StyleCard
+          icon="lucide:flame"
+          title="Pizza Napolitana"
+          tag="Tradicional"
+          description="Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta."
+          ballWeight="280 g"
+          hydration="65 %"
+          maturation="24h–48h"
+        />
 
-        <Card variant="specimen">
-          <div class="style-card-header">
-            <Icon name="lucide:wheat" class="style-card-icon" />
-            <div>
-              <h3>Tonda Romana</h3>
-              <span class="style-tag">Crujiente</span>
-            </div>
-          </div>
-          <p>Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico.</p>
-          <div class="style-spec-table">
-            <div class="spec-cell"><span>Bola:</span> <strong>180 g</strong></div>
-            <div class="spec-cell"><span>Hidratación:</span> <strong>57 %</strong></div>
-            <div class="spec-cell"><span>Maduración:</span> <strong>12h–24h</strong></div>
-          </div>
-        </Card>
+        <StyleCard
+          icon="lucide:wheat"
+          title="Tonda Romana"
+          tag="Crujiente"
+          description="Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico."
+          ballWeight="180 g"
+          hydration="57 %"
+          maturation="12h–24h"
+        />
       </div>
     </section>
 

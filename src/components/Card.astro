@@ -1,27 +1,11 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 interface Props {
-  title?: string;
-  titleI18n?: string;
-  description?: string;
-  descI18n?: string;
-  icon?: string;
-  badge?: string;
-  badgeI18n?: string;
   variant?: 'default' | 'bento' | 'specimen' | 'bordered' | 'interactive';
   class?: string;
   [key: string]: unknown;
 }
 
 const {
-  title,
-  titleI18n,
-  description,
-  descI18n,
-  icon,
-  badge,
-  badgeI18n,
   variant = 'default',
   class: className = '',
   ...rest
@@ -35,40 +19,5 @@ const cardClasses = [
 ---
 
 <div class={cardClasses} {...rest}>
-  <slot name="header">
-    {(icon || badge || title || description) && (
-      <header class="card-header">
-        {(icon || badge) && (
-          <div class="card-meta">
-            {icon && (
-              <div class="card-icon">
-                <Icon name={icon} />
-              </div>
-            )}
-            {badge && (
-              <span class="card-badge" data-i18n={badgeI18n}>{badge}</span>
-            )}
-          </div>
-        )}
-
-        {title && (
-          <h3 class="card-title" data-i18n={titleI18n}>{title}</h3>
-        )}
-
-        {description && (
-          <p class="card-description" data-i18n={descI18n}>{description}</p>
-        )}
-      </header>
-    )}
-  </slot>
-
-  <div class="card-body">
-    <slot />
-  </div>
-
-  {Astro.slots.has('footer') && (
-    <footer class="card-footer">
-      <slot name="footer" />
-    </footer>
-  )}
+  <slot />
 </div>

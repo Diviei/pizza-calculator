@@ -1,0 +1,46 @@
+---
+import Card from './Card.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  titleI18n?: string;
+  description: string;
+  descI18n?: string;
+  icon?: string;
+  badge?: string;
+  badgeI18n?: string;
+  class?: string;
+}
+
+const {
+  title,
+  titleI18n,
+  description,
+  descI18n,
+  icon,
+  badge,
+  badgeI18n,
+  class: className = '',
+} = Astro.props;
+---
+
+<Card class={`feature-card ${className}`}>
+  {(icon || badge) && (
+    <div class="card-meta">
+      {icon && (
+        <div class="card-icon">
+          <Icon name={icon} />
+        </div>
+      )}
+      {badge && (
+        <span class="card-badge" data-i18n={badgeI18n}>{badge}</span>
+      )}
+    </div>
+  )}
+
+  <h3 class="card-title" data-i18n={titleI18n}>{title}</h3>
+  <p class="card-description" data-i18n={descI18n}>{description}</p>
+
+  <slot />
+</Card>

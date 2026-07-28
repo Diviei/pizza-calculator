@@ -1,0 +1,42 @@
+---
+import Card from './Card.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  tag: string;
+  description: string;
+  icon?: string;
+  ballWeight: string;
+  hydration: string;
+  maturation: string;
+  class?: string;
+}
+
+const {
+  title,
+  tag,
+  description,
+  icon = 'lucide:flame',
+  ballWeight,
+  hydration,
+  maturation,
+  class: className = '',
+} = Astro.props;
+---
+
+<Card class={`style-preview-card ${className}`}>
+  <div class="style-card-header">
+    <Icon name={icon} class="style-card-icon" />
+    <div>
+      <h3>{title}</h3>
+      <span class="style-tag">{tag}</span>
+    </div>
+  </div>
+  <p>{description}</p>
+  <div class="style-spec-table">
+    <div class="spec-cell"><span>Bola:</span> <strong>{ballWeight}</strong></div>
+    <div class="spec-cell"><span>Hidratación:</span> <strong>{hydration}</strong></div>
+    <div class="spec-cell"><span>Maduración:</span> <strong>{maturation}</strong></div>
+  </div>
+</Card>
