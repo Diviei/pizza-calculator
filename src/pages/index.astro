@@ -31,7 +31,7 @@ import { Icon } from 'astro-icon/components';
 
           <!-- Hallmark Live Formula Spec Strip -->
           <div class="hero-formula-strip">
-            <span class="strip-label">Fórmula Base:</span>
+            <span class="strip-label" data-i18n="homeFormulaBase">Fórmula Base:</span>
             <code class="strip-code">Harina 100% • Agua 65% • Sal 2.5% • Levadura 0.3% • TA + TC</code>
           </div>
 
@@ -63,15 +63,16 @@ import { Icon } from 'astro-icon/components';
           class="bento-card-large"
           icon="lucide:scale"
           badge="Fórmula Profesional"
+          badgeI18n="homeFeature1Badge"
           title="Porcentaje de Panadero"
           titleI18n="homeFeature1Title"
           description="Cálculo exacto de harina (100%), hidratación, sal y levadura según las proporciones clásicas de la panadería profesional."
           descI18n="homeFeature1Desc"
         >
           <div class="bento-formula-preview">
-            <div class="formula-row"><span>Harina (Base)</span><strong>100.0%</strong></div>
-            <div class="formula-row"><span>Agua (Hidratación)</span><strong>65.0%</strong></div>
-            <div class="formula-row"><span>Sal Marina</span><strong>2.5%</strong></div>
+            <div class="formula-row"><span data-i18n="flour">Harina</span><strong>100.0%</strong></div>
+            <div class="formula-row"><span data-i18n="water">Agua</span><strong>65.0%</strong></div>
+            <div class="formula-row"><span data-i18n="saltIngredient">Sal Marina</span><strong>2.5%</strong></div>
           </div>
         </FeatureCard>
 
@@ -99,8 +100,8 @@ import { Icon } from 'astro-icon/components';
           descI18n="homeFeature3Desc"
         >
           <div class="mode-toggle-preview">
-            <span class="mode-pill active">Simple</span>
-            <span class="mode-pill">Avanzado</span>
+            <span class="mode-pill active" data-i18n="modeSimple">Simple</span>
+            <span class="mode-pill" data-i18n="modeAdvanced">Avanzado</span>
           </div>
         </FeatureCard>
 
@@ -114,7 +115,7 @@ import { Icon } from 'astro-icon/components';
         >
           <div class="pwa-status-pill">
             <span class="status-dot"></span>
-            <span>App Lista Sin Cobertura</span>
+            <span data-i18n="homeFeature4PwaStatus">App Lista Sin Cobertura</span>
           </div>
         </FeatureCard>
       </div>
@@ -131,8 +132,11 @@ import { Icon } from 'astro-icon/components';
         <StyleCard
           icon="lucide:flame"
           title="Pizza Napolitana"
+          titleI18n="styleNeapolitan"
           tag="Tradicional"
+          tagI18n="styleTagTraditional"
           description="Bola de 280g • 65% Hidratación • 2.5% Sal. Bordes altos, suaves, ligeros y digestión perfecta con maduración lenta."
+          descI18n="styleNeapolitanHomeDesc"
           ballWeight="280 g"
           hydration="65 %"
           maturation="24h–48h"
@@ -141,8 +145,11 @@ import { Icon } from 'astro-icon/components';
         <StyleCard
           icon="lucide:wheat"
           title="Tonda Romana"
+          titleI18n="styleTondaRomana"
           tag="Crujiente"
+          tagI18n="styleTagCrispy"
           description="Bola de 180g • 57% Hidratación • 2.5% Sal. Fina, crujiente (scrocchiarella) y con tostado característico."
+          descI18n="styleTondaRomanaHomeDesc"
           ballWeight="180 g"
           hydration="57 %"
           maturation="12h–24h"

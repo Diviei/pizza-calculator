@@ -4,8 +4,11 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
   title: string;
+  titleI18n?: string;
   tag: string;
+  tagI18n?: string;
   description: string;
+  descI18n?: string;
   icon?: string;
   ballWeight: string;
   hydration: string;
@@ -15,8 +18,11 @@ interface Props {
 
 const {
   title,
+  titleI18n,
   tag,
+  tagI18n,
   description,
+  descI18n,
   icon = 'lucide:flame',
   ballWeight,
   hydration,
@@ -29,14 +35,14 @@ const {
   <div class="style-card-header">
     <Icon name={icon} class="style-card-icon" />
     <div>
-      <h3>{title}</h3>
-      <span class="style-tag">{tag}</span>
+      <h3 data-i18n={titleI18n}>{title}</h3>
+      <span class="style-tag" data-i18n={tagI18n}>{tag}</span>
     </div>
   </div>
-  <p>{description}</p>
+  <p data-i18n={descI18n}>{description}</p>
   <div class="style-spec-table">
-    <div class="spec-cell"><span>Bola:</span> <strong>{ballWeight}</strong></div>
-    <div class="spec-cell"><span>Hidratación:</span> <strong>{hydration}</strong></div>
-    <div class="spec-cell"><span>Maduración:</span> <strong>{maturation}</strong></div>
+    <div class="spec-cell"><span data-i18n="styleBallWeightLabel">Bola:</span> <strong>{ballWeight}</strong></div>
+    <div class="spec-cell"><span data-i18n="styleHydrationLabel">Hidratación:</span> <strong>{hydration}</strong></div>
+    <div class="spec-cell"><span data-i18n="styleMaturationLabel">Maduración:</span> <strong>{maturation}</strong></div>
   </div>
 </Card>
